@@ -2,52 +2,89 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Delishots & Desserts';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+<div class="site-index" style="background-color:black">
+    
+    <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+        <!--Indicators-->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-2" data-slide-to="1"></li>
+            <li data-target="#carousel-example-2" data-slide-to="2"></li>
+        </ol>
+        <!--/.Indicators-->
+    
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+            <!--First slide-->
+            <div class="carousel-item active">
+                <!--Mask color-->
+                <div class="view hm-black-light">
+                    <img src="https://mdbootstrap.com/images/slides/slide%20(11).jpg" class="img-fluid" alt="">
+                    <div class="full-bg-img">
+                    </div>
+                </div>
+                <!--Caption-->
+                <div class="carousel-caption">
+                    <div class="animated fadeInDown">
+                        <h3 class="h3-responsive">Light mask</h3>
+                        <p>Secondary text</p>
+                    </div>
+                </div>
+                <!--Caption-->
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <!--/First slide-->
+    
+            <!--Second slide-->
+            <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view hm-black-strong">
+                    <img src="https://mdbootstrap.com/images/slides/slide%20(15).jpg" class="img-fluid" alt="">
+                    <div class="full-bg-img">
+                    </div>
+                </div>
+                <!--Caption-->
+                <div class="carousel-caption">
+                    <div class="animated fadeInDown">
+                        <h3 class="h3-responsive">Strong mask</h3>
+                        <p>Secondary text</p>
+                    </div>
+                </div>
+                <!--Caption-->
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            <!--/Second slide-->
+    
+            <!--Third slide-->
+            <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view hm-black-slight">
+                    <img src="https://mdbootstrap.com/images/slides/slide%20(13).jpg" class="img-fluid" alt="">
+                    <div class="full-bg-img">
+                    </div>
+                </div>
+                <!--Caption-->
+                <div class="carousel-caption">
+                    <div class="animated fadeInDown">
+                        <h3 class="h3-responsive">Super light mask</h3>
+                        <p>Secondary text</p>
+                    </div>
+                </div>
+                <!--Caption-->
             </div>
+            <!--/Third slide-->
         </div>
-
+        <!--/.Slides-->
+    
+        <!--Controls-->
+        <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <!--/.Controls-->
     </div>
 </div>

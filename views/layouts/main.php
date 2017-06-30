@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => Yii::getAlias('@web') . '/images/favicon.png']);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -26,16 +27,21 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+    <div class="header text-center">
+        <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
+            'class'          => 'img-fluid m0a',
+            'data-wow-delay' => '0.5s',
+            'alt'            => Html::encode('Delishots & Desserts'),
+        ]) ?>
+    </div>
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-inverse',
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav navbar-center'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
@@ -58,18 +64,46 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <?= $content ?>
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+<footer>
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 footer-left">
+                    <div class="col-xs-6">
+                        <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
+                            'class'          => 'img-fluid logo-footer m0a',
+                            'data-wow-delay' => '0.5s',
+                            'alt'            => Html::encode('Delishots & Desserts'),
+                        ]) ?>
+                    </div>
+                    <div class="col-xs-6 text-left footer-contact">
+                        <p><?= Html::encode('+58 212 668 4108') ?></p>
+                        <p><?= Html::encode('tequemucho@gmail.com') ?></p>
+                    </div>
+                </div>
+                <div class="col-md-6 footer-right text-center">
+                    <h5>¡Síguenos en nuestras redes sociales!</h5>
+                    <a class="btn btn-instagram" href="https://www.instagram.com/tequemucho/" target="_blank"><i class="fa fa-lg fa-instagram"></i></a>
+                    <a class="btn btn-twitter" href="https://twitter.com/tequemucho" target="_blank"><i class="fa fa-lg fa-twitter"></i></a>
+                    <a class="btn btn-facebook" href="https://es-la.facebook.com/Tequemucho/" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-rights">
+        <div class="container">
+            <p>© <?= date('Y') ?> Tequeño Mucho. Todos los derechos reservados.</p>
+            <p>Creado por <a href="https://github.com/JDSDigital" target="_blank">JDSDigital</a></p>
+            <p>
+                <a href="https://github.com/JDSDigital" target="_blank">
+                    <?= Html::img(Yii::getAlias('@web') . '/images/GitHub-Mark-Light-32px.png') ?>
+                </a>
+            </p>
+        </div>
     </div>
 </footer>
 

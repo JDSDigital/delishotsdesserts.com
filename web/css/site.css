@@ -113,3 +113,62 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.m0a {
+    margin: 0 auto;
+}
+
+.logo-footer {
+    max-height: 150px;
+}
+.btn-instagram {
+    background: #f09433;
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+.btn-twitter {
+    background-color: #0084b4;
+}
+.btn-facebook {
+    background-color: #3b5998;
+}
+.footer-main {
+    background-color: #EEDFD0;
+    padding: 20px;
+}
+.footer-main i {
+    font-size: 2em !important;
+}
+.footer-left {
+    display: flex;
+    position: relative;
+}
+.footer-contact, .footer-right {
+    margin: auto;
+}
+.footer-rights {
+    background-color: #513527;
+    padding: 20px 0 5px 0;
+    text-align: center;
+}
+.footer-rights p {
+    margin: 0;
+    padding: 0;
+}
+.footer-rights a {
+    color : #9d9d9d;
+    transition:.5s;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+}
+.footer-rights a:hover {
+    color: #fca824;
+    transition:.5s;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+}
