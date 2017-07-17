@@ -20,9 +20,12 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/mdb.css',
         'css/site.css',
+        'css/vegas.min.css',
     ];
     public $js = [
         'js/mdb.js',
+        'js/vegas.min.js',
+        'js/script.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
