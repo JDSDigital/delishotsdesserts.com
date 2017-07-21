@@ -24,7 +24,16 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="preloader">
+
+    <div id="preloader" class="text-center">
+        <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
+            'id'    => 'spinner',
+            'class' => 'img-fluid m0a',
+            'alt'   => Html::encode('Delishots & Desserts'),
+        ]) ?>
+    </div>
+
 <?php $this->beginBody() ?>
 
 <div class="<?= $class ?>">
@@ -46,21 +55,12 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-center'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Quienes Somos', 'url' => ['#']],
+            ['label' => 'Nuestros Productos', 'url' => ['#']],
+            ['label' => 'Escoge tu Mejor Opción', 'url' => ['#']],
+            ['label' => 'Galería', 'url' => ['#']],
+            ['label' => 'Contáctanos', 'url' => ['#']],
         ],
     ]);
     NavBar::end();

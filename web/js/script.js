@@ -19,3 +19,9 @@ $(".index-slider").vegas({
 		{ src: "./images/front/13.jpg" }
 	]
 });
+
+$(window).load(function() {
+	$('#preloader').fadeOut('slow', function(){
+		$(this).remove();
+	});
+});

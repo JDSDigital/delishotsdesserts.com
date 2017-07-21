@@ -149,17 +149,27 @@ a.desc:after {
     font-weight: 600;
 }
 .caption-logo {
-    position: relative;
-    height: 100%;
-    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -120px;
+    margin-left: -150px;
 }
 .caption-logo img {
-    position:absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0 auto;
+    opacity: 0.5;
+    -webkit-transition: all 0.4s ease !important;
+    -moz-transition: all 0.4s ease !important;
+    -o-transition: all 0.4s ease !important;
+    -ms-transition: all 0.4s ease !important;
+    transition: all 0.4s ease !important;
+}
+.caption-logo img:hover {
+    opacity: 1;
+    -webkit-transition: all 0.4s ease !important;
+    -moz-transition: all 0.4s ease !important;
+    -o-transition: all 0.4s ease !important;
+    -ms-transition: all 0.4s ease !important;
+    transition: all 0.4s ease !important;
 }
 .logo-footer {
     max-height: 150px;
@@ -214,4 +224,68 @@ a.desc:after {
     -ms-transition:.5s;
     -moz-transition:.5s;
     -webkit-transition:.5s;
+}
+
+.preloader #preloader {
+    display: block;
+}
+#preloader{
+    display: none;
+    background: linear-gradient(#FBECDD, #B4A596);
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: 100000;
+}
+.preloader .preloadspin2 {
+    display: none;
+}
+
+/* WebKit and Opera browsers */
+@-webkit-keyframes spinner {
+    0% { -webkit-transform: scale(0.9); }
+    50%   { -webkit-transform: scale(1); }
+    100%   { -webkit-transform: scale(0.9); }
+}
+
+/* all other browsers */
+@keyframes spinner {
+    0% {
+        -moz-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+    50% {
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+    100% {
+        -moz-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+}
+
+#spinner {
+    -webkit-animation-name: spinner;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 3s;
+
+    animation-name: spinner;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 3s;
+
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -120px;
+    margin-left: -150px;
 }
