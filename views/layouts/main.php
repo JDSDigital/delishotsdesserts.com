@@ -56,11 +56,11 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-center'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Quienes Somos', 'url' => ['#']],
-            ['label' => 'Nuestros Productos', 'url' => ['#']],
-            ['label' => 'Escoge tu Mejor Opción', 'url' => ['#']],
-            ['label' => 'Galería', 'url' => ['#']],
-            ['label' => 'Contáctanos', 'url' => ['#']],
+            ['label' => 'Quienes Somos'],
+            ['label' => 'Nuestros Productos'],
+            ['label' => 'Escoge tu Mejor Opción'],
+            ['label' => 'Galería'],
+            ['label' => 'Contáctanos'],
         ],
     ]);
     NavBar::end();
