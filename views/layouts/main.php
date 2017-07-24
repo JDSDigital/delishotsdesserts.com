@@ -9,7 +9,6 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 $class = (Yii::$app->controller->action->id == 'index') ? 'wrap index-slider' : 'wrap';
-$navbarClass = (Yii::$app->controller->action->id == 'index') ? 'navbar-inverse navbar-index' : 'navbar-inverse';
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => Yii::getAlias('@web') . '/images/favicon.png']);
 AppAsset::register($this);
 ?>
@@ -20,6 +19,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700|Oxygen:400,700" rel="stylesheet">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -37,26 +37,17 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="<?= $class ?>">
-    <div class="header text-center">
-        <?php if (Yii::$app->controller->action->id != 'index') : ?>
-            <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
-                'class'          => 'img-fluid m0a',
-                'data-wow-delay' => '0.5s',
-                'alt'            => Html::encode('Delishots & Desserts'),
-            ]) ?>
-        <?php endif; ?>
-    </div>
     <?php
     NavBar::begin([
         'options' => [
-            'class' => $navbarClass,
+            'class' => 'navbar-inverse',
         ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-center'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Quienes Somos'],
+            ['label' => 'Quienes Somos', 'url' => ['/site/about']],
             ['label' => 'Nuestros Productos'],
             ['label' => 'Escoge tu Mejor Opción'],
             ['label' => 'Galería'],
@@ -65,7 +56,15 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
+    <div class="header text-center">
+        <?php if (Yii::$app->controller->action->id != 'index') : ?>
+            <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
+                'class'          => 'img-fluid logo-banner m0a',
+                'data-wow-delay' => '0.5s',
+                'alt'            => Html::encode('Delishots & Desserts'),
+            ]) ?>
+        <?php endif; ?>
+    </div>
     <div class="container">
         <?= $content ?>
     </div>
@@ -98,8 +97,10 @@ AppAsset::register($this);
                 </div>
             </div>
         </div>
+
         <div class="footer-rights">
             <div class="container">
+                <hr/>
                 <p>© <?= date('Y') ?> Tequeño Mucho. Todos los derechos reservados.</p>
                 <p>Creado por <a href="https://github.com/JDSDigital" target="_blank">JDSDigital</a></p>
                 <p>

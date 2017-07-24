@@ -21,10 +21,12 @@ class AppAsset extends AssetBundle
         'css/mdb.css',
         'css/site.css',
         'css/vegas.min.css',
+        'css/font-awesome.min.css',
     ];
     public $js = [
         'js/mdb.js',
         'js/vegas.min.js',
+        'js/parallax.min.js',
         'js/script.js',
     ];
     public $depends = [
