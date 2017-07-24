@@ -48,10 +48,10 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'Quienes Somos', 'url' => ['/site/about']],
-            ['label' => 'Nuestros Productos'],
-            ['label' => 'Escoge tu Mejor Opción'],
-            ['label' => 'Galería'],
-            ['label' => 'Contáctanos'],
+            ['label' => 'Nuestros Productos', 'url' => ['/site/products']],
+            ['label' => 'Escoge tu Mejor Opción', 'url' => ['/site/option']],
+            ['label' => 'Galería', 'url' => ['/site/gallery']],
+            ['label' => 'Contáctanos', 'url' => ['/site/contact']],
         ],
     ]);
     NavBar::end();

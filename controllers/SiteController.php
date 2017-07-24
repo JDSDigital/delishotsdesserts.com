@@ -123,4 +123,34 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionProducts()
+    {
+        return $this->render('products');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionOption()
+    {
+        return $this->render('option');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionGallery()
+    {
+        return $this->render('gallery');
+    }
 }
