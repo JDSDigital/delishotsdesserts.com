@@ -19,9 +19,10 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/mdb.css',
-        'css/site.css',
+        'css/animate.css',
         'css/vegas.min.css',
         'css/font-awesome.min.css',
+        'css/site.css',
     ];
     public $js = [
         'js/mdb.js',

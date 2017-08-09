@@ -19,7 +19,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700|Oxygen:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -59,9 +59,8 @@ AppAsset::register($this);
     <div class="header text-center">
         <?php if (Yii::$app->controller->action->id != 'index') : ?>
             <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
-                'class'          => 'img-fluid logo-banner m0a',
-                'data-wow-delay' => '0.5s',
-                'alt'            => Html::encode('Delishots & Desserts'),
+                'class' => 'img-fluid logo-banner m0a animated fadeIn',
+                'alt'   => Html::encode('Delishots & Desserts'),
             ]) ?>
         <?php endif; ?>
     </div>
@@ -78,9 +77,8 @@ AppAsset::register($this);
                     <div class="col-md-6 footer-left">
                         <div class="col-xs-6">
                             <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
-                                'class'          => 'img-fluid logo-footer m0a',
-                                'data-wow-delay' => '0.5s',
-                                'alt'            => Html::encode('Delishots & Desserts'),
+                                'class' => 'img-fluid logo-footer m0a',
+                                'alt'   => Html::encode('Delishots & Desserts'),
                             ]) ?>
                         </div>
                         <div class="col-xs-6 text-left footer-contact">
