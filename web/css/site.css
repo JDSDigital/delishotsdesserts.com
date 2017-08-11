@@ -302,6 +302,43 @@ a.desc:after {
 
 /* END ABOUT */
 
+/* CONTACT */
+
+input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search-md]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #513527;
+    box-shadow: 0 1px 0 0 #2f1e15;
+}
+.form-control:focus {
+    border-color: #513527;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(81, 53, 39, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(81, 53, 39, .6);
+}
+.site-contact .btn-submit {
+    background: linear-gradient(#513527, #2f1e15);
+}
+.site-contact .contact-details {
+    margin-top: 70px;
+}
+.site-contact .contact-details .row {
+    margin-bottom: 20px;
+}
+.site-contact .contact-details i, .site-contact .contact-details h4 {
+    display: inline;
+}
+.site-contact .contact-details i {
+    margin-right: 10px;
+}
+.site-contact .contact-details .social-icons i {
+    margin: 0;
+    display: inline-block;
+    font-size: 2em !important;
+    /*padding: 20px;*/
+    border-radius: 50%;
+    /*box-shadow: 0 0 2px #888;*/
+}
+/* END CONTACT */
+
 /* FOOTER */
 
 footer {

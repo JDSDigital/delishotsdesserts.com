@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+
 $class = (Yii::$app->controller->action->id == 'index') ? 'wrap index-slider' : 'wrap';
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => Yii::getAlias('@web') . '/images/favicon.png']);
 AppAsset::register($this);
@@ -82,15 +83,16 @@ AppAsset::register($this);
                             ]) ?>
                         </div>
                         <div class="col-xs-6 text-left footer-contact">
-                            <p><?= Html::encode('+58 212 668 4108') ?></p>
-                            <p><?= Html::encode('tequemucho@gmail.com') ?></p>
+                            <p><?= Html::encode('+58 0424 277 7546') ?></p>
+                            <p><?= Html::encode('+58 0424 278 8219') ?></p>
+                            <p><?= Html::encode('delishotsdesserts@gmail.com') ?></p>
                         </div>
                     </div>
                     <div class="col-md-6 footer-right text-center">
                         <h5>¡Síguenos en nuestras redes sociales!</h5>
-                        <a class="btn btn-instagram" href="https://www.instagram.com/tequemucho/" target="_blank"><i class="fa fa-lg fa-instagram"></i></a>
-                        <a class="btn btn-twitter" href="https://twitter.com/tequemucho" target="_blank"><i class="fa fa-lg fa-twitter"></i></a>
-                        <a class="btn btn-facebook" href="https://es-la.facebook.com/Tequemucho/" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
+                        <a class="btn btn-instagram" href="https://www.instagram.com/delishots/" target="_blank"><i class="fa fa-lg fa-instagram"></i></a>
+                        <a class="btn btn-twitter" href="https://twitter.com/delishots" target="_blank"><i class="fa fa-lg fa-twitter"></i></a>
+                        <a class="btn btn-facebook" href="https://es-la.facebook.com/delishots/" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
                     </div>
                 </div>
             </div>
