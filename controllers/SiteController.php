@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Products;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -131,7 +132,25 @@ class SiteController extends Controller
      */
     public function actionProducts()
     {
-        return $this->render('products');
+        $products = new Products();
+
+        return $this->render('products', [
+            'products' => $products->getProducts(),
+        ]);
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionProductView()
+    {
+        $products = new Products();
+
+        return $this->render('product', [
+            'products' => $products->getProducts(),
+        ]);
     }
 
     /**

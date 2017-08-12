@@ -9,7 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
-$class = (Yii::$app->controller->action->id == 'index') ? 'wrap index-slider' : 'wrap';
+$class = (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') ? 'wrap index-slider' : 'wrap';
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => Yii::getAlias('@web') . '/images/favicon.png']);
 AppAsset::register($this);
 ?>
@@ -49,7 +49,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'Quienes Somos', 'url' => ['/site/about']],
-            ['label' => 'Nuestros Productos', 'url' => ['/site/products']],
+            ['label' => 'Nuestros Productos', 'url' => ['/products/index']],
             ['label' => 'Escoge tu Mejor Opción', 'url' => ['/site/option']],
             ['label' => 'Galería', 'url' => ['/site/gallery']],
             ['label' => 'Contáctanos', 'url' => ['/site/contact']],
@@ -58,12 +58,14 @@ AppAsset::register($this);
     NavBar::end();
     ?>
     <div class="header text-center">
-        <?php if (Yii::$app->controller->action->id != 'index') : ?>
+        <?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') { ?>
+
+        <?php } else { ?>
             <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
                 'class' => 'img-fluid logo-banner m0a animated fadeIn',
                 'alt'   => Html::encode('Delishots & Desserts'),
             ]) ?>
-        <?php endif; ?>
+        <?php } ?>
     </div>
     <div class="container">
         <?= $content ?>

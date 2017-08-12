@@ -234,9 +234,8 @@ a.desc:after {
 }
 .caption {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    padding: 30px 50px;
+    bottom: 50px;
+    right: 50px;
     border-radius: 5px;
     color: #fff;
     text-shadow: 3px 3px 5px black;
@@ -245,19 +244,19 @@ a.desc:after {
 .caption h1 {
     margin:0;
     font-weight: 700;
-    font-size: 32px;
+    font-size: 24px;
 }
 .caption-logo {
     position: absolute;
     /*top: 70px;*/
     /*left: 70px;*/
-    top: 50%;
-    left: 50%;
-    margin-top: -120px;
-    margin-left: -150px;
+    top: 100%;
+    left: 30px;
+    margin-top: -150px;
+    /*margin-left: -300px;*/
 }
 .caption-logo img {
-    /*max-width: 150px;*/
+    max-width: 150px;
     opacity: 0.3;
     -webkit-transition: all 0.4s ease !important;
     -moz-transition: all 0.4s ease !important;
@@ -301,6 +300,38 @@ a.desc:after {
 }
 
 /* END ABOUT */
+
+/* PRODUCTS */
+
+.product-container {
+    margin-bottom: 30px;
+    display: inline-block;
+    height: 150px;
+    width: 25%;
+    overflow: hidden;
+}
+.product-container img {
+    position: relative;
+    width: 100%;
+}
+.product-container h2 {
+    position: absolute;
+    padding: 5px 10px;
+    margin: 15px 0;
+    bottom: 0;
+    right: 15px;
+    color: #ddd;
+    background-color: rgba(0,0,0,0.5);
+}
+.site-product h1 {
+    margin-top: 0;
+}
+.site-product p {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* END PRODUCTS */
 
 /* CONTACT */
 
