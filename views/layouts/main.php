@@ -51,7 +51,7 @@ AppAsset::register($this);
             ['label' => 'Quienes Somos', 'url' => ['/site/about']],
             ['label' => 'Nuestros Productos', 'url' => ['/products/index']],
             ['label' => 'Escoge tu Mejor Opción', 'url' => ['/site/option']],
-            ['label' => 'Galería', 'url' => ['/site/gallery']],
+            ['label' => 'Galería', 'url' => ['/gallery/index']],
             ['label' => 'Contáctanos', 'url' => ['/site/contact']],
         ],
     ]);
@@ -72,7 +72,8 @@ AppAsset::register($this);
     </div>
 </div>
 
-<?php if (Yii::$app->controller->action->id != 'index') : ?>
+<?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') { ?>
+<?php } else { ?>
     <footer>
         <div class="footer-main">
             <div class="container">
@@ -113,7 +114,7 @@ AppAsset::register($this);
             </div>
         </div>
     </footer>
-<?php endif; ?>
+<?php } ?>
 <?php $this->endBody() ?>
 </body>
 </html>

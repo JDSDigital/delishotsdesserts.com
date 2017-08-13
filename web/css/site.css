@@ -306,7 +306,7 @@ a.desc:after {
 .product-container {
     margin-bottom: 30px;
     display: inline-block;
-    height: 150px;
+    height: 160px;
     width: 25%;
     overflow: hidden;
 }
@@ -332,6 +332,24 @@ a.desc:after {
 }
 
 /* END PRODUCTS */
+
+/* GALLERY */
+
+.site-gallery h2 {
+    position: absolute;
+    padding: 5px 10px;
+    margin: 15px -15px;
+    bottom: 0;
+    right: 15px;
+    color: #ddd;
+    background-color: rgba(0,0,0,0.5);
+}
+.gallery-products, .gallery-events {
+    height: 237px;
+    width: 500px;
+}
+
+/* END GALLERY */
 
 /* CONTACT */
 

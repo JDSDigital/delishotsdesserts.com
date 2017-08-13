@@ -20,6 +20,34 @@ $(".index-slider").vegas({
 	]
 });
 
+$(".gallery-products").vegas({
+	delay: 7000,
+	shuffle: true,
+	loop: true,
+	animation: 'random',
+	slides: [
+		{ src: "../images/gallery/thumbs/products/01.jpg" },
+		{ src: "../images/gallery/thumbs/products/02.jpg" },
+		{ src: "../images/gallery/thumbs/products/03.jpg" },
+		{ src: "../images/gallery/thumbs/products/04.jpg" },
+		{ src: "../images/gallery/thumbs/products/05.jpg" }
+	]
+});
+
+$(".gallery-events").vegas({
+	delay: 7000,
+	shuffle: true,
+	loop: true,
+	animation: 'random',
+	slides: [
+		{ src: "../images/gallery/thumbs/events/01.jpg" },
+		{ src: "../images/gallery/thumbs/events/02.jpg" },
+		{ src: "../images/gallery/thumbs/events/03.jpg" },
+		{ src: "../images/gallery/thumbs/events/04.jpg" },
+		{ src: "../images/gallery/thumbs/events/05.jpg" }
+	]
+});
+
 var frontImages = ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg'];
 var num = Math.floor(Math.random() * frontImages.length);
 

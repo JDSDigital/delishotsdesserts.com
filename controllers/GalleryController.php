@@ -6,9 +6,8 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\Products;
 
-class ProductsController extends Controller
+class GalleryController extends Controller
 {
     /**
      * @inheritdoc
@@ -59,11 +58,7 @@ class ProductsController extends Controller
      */
     public function actionIndex()
     {
-        $products = new Products();
-
-        return $this->render('index', [
-            'products' => $products->getProducts(),
-        ]);
+        return $this->render('index');
     }
 
     /**

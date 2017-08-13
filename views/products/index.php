@@ -17,7 +17,7 @@ $i = 0;
             <div class="col-md-3 product-container hm-zoom">
                 <?=
                     Html::a(
-                        Html::img(Yii::getAlias('@web') . '/images/products/full/' . $product['product'] . '.jpg', ['class' => 'img-responsive']) . '<h2>'. $product['name'].'</h2>',
+                        Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $product['product'] . '.jpg', ['class' => 'img-responsive']) . '<h2>'. $product['name'].'</h2>',
                         ['products/view', 'id' => $i]
                     );
                 ?>
