@@ -3,6 +3,9 @@ body {
     height: 100%;
     font-family: 'Oxygen', sans-serif;
 }
+h1 {
+    margin-bottom: 30px;
+}
 
 .wrap {
     min-height: 100%;
@@ -306,22 +309,29 @@ a.desc:after {
 .product-container {
     margin-bottom: 30px;
     display: inline-block;
-    height: 160px;
+    /*height: 160px;*/
     width: 25%;
     overflow: hidden;
+    position: relative;
 }
 .product-container img {
-    position: relative;
     width: 100%;
 }
 .product-container h2 {
     position: absolute;
-    padding: 5px 10px;
-    margin: 15px 0;
+    margin: 10px 15px;
     bottom: 0;
-    right: 15px;
-    color: #ddd;
-    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    font-weight: 400;
+    z-index: 3;
+}
+.product-container span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: linear-gradient(to bottom, transparent 50%, transparent 50%, rgba(0,0,0,1) 100% );
 }
 .site-product h1 {
     margin-top: 0;

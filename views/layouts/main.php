@@ -104,7 +104,7 @@ AppAsset::register($this);
         <div class="footer-rights">
             <div class="container">
                 <hr/>
-                <p>© <?= date('Y') ?> Tequeño Mucho. Todos los derechos reservados.</p>
+                <p>© <?= date('Y') ?> Delishots Desserts. Todos los derechos reservados.</p>
                 <p>Creado por <a href="https://github.com/JDSDigital" target="_blank">JDSDigital</a></p>
                 <p>
                     <a href="https://github.com/JDSDigital" target="_blank">

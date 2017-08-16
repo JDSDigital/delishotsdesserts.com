@@ -14,17 +14,20 @@ $i = 0;
     <div class="row">
         <?php foreach ($products as $product) : ?>
 
-            <div class="col-md-3 product-container hm-zoom">
-                <?=
-                    Html::a(
-                        Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $product['product'] . '.jpg', ['class' => 'img-responsive']) . '<h2>'. $product['name'].'</h2>',
-                        ['products/view', 'id' => $i]
-                    );
-                ?>
+            <div class="col-md-3 product-container">
+                <h2><?= $product['name'] ?></h2>
+                <div class="view hm-zoom">
+                    <?=
+                        Html::a(
+                            Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $product['product'] . '.jpg', ['class' => '']) . '<span></span>',
+                            ['products/view', 'id' => $i]
+                        );
+                    ?>
+                </div>
             </div>
 
             <?php if (($i+1) % 4 == 0) : ?>
-                </div><div class="row">
+<!--                </div><div class="row">-->
             <?php endif; ?>
 
             <?php $i++; ?>
