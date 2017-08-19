@@ -59,9 +59,19 @@ class ProductsController extends Controller
      */
     public function actionIndex()
     {
+        return $this->render('index');
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionBakery()
+    {
         $products = new Products();
 
-        return $this->render('index', [
+        return $this->render('products', [
             'products' => $products->getProducts(),
         ]);
     }

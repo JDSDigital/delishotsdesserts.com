@@ -345,7 +345,7 @@ a.desc:after {
 
 /* GALLERY */
 
-.site-gallery h2 {
+.site-gallery h2, .site-products h2 {
 	position: absolute;
 	margin: 10px 15px;
 	bottom: 0;
@@ -354,7 +354,7 @@ a.desc:after {
 	font-weight: 400;
 	z-index: 3;
 }
-.gallery-products, .gallery-events {
+.gallery-products, .gallery-events, .gallery-bakery, .gallery-pastry {
     height: 237px;
     width: 500px;
 	display: inline-block;
@@ -362,7 +362,7 @@ a.desc:after {
 	overflow: hidden;
 	position: relative;
 }
-.gallery-products span, .gallery-events span {
+.gallery-products span, .gallery-events span, .gallery-bakery span, .gallery-pastry span {
 	position: absolute;
 	width: 100%;
 	height: 100%;

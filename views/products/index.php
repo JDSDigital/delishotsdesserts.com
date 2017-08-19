@@ -12,25 +12,23 @@ $i = 0;
 <div class="site-products">
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
-        <?php foreach ($products as $product) : ?>
-
-            <div class="col-md-3 product-container">
-                <h2><?= $product['name'] ?></h2>
-                <div class="view hm-zoom">
-                    <?=
-                        Html::a(
-                            Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $product['product'] . '.jpg', ['class' => '']) . '<span></span>',
-                            ['products/view', 'id' => $i]
-                        );
-                    ?>
-                </div>
-            </div>
-
-            <?php if (($i+1) % 4 == 0) : ?>
-<!--                </div><div class="row">-->
-            <?php endif; ?>
-
-            <?php $i++; ?>
-        <?php endforeach; ?>
+        <div class="col-md-6">
+            <h2 class="gallery-image-text"><?= Html::encode('Pastelería')?></h2>
+            <?=
+            Html::a(
+                '<div class="gallery-bakery m0a"><span></span></div>',
+                ['products/bakery']
+            );
+            ?>
+        </div>
+        <div class="col-md-6">
+            <h2 class="gallery-image-text"><?= Html::encode('Repostería')?></h2>
+            <?=
+            Html::a(
+                '<div class="gallery-pastry m0a"><span></span></div>',
+                ['products/pastry']
+            );
+            ?>
+        </div>
     </div>
 </div>
