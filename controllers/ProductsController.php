@@ -77,6 +77,17 @@ class ProductsController extends Controller
     }
 
     /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionPastry()
+    {
+
+        return $this->render('pastry');
+    }
+
+    /**
      * Displays about page.
      *
      * @return string

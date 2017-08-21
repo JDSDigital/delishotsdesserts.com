@@ -66,14 +66,20 @@ class GalleryController extends Controller
      *
      * @return string
      */
-    public function actionView($id)
+    public function actionProducts()
     {
-        $products = new Products();
-        $product = $products->getProducts();
 
-        return $this->render('view', [
-            'id'      => $id,
-            'product' => $product[ $id ],
-        ]);
+        return $this->render('products');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionEvents()
+    {
+
+        return $this->render('events');
     }
 }

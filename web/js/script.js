@@ -81,5 +81,25 @@ $(window).load(function() {
 	$('#preloader').fadeOut('slow', function(){
 		$(this).remove();
 	});
+
 	$('.header').parallax({imageSrc: '../images/front/' + frontImages[num] });
+
+	$("[data-fancybox]").fancybox({
+		image : {
+			// Wait for images to load before displaying
+			// Requires predefined image dimensions
+			// If 'auto' - will zoom in thumbnail if 'width' and 'height' attributes are found
+			preload : "auto",
+			// Protect an image from downloading by right-click
+			protect : true
+		},
+		thumbs: {
+			autoStart: true, // Display thumbnails on opening
+			hideOnClosing: true   // Hide thumbnail grid when closing animation starts
+		},
+		slideShow : {
+			autoStart : true,
+			speed     : 4000
+		}
+	});
 });

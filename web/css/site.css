@@ -6,6 +6,9 @@ body {
 h1 {
     margin-bottom: 30px;
 }
+p {
+    font-size: 18px;
+}
 
 .wrap {
     min-height: 100%;
@@ -343,6 +346,14 @@ a.desc:after {
 
 /* END PRODUCTS */
 
+/* PASTRY */
+
+.site-pastry img {
+    /*padding: 30px;*/
+}
+
+/* END PASTRY */
+
 /* GALLERY */
 
 .site-gallery h2, .site-products h2 {
@@ -368,6 +379,9 @@ a.desc:after {
 	height: 100%;
 	top: 0;
 	background: linear-gradient(to bottom, transparent 50%, transparent 50%, rgba(0,0,0,1) 100% );
+}
+.site-gallery .view {
+    margin-bottom: 30px;
 }
 
 /* END GALLERY */
@@ -462,6 +476,7 @@ footer hr {
 .footer-rights p {
     margin: 0;
     padding: 0;
+	font-size: 15px;
 }
 .footer-rights a {
     color : #EEDFD0;
