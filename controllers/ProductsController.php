@@ -69,10 +69,10 @@ class ProductsController extends Controller
      */
     public function actionBakery()
     {
-        $products = new Products();
+        $products = Products::find()->all();
 
-        return $this->render('products', [
-            'products' => $products->getProducts(),
+        return $this->render('bakery', [
+            'products' => $products,
         ]);
     }
 
@@ -94,12 +94,10 @@ class ProductsController extends Controller
      */
     public function actionView($id)
     {
-        $products = new Products();
-        $product = $products->getProducts();
+        $product = Products::find()->where(['id' => $id])->one();
 
         return $this->render('view', [
-            'id'      => $id,
-            'product' => $product[ $id ],
+            'product' => $product,
         ]);
     }
 }

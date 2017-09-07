@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $products */
+/* @var $product */
 /* @var $id */
 
 use yii\helpers\Html;
@@ -13,19 +13,19 @@ $i = 1;
 <div class="site-product">
     <div class="row">
         <div class="col-md-4">
-            <?= Html::img(Yii::getAlias('@web') . '/images/products/full/' . $product['product'] . '.jpg', [
+            <?= Html::img(Yii::getAlias('@web') . '/images/products/full/' . $product->product . '.jpg', [
                 'class' => 'img-responsive',
             ]) ?>
         </div>
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-12">
-                    <h1><?= $product['name'] ?></h1>
+                    <h1><?= $product->name ?></h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <p><?= $product['description'] ?></p>
+                    <p><?= $product->description ?></p>
                 </div>
             </div>
             <div class="row">

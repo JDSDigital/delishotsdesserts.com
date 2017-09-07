@@ -53,6 +53,16 @@ AppAsset::register($this);
             ['label' => 'Escoge tu Mejor Opción', 'url' => ['/site/option']],
             ['label' => 'Galería', 'url' => ['/gallery/index']],
             ['label' => 'Contáctanos', 'url' => ['/site/contact']],
+            !Yii::$app->user->isGuest ? (
+                    '<li>'
+                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'
+                ) : ''
         ],
     ]);
     NavBar::end();
@@ -73,6 +83,7 @@ AppAsset::register($this);
 </div>
 
 <?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') { ?>
+
 <?php } else { ?>
     <footer>
         <div class="footer-main">

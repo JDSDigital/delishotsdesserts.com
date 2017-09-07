@@ -78,7 +78,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['//admin/index']);
         }
         return $this->render('login', [
             'model' => $model,
@@ -171,5 +171,19 @@ class SiteController extends Controller
     public function actionGallery()
     {
         return $this->render('gallery');
+    }
+
+    /**
+     * Displays admin page.
+     *
+     * @return string
+     */
+    public function actionAdmin()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        return $this->render('admin');
     }
 }
