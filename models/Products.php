@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 class Products extends ActiveRecord
@@ -15,12 +16,23 @@ class Products extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
             [['product', 'name', 'description'], 'string'],
+            [['priceFull', 'priceShot', 'price5oz', 'price8oz'], 'integer'],
         ];
     }
 

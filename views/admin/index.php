@@ -36,10 +36,14 @@ $this->title = 'Productos';
                     ['class' => 'yii\grid\SerialColumn'],
                      'name',
                      'description',
+                     'priceFull',
+                     'priceShot',
+                     'price5oz',
+                     'price8oz',
                     [
                         'class'          => 'yii\grid\ActionColumn',
                         'template'       => '{ul}{view}{update}',
-                        'contentOptions' => ['style' => 'width: 180px;min-width: 180px'],
+                        'contentOptions' => ['style' => 'width: 80px;min-width: 50px'],
                     ],
                 ],
             ]); ?>

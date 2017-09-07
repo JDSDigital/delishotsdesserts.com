@@ -58,7 +58,7 @@ AppAsset::register($this);
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(
                         'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn logout']
+                        ['class' => 'btn logout-button']
                     )
                     . Html::endForm()
                     . '</li>'

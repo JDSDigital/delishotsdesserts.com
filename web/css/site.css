@@ -423,6 +423,12 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 }
 /* END CONTACT */
 
+/* ADMIN */
+.logout-button {
+    background: linear-gradient(#513527, #2f1e15) !important;
+}
+/* END ADMIN */
+
 /* FOOTER */
 
 footer {
