@@ -203,6 +203,9 @@ a.desc:after {
     border: none;
     box-shadow: none;
 }
+.navbar-header, .navbar .in {
+    background: linear-gradient(#513527, #2f1e15);
+}
 .navbar-inverse .navbar-nav > li > a {
     color: #FFF;
     text-shadow: 1px 1px 3px #000;
@@ -426,6 +429,16 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 /* ADMIN */
 .logout-button {
     background: linear-gradient(#513527, #2f1e15) !important;
+}
+.admin-panel a {
+    color: #2f1e15;
+}
+.admin-panel a:hover {
+    color: #513527;
+}
+.admin-panel .glyphicon {
+    font-size: large;
+    margin-right: 5px;
 }
 /* END ADMIN */
 

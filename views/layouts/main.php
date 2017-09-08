@@ -90,13 +90,13 @@ AppAsset::register($this);
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 footer-left">
-                        <div class="col-xs-6">
+                        <div class="col-md-6">
                             <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
                                 'class' => 'img-fluid logo-footer m0a',
                                 'alt'   => Html::encode('Delishots & Desserts'),
                             ]) ?>
                         </div>
-                        <div class="col-xs-6 text-left footer-contact">
+                        <div class="col-md-6 text-left footer-contact">
                             <p><?= Html::encode('+58 0424 277 7546') ?></p>
                             <p><?= Html::encode('+58 0424 278 8219') ?></p>
                             <p><?= Html::encode('delishotsdesserts@gmail.com') ?></p>

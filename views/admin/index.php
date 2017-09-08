@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 $this->title = 'Productos';
 ?>
-<div class="container">
+<div class="container admin-panel">
 	<section class="panel">
 		<header class="panel-heading">
 			<h4><?= $this->title ?></h4>
