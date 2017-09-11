@@ -10,9 +10,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-option">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        This is the Options page. You may modify the following file to customize its content:
-    </p>
+    <p>Aquí podrás presupuestar tu pedido</p>
 
-    <code><?= __FILE__ ?></code>
+    <div id="options-list"></div>
+    <div class="row text-center">
+        <?= Html::button('Click para agregar un producto', ['id' => 'button-add', 'class' => 'btn btn-add']) ?>
+    </div>
+
 </div>

@@ -160,7 +160,11 @@ class SiteController extends Controller
      */
     public function actionOption()
     {
-        return $this->render('option');
+        $products = Products::find()->all();
+
+        return $this->render('option', [
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -185,5 +189,16 @@ class SiteController extends Controller
         }
 
         return $this->render('admin');
+    }
+
+    /**
+     * @return null|string
+     */
+    public function actionTest()
+    {
+        if (Yii::$app->request->isAjax) {
+            return "La consulta fue un éxito";
+        } else
+            return null;
     }
 }

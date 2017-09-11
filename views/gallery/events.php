@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <?php for ($i = 1; $i < 11; $i++) : ?>
-            <div class="col-md-3">
+            <div class="col-md-3 product-container">
                 <div class="view hm-zoom">
                     <?= Html::a(
                         Html::img(Yii::getAlias('@web') . '/images/gallery/events/thumb-' . $i . '.jpg', [
