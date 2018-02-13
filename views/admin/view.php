@@ -10,6 +10,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="products-view">
     <div class="container">
 
+        <div class="row">
+            <div class="col-md-6">
+                <?= Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $model->product . '.jpg', ['class' => 'img-responsive']); ?>
+            </div>
+        </div>
+
         <h1><?= Html::encode($this->title) ?></h1>
 
         <?= DetailView::widget([

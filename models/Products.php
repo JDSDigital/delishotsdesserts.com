@@ -4,9 +4,13 @@ namespace app\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii2mod\cart\models\CartItemInterface;
 
 class Products extends ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_DELETED = 0;
+
     /**
      * @inheritdoc
      */
@@ -32,7 +36,7 @@ class Products extends ActiveRecord
     {
         return [
             [['product', 'name', 'description'], 'string'],
-            [['priceFull', 'priceShot', 'price5oz', 'price8oz'], 'integer'],
+            [['status', 'priceFull', 'priceShot', 'price5oz', 'price8oz'], 'integer'],
         ];
     }
 
@@ -49,10 +53,11 @@ class Products extends ActiveRecord
             'priceShot'   => 'Precio Shot',
             'price5oz'    => 'Precio 5oz',
             'price8oz'    => 'Precio 8oz',
+            'status' => 'Estado',
         ];
     }
 
-    public function getProducts()
+    /*public function getProducts()
     {
         $products = [
             [
@@ -98,5 +103,5 @@ class Products extends ActiveRecord
         ];
 
         return $products;
-    }
+    }*/
 }

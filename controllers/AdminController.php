@@ -90,6 +90,29 @@ class AdminController extends \yii\web\Controller
     }
 
     /**
+     * Changes Products Status.
+     *
+     * @return string
+     */
+    public function actionProductstatus()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+
+            $model = Products::findOne($data['id']);
+
+            if ($model->status)
+                $model->status = Products::STATUS_DELETED;
+            else
+                $model->status = Products::STATUS_ACTIVE;
+
+            $model->save();
+        }
+
+        return null;
+    }
+
+    /**
      * Finds the Products model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

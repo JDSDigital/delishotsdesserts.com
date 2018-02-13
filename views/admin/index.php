@@ -1,7 +1,9 @@
 <?php
 
+use app\models\Products;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -33,7 +35,17 @@ $this->title = 'Productos';
                 ],
                 'layout'         => '{items}{pager}{summary}',
                 'columns'        => [
-                    ['class' => 'yii\grid\SerialColumn'],
+					[
+						'attribute' => 'status',
+						'format' => 'raw',
+						'value'     => function ($model) {
+							$check = ($model->status == Products::STATUS_ACTIVE) ? "checked='checked'" : null;
+
+							return "<div class='switchery-xs m0'>
+                                    <input id='status-$model->id' type='checkbox' class='switchery switchStatus' $check>
+                                </div>";
+						},
+					],
                      'name',
                      'description',
                      'priceFull',
@@ -50,3 +62,4 @@ $this->title = 'Productos';
 		</div>
 	</section>
 </div>
+<?php $this->registerJs('listenerChangeStatus("'.Url::to(["/admin/productstatus"]).'");'); ?>

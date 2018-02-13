@@ -88,13 +88,13 @@ class SiteController extends Controller
     /**
      * Logout action.
      *
-     * @return Response
+     * @return string
      */
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect('index');
     }
 
     /**
@@ -158,20 +158,6 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionOption()
-    {
-        $products = Products::find()->all();
-
-        return $this->render('option', [
-            'products' => $products,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
     public function actionGallery()
     {
         return $this->render('gallery');
@@ -191,14 +177,4 @@ class SiteController extends Controller
         return $this->render('admin');
     }
 
-    /**
-     * @return null|string
-     */
-    public function actionTest()
-    {
-        if (Yii::$app->request->isAjax) {
-            return "La consulta fue un éxito";
-        } else
-            return null;
-    }
 }

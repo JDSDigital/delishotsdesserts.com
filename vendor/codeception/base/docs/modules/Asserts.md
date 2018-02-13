@@ -3,7 +3,6 @@
 
 Special module for using asserts in your tests.
 
-
 ## Actions
 
 ### assertArrayHasKey
@@ -18,6 +17,16 @@ Special module for using asserts in your tests.
  * `param` $key
  * `param` $actual
  * `param` $description
+
+
+### assertArraySubset
+ 
+Checks that array contains subset.
+
+ * `param array`  $subset
+ * `param array`  $array
+ * `param bool`   $strict
+ * `param string` $message
 
 
 ### assertContains
@@ -259,6 +268,24 @@ Checks that two variables are same
 
  * `param`        $expected
  * `param`        $actual
+ * `param string` $message
+
+
+### assertStringStartsNotWith
+ 
+Checks that a string doesn't start with the given prefix.
+
+ * `param string` $prefix
+ * `param string` $string
+ * `param string` $message
+
+
+### assertStringStartsWith
+ 
+Checks that a string starts with the given prefix.
+
+ * `param string` $prefix
+ * `param string` $string
  * `param string` $message
 
 

@@ -50,7 +50,7 @@ AppAsset::register($this);
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'Quienes Somos', 'url' => ['/site/about']],
             ['label' => 'Nuestros Productos', 'url' => ['/products/index']],
-            ['label' => 'Escoge tu Mejor Opción', 'url' => ['/site/option']],
+            ['label' => 'Escoge tu Mejor Opción', 'url' => ['/option/index']],
             ['label' => 'Galería', 'url' => ['/gallery/index']],
             ['label' => 'Contáctanos', 'url' => ['/site/contact']],
             !Yii::$app->user->isGuest ? (
