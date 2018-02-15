@@ -11,6 +11,18 @@ class Products extends ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 0;
 
+    const PRODUCT_FULL = 1;
+    const PRODUCT_SHOT = 2;
+    const PRODUCT_5OZ = 3;
+    const PRODUCT_8OZ = 4;
+
+    const PRODUCT_QUANTITIES = [
+        self::PRODUCT_FULL => [1,2,3,4],
+        self::PRODUCT_SHOT => [20,30,40,50,60,70,80,90,100],
+        self::PRODUCT_5OZ => [6,12,18,24,30,36,42,48,54,60],
+        self::PRODUCT_8OZ => [6,12,18,24,30,36,42,48,54,60],
+    ];
+
     /**
      * @inheritdoc
      */

@@ -10,6 +10,11 @@ p {
     font-size: 18px;
 }
 
+.vertical-align {
+    display: flex !important;
+    align-items: center !important;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -392,6 +397,16 @@ a.desc:after {
 /* OPTIONS */
 .btn-add, .btn-add:active {
     background: linear-gradient(#513527, #2f1e15);
+}
+#options-table-body img {
+    max-height: 75px !important;
+}
+#options-table-body .form-control {
+    padding: 0;
+    background-color: #FFF;
+}
+#options-table-body button {
+    padding: 5px 12px;
 }
 /* END OPTIONS */
 

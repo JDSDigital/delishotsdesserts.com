@@ -6,6 +6,7 @@ use app\models\Option;
 use app\models\Products;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 
@@ -70,7 +71,53 @@ class OptionController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             $products = Products::find()->where(['status' => Products::STATUS_ACTIVE])->asArray()->all();
+            $products = ArrayHelper::map($products, 'id', 'name');
             return json_encode($products);
+        } else
+            return null;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function actionProductthumb()
+    {
+        if (Yii::$app->request->isAjax) {
+            $product = Products::findOne(Yii::$app->request->post()['id']);
+            return $product->product . '.jpg';
+        } else
+            return null;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function actionProductforms()
+    {
+        if (Yii::$app->request->isAjax) {
+            $product = Products::findOne(Yii::$app->request->post()['id']);
+            $response = [];
+            if ($product->priceFull != null && $product->priceFull != '')
+                $response[Products::PRODUCT_FULL] = 'Postre Completo';
+            if ($product->priceShot != null && $product->priceShot != '')
+                $response[Products::PRODUCT_SHOT] = 'Shots';
+            if ($product->price5oz != null && $product->price5oz != '')
+                $response[Products::PRODUCT_5OZ] = 'Vasito de 5oz';
+            if ($product->price8oz != null && $product->price8oz != '')
+                $response[Products::PRODUCT_8OZ] = 'Vasito de 8oz';
+            return json_encode($response);
+        } else
+            return null;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function actionProductquantities()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            return json_encode(Products::PRODUCT_QUANTITIES[$data['id']]);
         } else
             return null;
     }
