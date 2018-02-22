@@ -121,4 +121,21 @@ class OptionController extends Controller
         } else
             return null;
     }
+
+    /**
+     * @return null|string
+     */
+    public function actionProductprice()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $product = Products::find()
+                ->where(['id' => $data['product']])
+                ->asArray()
+                ->one();
+            $price = $product[Products::PRODUCT_FORMS[$data['form']]] * $data['quantity'];
+            return json_encode(Yii::$app->formatter->asCurrency($price, 'VEF'));
+        } else
+            return null;
+    }
 }

@@ -408,6 +408,12 @@ a.desc:after {
 #options-table-body button {
     padding: 5px 12px;
 }
+#options-table-body select {
+    margin: 0;
+}
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
 /* END OPTIONS */
 
 /* CONTACT */
