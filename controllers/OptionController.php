@@ -138,4 +138,22 @@ class OptionController extends Controller
         } else
             return null;
     }
+
+    public function actionTotalprice()
+    {
+        if (Yii::$app->request->isAjax) {
+            $total = 0;
+            $data = Yii::$app->request->post();
+            foreach ($data['list'] as $item) {
+                $product = Products::find()
+                    ->where(['id' => $item[0]])
+                    ->asArray()
+                    ->one();
+                $price = $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2];
+                $total = $total + $price;
+            }
+            return json_encode('<b>Total: </b>' . Yii::$app->formatter->asCurrency($total, 'VEF'));
+        } else
+            return null;
+    }
 }

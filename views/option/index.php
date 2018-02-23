@@ -43,6 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
             </tbody>
         </table>
     </div>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <h4 id="price-total"></h4>
+        </div>
+    </div>
     <div class="row text-center">
         <?= Html::button('Click para agregar un producto', ['id' => 'button-add', 'class' => 'btn btn-add']) ?>
     </div>

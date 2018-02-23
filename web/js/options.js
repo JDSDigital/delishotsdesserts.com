@@ -31,12 +31,14 @@ function addEmptyRow () {
 	$('#delete-'+row).on('click', function () {
 		deleteRow(this);
 	});
+
 }
 
 // Deletes a row
 function deleteRow (object) {
 	let id = object.id.replace(/delete-/, '');
 	$('#row-'+id).remove();
+	showTotal();
 }
 
 // Fills the product select
@@ -175,6 +177,37 @@ function showPrice(id) {
 		success: function(data) {
 			let price = JSON.parse(data);
 			cell.html(price);
+			showTotal();
 		}
 	});
+}
+function showTotal () {
+	let cell = $('#price-total');
+	let list = [];
+
+	for (var i = 1; i <= row; i++) {
+		let product = $('#product-'+i).val();
+		let form = $('#form-'+i).val();
+		let quantity = $('#quantity-'+i).val();
+
+		if (!product || !form || !quantity)
+			continue;
+
+		list.push([product, form, quantity]);
+	}
+
+	// Gets price from the database
+	$.ajax({
+		url: 'totalprice',
+		type: 'post',
+		data: {
+			list: list,
+			_csrf : yii.getCsrfToken()
+		},
+		success: function(data) {
+			let price = JSON.parse(data);
+			cell.html(price);
+		}
+	});
+
 }
