@@ -5,6 +5,7 @@
  * @var $form  yii\bootstrap\ActiveForm
  */
 
+use app\models\Products;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 ?>
@@ -20,13 +21,21 @@ use yii\helpers\Html;
 
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-                <?= $form->field($model, 'priceFull')->textInput() ?>
+				<?php if ($model->type == Products::PRODUCT_BAKERY) : ?>
 
-                <?= $form->field($model, 'priceShot')->textInput() ?>
+					<?= $form->field($model, 'priceFull')->textInput() ?>
 
-                <?= $form->field($model, 'price5oz')->textInput() ?>
+					<?= $form->field($model, 'priceShot')->textInput() ?>
 
-                <?= $form->field($model, 'price8oz')->textInput() ?>
+					<?= $form->field($model, 'price5oz')->textInput() ?>
+
+					<?= $form->field($model, 'price8oz')->textInput() ?>
+
+				<?php elseif ($model->type == Products::PRODUCT_DELI) : ?>
+
+					<?= $form->field($model, 'priceDeli')->textInput() ?>
+
+				<?php endif; ?>
 
                 <div class="form-group">
 					<?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Actualizar', [

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Products;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -11,25 +12,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container">
 
         <div class="row">
-            <div class="col-md-6">
-                <?= Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $model->product . '.jpg', ['class' => 'img-responsive']); ?>
+            <div class="col-md-12">
+                <?= Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $model->product . '.jpg', ['class' => 'img-responsive m0a']); ?>
             </div>
         </div>
 
-        <h1><?= Html::encode($this->title) ?></h1>
+        <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
-        <?= DetailView::widget([
-            'model' => $model,
-            'attributes' => [
-                'id',
-                'name',
-                'description',
-                'priceFull',
-                'priceShot',
-                'price5oz',
-                'price8oz',
-            ],
-        ]) ?>
+        <?= ($model->type == Products::PRODUCT_BAKERY) ?
+            DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'name',
+                    'description',
+                    'priceFull',
+                    'priceShot',
+                    'price5oz',
+                    'price8oz',
+                ],
+            ]) :
+            DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'name',
+                    'description',
+                    'priceDeli',
+                ],
+            ])
+
+        ?>
 
     </div>
 </div>

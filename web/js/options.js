@@ -107,25 +107,35 @@ function createFormsSelect (id, value) {
 			let arr = JSON.parse(data);
 			dropdown.html('');
 
-			// Appends results
-			for (var i = 1; i <= 4; i++) {
-				if (arr[i])
-					dropdown.append('<option value="'+i+'">'+arr[i]+'</option>');
-			}
+			if (arr[0] == 1) {
 
-			let value = dropdown.val();
-			createQuantitySelect(id, value);
+				dropdown.removeAttr('disabled');
 
-			// Creates the selects on change event
-			dropdown.on('change', function () {
-				let id = this.id.replace(/form-/, '');
+				// Appends results
+				for (var i = 1; i <= 4; i++) {
+					if (arr[i])
+						dropdown.append('<option value="'+i+'">'+arr[i]+'</option>');
+				}
+
 				let value = dropdown.val();
 				createQuantitySelect(id, value);
-			});
+
+				// Creates the selects on change event
+				dropdown.on('change', function () {
+					let id = this.id.replace(/form-/, '');
+					let value = dropdown.val();
+					createQuantitySelect(id, value);
+				});
+
+			} else if (arr[0] == 3) {
+				dropdown.attr('disabled', 'disabled');
+				createQuantitySelect(id, 0);
+			}
 
 		}
 	});
 }
+
 function createQuantitySelect (id, value) {
 	let dropdown = $('#quantity-'+id);
 
@@ -157,6 +167,7 @@ function createQuantitySelect (id, value) {
 		}
 	});
 }
+
 function showPrice(id) {
 	let product = $('#product-'+id).val();
 	let form = $('#form-'+id).val();
@@ -165,22 +176,40 @@ function showPrice(id) {
 	let cell = $('#price-'+id);
 
 	// Gets price from the database
-	$.ajax({
-		url: 'productprice',
-		type: 'post',
-		data: {
-			product: product,
-			form: form,
-			quantity: quantity,
-			_csrf : yii.getCsrfToken()
-		},
-		success: function(data) {
-			let price = JSON.parse(data);
-			cell.html(price);
-			showTotal();
-		}
-	});
+	if (form != null) {
+		$.ajax({
+			url: 'productprice',
+			type: 'post',
+			data: {
+				product: product,
+				form: form,
+				quantity: quantity,
+				_csrf : yii.getCsrfToken()
+			},
+			success: function(data) {
+				let price = JSON.parse(data);
+				cell.html(price);
+				showTotal();
+			}
+		});
+	} else {
+		$.ajax({
+			url: 'productpricedeli',
+			type: 'post',
+			data: {
+				product: product,
+				quantity: quantity,
+				_csrf : yii.getCsrfToken()
+			},
+			success: function(data) {
+				let price = JSON.parse(data);
+				cell.html(price);
+				showTotal();
+			}
+		});
+	}
 }
+
 function showTotal () {
 	let cell = $('#price-total');
 	let list = [];
@@ -190,7 +219,7 @@ function showTotal () {
 		let form = $('#form-'+i).val();
 		let quantity = $('#quantity-'+i).val();
 
-		if (!product || !form || !quantity)
+		if (!product || !quantity)
 			continue;
 
 		list.push([product, form, quantity]);

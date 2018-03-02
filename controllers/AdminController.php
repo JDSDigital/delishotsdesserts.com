@@ -47,12 +47,17 @@ class AdminController extends \yii\web\Controller
             return $this->goHome();
         }
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => Products::find(),
+        $dataProviderBakery = new ActiveDataProvider([
+            'query' => Products::find()->where(['type' => 1]),
+        ]);
+
+        $dataProviderDeli = new ActiveDataProvider([
+            'query' => Products::find()->where(['type' => 3]),
         ]);
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'dataProviderBakery' => $dataProviderBakery,
+            'dataProviderDeli' => $dataProviderDeli,
         ]);
     }
 

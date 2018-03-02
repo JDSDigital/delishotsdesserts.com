@@ -97,14 +97,22 @@ class OptionController extends Controller
         if (Yii::$app->request->isAjax) {
             $product = Products::findOne(Yii::$app->request->post()['id']);
             $response = [];
-            if ($product->priceFull != null && $product->priceFull != '')
-                $response[Products::PRODUCT_FULL] = 'Postre Completo';
-            if ($product->priceShot != null && $product->priceShot != '')
-                $response[Products::PRODUCT_SHOT] = 'Shots';
-            if ($product->price5oz != null && $product->price5oz != '')
-                $response[Products::PRODUCT_5OZ] = 'Vasito de 5oz';
-            if ($product->price8oz != null && $product->price8oz != '')
-                $response[Products::PRODUCT_8OZ] = 'Vasito de 8oz';
+
+            if ($product->type == Products::PRODUCT_BAKERY) {
+
+                $response[0] =  Products::PRODUCT_BAKERY;
+
+                if ($product->priceFull != null && $product->priceFull != '')
+                    $response[Products::PRODUCT_FULL] = 'Postre Completo';
+                if ($product->priceShot != null && $product->priceShot != '')
+                    $response[Products::PRODUCT_SHOT] = 'Shots';
+                if ($product->price5oz != null && $product->price5oz != '')
+                    $response[Products::PRODUCT_5OZ] = 'Vasito de 5oz';
+                if ($product->price8oz != null && $product->price8oz != '')
+                    $response[Products::PRODUCT_8OZ] = 'Vasito de 8oz';
+            } elseif ($product->type == Products::PRODUCT_DELI)
+                $response[0] =  Products::PRODUCT_DELI;
+
             return json_encode($response);
         } else
             return null;
@@ -117,7 +125,10 @@ class OptionController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
-            return json_encode(Products::PRODUCT_QUANTITIES[$data['id']]);
+            if ($data['id'] != 0)
+                return json_encode(Products::PRODUCT_QUANTITIES[$data['id']]);
+            else
+                return json_encode(Products::PRODUCT_TYPE_QUANTITIES[Products::PRODUCT_DELI]);
         } else
             return null;
     }
@@ -139,6 +150,26 @@ class OptionController extends Controller
             return null;
     }
 
+    /**
+     * @return null|string
+     */
+    public function actionProductpricedeli()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $product = Products::find()
+                ->where(['id' => $data['product']])
+                ->asArray()
+                ->one();
+            $price = $product['priceDeli'] * $data['quantity'];
+            return json_encode(Yii::$app->formatter->asCurrency($price, 'VEF'));
+        } else
+            return null;
+    }
+
+    /**
+     * @return null|string
+     */
     public function actionTotalprice()
     {
         if (Yii::$app->request->isAjax) {
@@ -149,7 +180,7 @@ class OptionController extends Controller
                     ->where(['id' => $item[0]])
                     ->asArray()
                     ->one();
-                $price = $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2];
+                $price = ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2];
                 $total = $total + $price;
             }
             return json_encode('<b>Total: </b>' . Yii::$app->formatter->asCurrency($total, 'VEF'));
