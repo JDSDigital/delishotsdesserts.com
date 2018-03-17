@@ -351,6 +351,12 @@ a.desc:after {
     font-size: 18px;
     font-weight: 400;
 }
+.product-link {
+  color: white;
+}
+.product-link:hover {
+  color: white;
+}
 
 /* END PRODUCTS */
 

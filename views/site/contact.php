@@ -22,49 +22,47 @@ $this->title = 'Contáctanos';
     <?php else: ?>
 
         <p>
-            Si tienes alguna duda por favor no dudes en contactarnos. Gracias.
+            ¿Tienes alguna duda? Nos encantaría escuchar de ti. Si quieres realizar un pedido haz click <?= Html::a('aquí', ['//option/index']) ?>.
         </p>
 
-        <div class="row">
-            <div class="col-lg-5">
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+    <div class="row text-center social-icons" style="margin: 30px 0">
+      <h3>¡Siguenos en nuestras redes sociales!</h3>
+      <a class="btn btn-instagram" href="https://www.instagram.com/delishots/" target="_blank"><i class="fa fa-lg fa-instagram"></i></a>
+      <a class="btn btn-twitter" href="https://twitter.com/delishots" target="_blank"><i class="fa fa-lg fa-twitter"></i></a>
+      <a class="btn btn-facebook" href="https://es-la.facebook.com/delishots/" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
+    </div>
+    <div class="row" style="margin-bottom: 20px">
+      <div class="col-lg-12">
+        <h3>Formulario de contacto:</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+      </div>
+      <div class="col-lg-6">
+        <?= $form->field($model, 'email') ?>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <?= $form->field($model, 'subject') ?>
+        <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
+        <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+          'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+          ]) ?>
 
-                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
-
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
-                    <?= $form->field($model, 'email') ?>
-                    <?= $form->field($model, 'subject') ?>
-                    <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    ]) ?>
-
-                    <div class="form-group">
-                        <?= Html::submitButton('Enviar', ['class' => 'btn btn-submit', 'name' => 'contact-button']) ?>
-                    </div>
-
-                <?php ActiveForm::end(); ?>
-
-            </div>
-            <div class="col-lg-5 col-lg-offset-2 contact-details">
-                <div class="row">
-                    <i class="fa fa-lg fa-map-marker"></i><h4><?= Html::encode('Caracas, Venezuela') ?></h4>
-                </div>
-                <div class="row">
-                    <i class="fa fa-lg fa-mobile"></i><h4><?= Html::encode('+58 0424 277 7546') ?></h4>
-                </div>
-                <div class="row">
-                    <i class="fa fa-lg fa-mobile"></i><h4><?= Html::encode('+58 0424 278 8219') ?></h4>
-                </div>
-                <div class="row">
-                    <i class="fa fa-lg fa-envelope"></i><h4><?= Html::encode('delishotsdesserts@gmail.com') ?></h4>
-                </div>
-                <div class="row social-icons">
-                    <a class="btn btn-instagram" href="https://www.instagram.com/delishots/" target="_blank" style="margin-left:0"><i class="fa fa-lg fa-instagram"></i></a>
-                    <a class="btn btn-twitter" href="https://twitter.com/delishots" target="_blank"><i class="fa fa-lg fa-twitter"></i></a>
-                    <a class="btn btn-facebook" href="https://es-la.facebook.com/delishots/" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
-                </div>
-            </div>
+          <div class="form-group">
+            <?= Html::submitButton('Enviar', ['class' => 'btn btn-submit', 'name' => 'contact-button']) ?>
+          </div>
         </div>
+      </div>
+      <?php ActiveForm::end(); ?>
+  </div>
+</div>
 
     <?php endif; ?>
 </div>

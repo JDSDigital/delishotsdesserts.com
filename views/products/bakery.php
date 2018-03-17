@@ -14,8 +14,16 @@ $this->title = 'Nuestros Productos';
 
         <?php foreach ($products as $product) : ?>
             <div class="col-md-3 product-container">
-                <h2><?= $product->name ?></h2>
                 <div class="view hm-zoom">
+                  <h2>
+                    <?=
+                    Html::a(
+                      $product->name,
+                      ['products/view', 'id' => $product->id],
+                      ['class' => 'product-link']
+                    );
+                    ?>
+                  </h2>
                     <?=
                         Html::a(
                             Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $product->product . '.jpg', ['class' => '']) . '<span></span>',
