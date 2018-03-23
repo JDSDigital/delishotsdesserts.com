@@ -6,7 +6,9 @@
  **/
 
 use app\models\Option;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Escoge tu mejor opción';
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,6 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Aquí podrás presupuestar tu pedido</p>
+
+    <?php $form = ActiveForm::begin([
+      'id' => 'option-form',
+    ]); ?>
 
     <div id="options-list">
         <table id="options-table" class="table-responsive table table-striped table-hover">
@@ -50,6 +56,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="row text-center">
         <?= Html::button('Click para agregar un producto', ['id' => 'button-add', 'class' => 'btn btn-add']) ?>
+        <br />
+        <?= Html::button('Revisar pedido', ['id' => 'button-check', 'url' => Url::to(['/option/checkout']),'class' => 'btn btn-success btn-check dn']) ?>
     </div>
+    <?php ActiveForm::end(); ?>
 
 </div>

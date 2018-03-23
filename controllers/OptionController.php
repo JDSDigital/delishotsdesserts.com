@@ -61,6 +61,9 @@ class OptionController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->session->has('cart'))
+            Yii::$app->session->remove('cart');
+
         return $this->render('index');
     }
 
@@ -144,8 +147,14 @@ class OptionController extends Controller
                 ->where(['id' => $data['product']])
                 ->asArray()
                 ->one();
-            $price = $product[Products::PRODUCT_FORMS[$data['form']]] * $data['quantity'];
-            return json_encode(Yii::$app->formatter->asCurrency($price, 'VEF'));
+
+            // Price by quantity
+            //$price = $product[Products::PRODUCT_FORMS[$data['form']]] * $data['quantity'];
+
+            // Price by unity
+            $price = $product[Products::PRODUCT_FORMS[$data['form']]];
+
+            return json_encode(Yii::$app->formatter->asCurrency($price, 'VEF') . ' c/u');
         } else
             return null;
     }
@@ -167,24 +176,80 @@ class OptionController extends Controller
             return null;
     }
 
+    public function actionCalculateTotal($data)
+    {
+        $total = 0;
+
+        foreach ($data['list'] as $item) {
+            $product = Products::find()
+                ->where(['id' => $item[0]])
+                ->asArray()
+                ->one();
+            $price = ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2];
+            $total = $total + $price;
+        }
+        return $total;
+    }
+
     /**
      * @return null|string
      */
     public function actionTotalprice()
     {
         if (Yii::$app->request->isAjax) {
-            $total = 0;
+            $total = $this->actionCalculateTotal(Yii::$app->request->post());
+            return json_encode('<b>Total: </b>' . Yii::$app->formatter->asCurrency($total, 'VEF'));
+        } else
+            return null;
+    }
+
+    public function actionSetcart()
+    {
+        // If request doesnt come from ajax, does nothing
+        if (Yii::$app->request->isAjax) {
+
+            // If there is already a cart, proceeds to checkout
+            if (Yii::$app->session->has('cart'))
+                return $this->redirect('actionCheckout');
+
+            $cart = [];
+            $list = [];
             $data = Yii::$app->request->post();
+
             foreach ($data['list'] as $item) {
                 $product = Products::find()
                     ->where(['id' => $item[0]])
                     ->asArray()
                     ->one();
-                $price = ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2];
-                $total = $total + $price;
+
+                array_push($list, ['name' => $product['name']]);
+                // TO DO: Set product forms
+                // $price = ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2];
             }
-            return json_encode('<b>Total: </b>' . Yii::$app->formatter->asCurrency($total, 'VEF'));
+
+            $cart['items'] = $list;
+            $cart['total'] = $this->actionCalculateTotal($data);
+
+            Yii::$app->session->set('cart', $cart);
+
+            if (Yii::$app->session->get('cart'))
+                return true;
+
         } else
             return null;
+
+    }
+
+    public function actionCheckout()
+    {
+        if (!Yii::$app->session->has('cart'))
+            return $this->redirect('actionIndex');
+
+        $cart = Yii::$app->session->get('cart');
+
+
+        return $this->render('checkout', [
+            'cart' => $cart,
+        ]);
     }
 }

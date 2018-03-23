@@ -403,6 +403,13 @@ a.desc:after {
 /* OPTIONS */
 .btn-add, .btn-add:active {
     background: linear-gradient(#513527, #2f1e15);
+    width: 300px;
+}
+.btn-check {
+    width: 300px;
+}
+.dn {
+    display: none;
 }
 #options-table-body img {
     max-height: 75px !important;
@@ -420,6 +427,7 @@ a.desc:after {
 .table > tbody > tr > td {
     vertical-align: middle;
 }
+
 /* END OPTIONS */
 
 /* CONTACT */

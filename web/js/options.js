@@ -5,6 +5,10 @@ $(document).ready(function(){
 		addEmptyRow();
 	});
 
+	$('#button-check').on('click', function () {
+		checkOut($(this).attr('url'));
+	})
+
 });
 
 // Initializes variables
@@ -26,6 +30,11 @@ function addEmptyRow () {
 	$('#options-table tbody').append(productRow);
 
 	createProductSelect(row);
+
+	let checkBtn = $('#button-check').hasClass('dn');
+
+	if (checkBtn)
+		$('#button-check').removeClass('dn');
 
 	// Creates event on the delete row button
 	$('#delete-'+row).on('click', function () {
@@ -239,4 +248,44 @@ function showTotal () {
 		}
 	});
 
+}
+
+function checkOut (url) {
+	swal({
+		title: '¿Desea continuar a la revisión del pedido?',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Continuar',
+		cancelButtonText: 'Cancelar',
+	}).then((result) => {
+			if (result.value) {
+				let list = [];
+
+				for (var i = 1; i <= row; i++) {
+					let product = $('#product-'+i).val();
+					let form = $('#form-'+i).val();
+					let quantity = $('#quantity-'+i).val();
+
+					if (!product || !quantity)
+						continue;
+
+					list.push([product, form, quantity]);
+				}
+
+				// Gets price from the database
+				$.ajax({
+					url: 'setcart',
+					type: 'post',
+					data: {
+						list: list,
+						_csrf : yii.getCsrfToken()
+					},
+					success: function(data) {
+						window.location.href = url;
+					}
+				});
+			}
+		})
 }
