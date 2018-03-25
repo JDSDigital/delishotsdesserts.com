@@ -238,6 +238,9 @@ a.desc:after {
     -ms-transition: all 0.4s ease !important;
     transition: all 0.4s ease !important;
 }
+.navbar-collapse.collapse {
+    display: flex !important;
+}
 .logo-banner {
     /*max-height: 180px;*/
     animation-delay: 0.5s;

@@ -216,22 +216,30 @@ class OptionController extends Controller
             $list = [];
             $data = Yii::$app->request->post();
 
+            // Creates an array with the clients products
             foreach ($data['list'] as $item) {
                 $product = Products::find()
                     ->where(['id' => $item[0]])
                     ->asArray()
                     ->one();
 
-                array_push($list, ['name' => $product['name']]);
-                // TO DO: Set product forms
-                // $price = ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2];
+                array_push($list, [
+                  'product' => $product['product'],
+                  'name' => $product['name'],
+                  'form' => ($item[1]) ? Products::PRODUCT_FORMS_LABEL[$item[1]] : null,
+                  'price' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2],
+                  'quantity' => $item[2],
+                ]);
             }
 
+            // Adds products and total to response array
             $cart['items'] = $list;
             $cart['total'] = $this->actionCalculateTotal($data);
 
+            // Sets the response array as a session variable
             Yii::$app->session->set('cart', $cart);
 
+            // If session variable has been created, proceds to checkout
             if (Yii::$app->session->get('cart'))
                 return true;
 
@@ -246,7 +254,6 @@ class OptionController extends Controller
             return $this->redirect('actionIndex');
 
         $cart = Yii::$app->session->get('cart');
-
 
         return $this->render('checkout', [
             'cart' => $cart,

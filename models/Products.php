@@ -26,6 +26,13 @@ class Products extends ActiveRecord
         self::PRODUCT_8OZ => 'price8oz',
     ];
 
+    const PRODUCT_FORMS_LABEL = [
+        self::PRODUCT_FULL => 'Postre Completo',
+        self::PRODUCT_SHOT => 'Shots',
+        self::PRODUCT_5OZ => 'Vasito de 5oz',
+        self::PRODUCT_8OZ => 'Vasito de 8oz',
+    ];
+
     const PRODUCT_QUANTITIES = [
         self::PRODUCT_FULL => [1,2,3,4],
         self::PRODUCT_SHOT => [20,30,40,50,60,70,80,90,100],
