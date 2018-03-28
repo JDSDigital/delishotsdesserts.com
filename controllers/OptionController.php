@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Option;
+use app\models\OptionForm;
 use app\models\Products;
 use Yii;
 use yii\filters\AccessControl;
@@ -257,6 +258,23 @@ class OptionController extends Controller
 
         return $this->render('checkout', [
             'cart' => $cart,
+        ]);
+    }
+
+    public function actionForm()
+    {
+        if (!Yii::$app->session->has('cart'))
+            return $this->redirect('actionIndex');
+
+        $model = new OptionForm;
+
+        if ($model->load(Yii::$app->request->post()) && $model->sendMail()) {
+            Yii::$app->session->setFlash('success', 'Su pedido ha sido enviado. Le contactaremos lo antes posible.');
+            return $this->redirect(['//site/index']);
+        }
+
+        return $this->render('form', [
+            'model' => $model,
         ]);
     }
 }

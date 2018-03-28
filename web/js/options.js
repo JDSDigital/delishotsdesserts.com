@@ -9,8 +9,8 @@ $(document).ready(function(){
 		checkOut($(this).attr('url'));
 	})
 
-	$('#button-send').on('click', function () {
-		btnSend($(this).attr('url'));
+	$('#button-form').on('click', function () {
+		orderForm($(this).attr('url'));
 	})
 
 });
@@ -251,7 +251,6 @@ function showTotal () {
 			cell.html(price);
 		}
 	});
-
 }
 
 function checkOut (url) {
@@ -292,20 +291,20 @@ function checkOut (url) {
 			});
 		}
 	})
+}
 
-	function btnSend (url) {
-		swal({
-			title: '¿Desea continuar a la revisión del pedido?',
-			type: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Continuar',
-			cancelButtonText: 'Cancelar',
-		}).then((result) => {
+function orderForm (url) {
+	swal({
+		title: '¿Desea enviar su pedido?',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Continuar',
+		cancelButtonText: 'Cancelar',
+	}).then((result) => {
 			if (result.value) {
-					// TO DO: Shows contact form
-				});
+					window.location.href = url;
 			}
-		})
+	})
 }

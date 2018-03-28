@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row text-center">
         <?= Html::button('Click para agregar un producto', ['id' => 'button-add', 'class' => 'btn btn-add']) ?>
         <br />
-        <?= Html::button('Revisar pedido', ['id' => 'button-check', 'url' => Url::to(['/option/send']),'class' => 'btn btn-success btn-check dn']) ?>
+        <?= Html::button('Revisar pedido', ['id' => 'button-check', 'url' => Url::to(['/option/checkout']),'class' => 'btn btn-success btn-check dn']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 

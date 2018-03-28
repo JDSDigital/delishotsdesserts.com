@@ -11,19 +11,9 @@ use yii\captcha\Captcha;
 $this->title = 'Contáctanos';
 ?>
 <div class="site-contact">
+
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
-
-        <div class="alert alert-success">
-            Gracias por contactarnos. Te responderemos lo mas pronto posible.
-        </div>
-
-    <?php else: ?>
-
-        <p>
-            ¿Tienes alguna duda? Nos encantaría escuchar de ti. Si quieres realizar un pedido haz click <?= Html::a('aquí', ['//option/index']) ?>.
-        </p>
+    <p>¿Tienes alguna duda? Nos encantaría escuchar de ti. Si quieres realizar un pedido haz click <?= Html::a('aquí', ['//option/index']) ?>.</p>
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
