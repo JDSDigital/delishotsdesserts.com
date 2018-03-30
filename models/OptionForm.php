@@ -59,6 +59,7 @@ class OptionForm extends Model
               $order .= '<td>' . Yii::$app->formatter->asCurrency($value['price'], 'VEF') . '</td>';
               $order .= '</tr>';
             }
+
             $order .= '<tr>';
             $order .= '<td colspan="3"><strong>Total:</strong></td>';
             $order .= '<td><strong>' . Yii::$app->formatter->asCurrency(Yii::$app->session->get('cart')['total'], 'VEF') . '</strong></td>';
@@ -76,7 +77,15 @@ class OptionForm extends Model
               ->setSubject('Nuevo pedido desde la página web')
               ->send();
 
-            // Yii::$app->session->remove('cart');
+            Yii::$app->mailer->compose('confirmation', [
+                'order' => $order,
+              ])
+              ->setTo($this->email)
+              ->setFrom([Yii::$app->params['supportEmail'] => 'Delishots Web'])
+              ->setSubject('Hemos recibido su pedido')
+              ->send();
+
+            Yii::$app->session->remove('cart');
 
             return true;
         }
