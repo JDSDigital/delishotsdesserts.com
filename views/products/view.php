@@ -42,4 +42,9 @@ $i = 1;
             </div>
         </div>
     </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h4><?= Html::a('Volver', ['products/bakery'], ['class' => 'btn btn-submit mt30'] ) ?></h4>
+      </div>
+    </div>
 </div>

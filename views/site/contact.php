@@ -53,6 +53,4 @@ $this->title = 'Contáctanos';
       <?php ActiveForm::end(); ?>
   </div>
 </div>
-
-    <?php endif; ?>
 </div>

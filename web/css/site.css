@@ -10,6 +10,10 @@ p {
     font-size: 18px;
 }
 
+.mt30 {
+  margin-top: 30px;
+}
+
 .vertical-align {
     display: flex !important;
     align-items: center !important;
@@ -445,7 +449,7 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(81, 53, 39, .6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(81, 53, 39, .6);
 }
-.site-contact .btn-submit {
+.site-contact .btn-submit, .site-product .btn-submit {
     background: linear-gradient(#513527, #2f1e15);
 }
 .site-contact .contact-details {
