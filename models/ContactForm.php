@@ -16,7 +16,6 @@ class ContactForm extends Model
     public $body;
     public $verifyCode;
 
-
     /**
      * @return array the validation rules.
      */
@@ -51,18 +50,17 @@ class ContactForm extends Model
      * @param string $email the target email address
      * @return bool whether the model passes validation
      */
-    public function contact($email)
+    public function contact()
     {
-        if ($this->validate()) {
-            Yii::$app->mailer->compose()
-                ->setTo(Yii::$app->params['adminEmail'])
-                ->setFrom([Yii::$app->params['supportEmail'] => 'Delishots Web'])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body)
-                ->send();
+        $email = Yii::$app->mailer->compose()
+            ->setTo(Yii::$app->params['adminEmail'])
+            ->setFrom([Yii::$app->params['supportEmail'] => 'Delishots Web'])
+            ->setSubject($this->subject)
+            ->setTextBody($this->body);
 
-            return true;
-        }
-        return false;
+        if ($email->send())
+          return true;
+        else
+          return false;
     }
 }
