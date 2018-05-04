@@ -9,7 +9,7 @@ $this->title = 'Quienes Somos';
 <div class="site-about">
     <div class="row">
         <div class="col-md-3 col-xs-6 col-md-offset-0 col-xs-offset-3">
-            <?= Html::img(Yii::getAlias('@web') . '/images/product1.jpg', [
+            <?= Html::img(Yii::getAlias('@web') . '/images/gallery/events/full-10.jpg', [
                 'class' => 'img-responsive m0a animated fadeInUp',
                 'alt'   => Html::encode('Delishots & Desserts'),
             ]) ?>

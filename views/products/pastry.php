@@ -35,7 +35,7 @@ $this->title = 'Nuestros Productos';
 
     <div class="row">
         <div class="col-md-4">
-            <?= Html::img(Yii::getAlias('@web') . '/images/products/full/pastry01.jpg', [
+            <?= Html::img(Yii::getAlias('@web') . '/images/products/full/pastry05.jpg', [
                 'class' => 'img-fluid m0a animated fadeInUp',
                 'alt'   => Html::encode('Delishots & Desserts'),
             ]) ?>

@@ -70,7 +70,11 @@ $(".gallery-pastry").vegas({
 	slides: [
 		{ src: "../images/products/thumbs/pastry01.jpg" },
 		{ src: "../images/products/thumbs/pastry02.jpg" },
-		{ src: "../images/products/thumbs/pastry03.jpg" }
+		{ src: "../images/products/thumbs/pastry05.jpg" },
+		{ src: "../images/products/thumbs/pastry07.jpg" },
+		{ src: "../images/products/thumbs/pastry09.jpg" },
+		{ src: "../images/products/thumbs/pastry10.jpg" },
+		{ src: "../images/products/thumbs/pastry11.jpg" }
 	]
 });
 
