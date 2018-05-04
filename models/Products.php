@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -91,6 +92,29 @@ class Products extends ActiveRecord
             'priceDeli'   => 'Precio Individual',
             'status'      => 'Estado',
         ];
+    }
+
+    /**
+     *  Sets a session variable with an array of active products
+     *  @return array
+     */
+    public function getProductsArray()
+    {
+        if (Yii::$app->session->has('cart'))
+            Yii::$app->session->remove('cart');
+            
+        if (Yii::$app->session->has('products'))
+            Yii::$app->session->remove('products');
+
+        $products = Products::find()
+          ->where(['status' => Products::STATUS_ACTIVE])
+          ->asArray()
+          ->all();
+
+        Yii::$app->session->set('products', $products);
+
+        return true;
+
     }
 
 }

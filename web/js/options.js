@@ -13,6 +13,18 @@ $(document).ready(function(){
 		orderForm($(this).attr('url'));
 	})
 
+	// Gets products from the database
+	$.ajax({
+		url: 'productsfull',
+		type: 'post',
+		data: {
+			_csrf : yii.getCsrfToken()
+		},
+		success: function(data) {
+			PRODUCTS = JSON.parse(data);
+		}
+	});
+
 });
 
 // Initializes variables
@@ -59,7 +71,7 @@ function createProductSelect (id) {
 	let dropdown = $('#product-'+id);
 
 	// Gets products from the database
-	$.ajax({
+	/*$.ajax({
 		url: 'products',
 		type: 'post',
 		data: {
@@ -88,11 +100,31 @@ function createProductSelect (id) {
 				createFormsSelect(id, value);
 			});
 		}
+	});*/
+
+	// Appends results
+	for (var i = 0; i < PRODUCTS.length; i++) {
+		dropdown.append('<option value="'+PRODUCTS[i].id+'">'+PRODUCTS[i].name+'</option>');
+	}
+
+	// Shows thumb for first product
+	addProductThumb(id, 1);
+
+	let value = dropdown.val();
+	addProductThumb(id, value);
+	createFormsSelect(id, value);
+
+	// Creates the selects on change event
+	dropdown.on('change', function () {
+		let id = this.id.replace(/product-/, '');
+		let value = dropdown.val();
+		addProductThumb(id, value);
+		createFormsSelect(id, value);
 	});
 }
 
 function addProductThumb(id, value) {
-	$.ajax({
+	/*$.ajax({
 		url: 'productthumb',
 		type: 'post',
 		data: {
@@ -100,9 +132,14 @@ function addProductThumb(id, value) {
 			_csrf : yii.getCsrfToken()
 		},
 		success: function(data) {
-			$('#thumb-'+id).html('<img class="img-responsive" src="../images/products/thumbs/'+data+'" />')
+			$('#thumb-'+id).html('<img class="img-responsive" src="../images/products/thumbs/'+data+'" />');
 		}
-	});
+	});*/
+	for (let i = 0; i < PRODUCTS.length; i++) {
+		if (PRODUCTS[i].id == value) {
+			$('#thumb-'+id).html('<img class="img-responsive" src="../images/products/thumbs/'+PRODUCTS[i].product+'" />');
+		}
+	}
 }
 
 function createFormsSelect (id, value) {

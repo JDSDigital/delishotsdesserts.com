@@ -31,7 +31,7 @@ class AppAsset extends AssetBundle
         'js/vegas.min.js',
         'js/parallax.min.js',
         'js/jquery.fancybox.min.js',
-        'js/options.js',
+        // 'js/options.js',
         'js/script.js',
     ];
     public $depends = [

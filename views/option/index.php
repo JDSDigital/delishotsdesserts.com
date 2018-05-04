@@ -9,6 +9,7 @@ use app\models\Option;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
 
 $this->title = 'Escoge tu mejor opción';
 $this->params['breadcrumbs'][] = $this->title;
@@ -62,3 +63,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php ActiveForm::end(); ?>
 
 </div>
+<?php
+$this->registerJsFile('@web/js/options.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+?>

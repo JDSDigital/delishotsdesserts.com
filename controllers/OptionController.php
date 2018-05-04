@@ -62,10 +62,22 @@ class OptionController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->session->has('cart'))
-            Yii::$app->session->remove('cart');
+        $products = new Products;
+        $products->getProductsArray();
 
         return $this->render('index');
+    }
+
+    /**
+     * @return null|string
+     */
+    public function actionProductsfull()
+    {
+        if (Yii::$app->request->isAjax) {
+            $products = Yii::$app->session->get('products');
+            return json_encode($products);
+        } else
+            return null;
     }
 
     /**
@@ -74,7 +86,7 @@ class OptionController extends Controller
     public function actionProducts()
     {
         if (Yii::$app->request->isAjax) {
-            $products = Products::find()->where(['status' => Products::STATUS_ACTIVE])->asArray()->all();
+            $products = Yii::$app->session->get('products');
             $products = ArrayHelper::map($products, 'id', 'name');
             return json_encode($products);
         } else
@@ -87,8 +99,8 @@ class OptionController extends Controller
     public function actionProductthumb()
     {
         if (Yii::$app->request->isAjax) {
-            $product = Products::findOne(Yii::$app->request->post()['id']);
-            return $product->product . '.jpg';
+            $product = Yii::$app->session->get('products')[Yii::$app->request->post()['id']];
+            return $product['product'] . '.jpg';
         } else
             return null;
     }
@@ -99,22 +111,22 @@ class OptionController extends Controller
     public function actionProductforms()
     {
         if (Yii::$app->request->isAjax) {
-            $product = Products::findOne(Yii::$app->request->post()['id']);
+            $product = Yii::$app->session->get('products')[Yii::$app->request->post()['id']];
             $response = [];
 
-            if ($product->type == Products::PRODUCT_BAKERY) {
+            if ($product['type'] == Products::PRODUCT_BAKERY) {
 
                 $response[0] =  Products::PRODUCT_BAKERY;
 
-                if ($product->priceFull != null && $product->priceFull != '')
+                if ($product['priceFull'] != null && $product['priceFull'] != '')
                     $response[Products::PRODUCT_FULL] = 'Postre Completo';
-                if ($product->priceShot != null && $product->priceShot != '')
+                if ($product['priceShot'] != null && $product['priceShot'] != '')
                     $response[Products::PRODUCT_SHOT] = 'Shots';
-                if ($product->price5oz != null && $product->price5oz != '')
+                if ($product['price5oz'] != null && $product['price5oz'] != '')
                     $response[Products::PRODUCT_5OZ] = 'Vasito de 5oz';
-                if ($product->price8oz != null && $product->price8oz != '')
+                if ($product['price8oz'] != null && $product['price8oz'] != '')
                     $response[Products::PRODUCT_8OZ] = 'Vasito de 8oz';
-            } elseif ($product->type == Products::PRODUCT_DELI)
+            } elseif ($product['type'] == Products::PRODUCT_DELI)
                 $response[0] =  Products::PRODUCT_DELI;
 
             return json_encode($response);
@@ -144,10 +156,7 @@ class OptionController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
-            $product = Products::find()
-                ->where(['id' => $data['product']])
-                ->asArray()
-                ->one();
+            $product = Yii::$app->session->get('products')[$data['product']];
 
             // Price by quantity
             //$price = $product[Products::PRODUCT_FORMS[$data['form']]] * $data['quantity'];
@@ -167,10 +176,8 @@ class OptionController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
-            $product = Products::find()
-                ->where(['id' => $data['product']])
-                ->asArray()
-                ->one();
+            $product = Yii::$app->session->get('products')[$data['product']];
+
             $price = $product['priceDeli'] * $data['quantity'];
             return json_encode(Yii::$app->formatter->asCurrency($price, 'VEF'));
         } else
@@ -182,10 +189,8 @@ class OptionController extends Controller
         $total = 0;
 
         foreach ($data['list'] as $item) {
-            $product = Products::find()
-                ->where(['id' => $item[0]])
-                ->asArray()
-                ->one();
+            $product = Yii::$app->session->get('products')[$item[0]];
+
             $price = ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2];
             $total = $total + $price;
         }
@@ -219,10 +224,7 @@ class OptionController extends Controller
 
             // Creates an array with the clients products
             foreach ($data['list'] as $item) {
-                $product = Products::find()
-                    ->where(['id' => $item[0]])
-                    ->asArray()
-                    ->one();
+                $product = Yii::$app->session->get('products')[$item[0]];
 
                 array_push($list, [
                   'product' => $product['product'],
