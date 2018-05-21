@@ -35,10 +35,16 @@ $this->title = 'Nuestros Productos';
             <p>Cuando elaboramos un proyecto nos reunimos con nuestros clientes para escuchar e interpretar sus ideas, descubrimos sus gustos y sus aspiraciones, posteriormente estudiamos todos los aspectos importantes y desarrollamos un proyecto adaptado a sus necesidades.</p>
             <p>Consulta sin compromiso y te presentaremos varias alternativas.</p>
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <h4><?= Html::a('Contáctanos para mayor información', ['site/contact'] ) ?></h4>
+                <div class="col-md-12 text-center mt30">
+                    <h3><?= Html::a('Contáctanos para mayor información', ['products/contact'] ) ?></h3>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="row site-product">
+  <div class="col-md-12 text-center">
+    <h4><?= Html::a('Volver a Nuestros Productos', ['products/index'], ['class' => 'btn btn-submit mt30'] ) ?></h4>
+  </div>
 </div>

@@ -40,6 +40,7 @@ function addEmptyRow () {
 		'<td><select id="form-' + row + '" class="form-control"></select></td>' +
 		'<td><select id="quantity-' + row + '" class="form-control"></select></td>' +
 		'<td id="price-' + row + '"></td>' +
+		'<td id="priceTotal-' + row + '"></td>' +
 		'<td><button id="delete-' + row + '" class="btn btn-danger">X</button></td>' +
 	'</tr>';
 
@@ -103,7 +104,7 @@ function createProductSelect (id) {
 	});*/
 
 	// Appends results
-	for (var i = 0; i < PRODUCTS.length; i++) {
+	for (var i = 1; i < PRODUCTS.length; i++) {
 		dropdown.append('<option value="'+PRODUCTS[i].id+'">'+PRODUCTS[i].name+'</option>');
 	}
 
@@ -135,7 +136,7 @@ function addProductThumb(id, value) {
 			$('#thumb-'+id).html('<img class="img-responsive" src="../images/products/thumbs/'+data+'" />');
 		}
 	});*/
-	for (let i = 0; i < PRODUCTS.length; i++) {
+	for (let i = 1; i < PRODUCTS.length; i++) {
 		if (PRODUCTS[i].id == value) {
 			$('#thumb-'+id).html('<img class="img-responsive" src="../images/products/thumbs/'+PRODUCTS[i].product+'" />');
 		}
@@ -223,7 +224,8 @@ function showPrice(id) {
 	let form = $('#form-'+id).val();
 	let quantity = $('#quantity-'+id).val();
 
-	let cell = $('#price-'+id);
+	let cellPrice = $('#price-'+id);
+	let cellPriceTotal = $('#priceTotal-'+id);
 
 	// Gets price from the database
 	if (form != null) {
@@ -237,8 +239,9 @@ function showPrice(id) {
 				_csrf : yii.getCsrfToken()
 			},
 			success: function(data) {
-				let price = JSON.parse(data);
-				cell.html(price);
+				let prices = JSON.parse(data);
+				cellPrice.html(prices.price);
+				cellPriceTotal.html(prices.priceTotal);
 				showTotal();
 			}
 		});
@@ -252,8 +255,9 @@ function showPrice(id) {
 				_csrf : yii.getCsrfToken()
 			},
 			success: function(data) {
-				let price = JSON.parse(data);
-				cell.html(price);
+				let prices = JSON.parse(data);
+				cellPrice.html(prices.price);
+				cellPriceTotal.html(prices.priceTotal);
 				showTotal();
 			}
 		});

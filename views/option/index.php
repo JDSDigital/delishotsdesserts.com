@@ -39,7 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     Cantidad
                 </th>
                 <th>
-                    Precio
+                    Precio Unitario
+                </th>
+                <th>
+                    Precio Total
                 </th>
                 <th>
                     Eliminar

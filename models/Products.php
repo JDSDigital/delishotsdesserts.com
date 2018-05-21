@@ -28,7 +28,7 @@ class Products extends ActiveRecord
     ];
 
     const PRODUCT_FORMS_LABEL = [
-        self::PRODUCT_FULL => 'Postre Completo',
+        self::PRODUCT_FULL => 'Postre Completo Kg',
         self::PRODUCT_SHOT => 'Shots',
         self::PRODUCT_5OZ => 'Vasito de 5oz',
         self::PRODUCT_8OZ => 'Vasito de 8oz',
@@ -102,7 +102,7 @@ class Products extends ActiveRecord
     {
         if (Yii::$app->session->has('cart'))
             Yii::$app->session->remove('cart');
-            
+
         if (Yii::$app->session->has('products'))
             Yii::$app->session->remove('products');
 
@@ -110,6 +110,8 @@ class Products extends ActiveRecord
           ->where(['status' => Products::STATUS_ACTIVE])
           ->asArray()
           ->all();
+
+        array_unshift($products, [0]);
 
         Yii::$app->session->set('products', $products);
 

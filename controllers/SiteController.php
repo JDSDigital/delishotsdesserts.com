@@ -113,6 +113,13 @@ class SiteController extends Controller
             else
                 Yii::$app->session->setFlash('error', 'Ocurrió un error con el envío de su correo. Por favor intente mas tarde.');
 
+            if (Yii::$app->session->has('pastry')) {
+
+                Yii::$app->session->remove('pastry');
+                return $this->redirect(['products/pastry']);
+
+            }
+
             return $this->refresh();
         }
 

@@ -119,7 +119,7 @@ class OptionController extends Controller
                 $response[0] =  Products::PRODUCT_BAKERY;
 
                 if ($product['priceFull'] != null && $product['priceFull'] != '')
-                    $response[Products::PRODUCT_FULL] = 'Postre Completo';
+                    $response[Products::PRODUCT_FULL] = 'Postre Completo Kg';
                 if ($product['priceShot'] != null && $product['priceShot'] != '')
                     $response[Products::PRODUCT_SHOT] = 'Shots';
                 if ($product['price5oz'] != null && $product['price5oz'] != '')
@@ -158,13 +158,18 @@ class OptionController extends Controller
             $data = Yii::$app->request->post();
             $product = Yii::$app->session->get('products')[$data['product']];
 
-            // Price by quantity
-            //$price = $product[Products::PRODUCT_FORMS[$data['form']]] * $data['quantity'];
-
             // Price by unity
             $price = $product[Products::PRODUCT_FORMS[$data['form']]];
 
-            return json_encode(Yii::$app->formatter->asCurrency($price, 'VEF') . ' c/u');
+            // Price by quantity
+            $priceTotal = $product[Products::PRODUCT_FORMS[$data['form']]] * $data['quantity'];
+
+            $response = [
+              'price' => Yii::$app->formatter->asCurrency($price, 'VEF') . ' c/u',
+              'priceTotal' => Yii::$app->formatter->asCurrency($priceTotal, 'VEF')
+            ];
+
+            return json_encode($response);
         } else
             return null;
     }
@@ -178,8 +183,15 @@ class OptionController extends Controller
             $data = Yii::$app->request->post();
             $product = Yii::$app->session->get('products')[$data['product']];
 
-            $price = $product['priceDeli'] * $data['quantity'];
-            return json_encode(Yii::$app->formatter->asCurrency($price, 'VEF'));
+            $price = $product['priceDeli'];
+            $priceTotal = $product['priceDeli'] * $data['quantity'];
+
+            $response = [
+              'price' => Yii::$app->formatter->asCurrency($price, 'VEF') . ' c/u',
+              'priceTotal' => Yii::$app->formatter->asCurrency($priceTotal, 'VEF')
+            ];
+
+            return json_encode($response);
         } else
             return null;
     }
@@ -230,7 +242,8 @@ class OptionController extends Controller
                   'product' => $product['product'],
                   'name' => $product['name'],
                   'form' => ($item[1]) ? Products::PRODUCT_FORMS_LABEL[$item[1]] : null,
-                  'price' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2],
+                  'price' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] : $product['priceDeli'],
+                  'priceTotal' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2],
                   'quantity' => $item[2],
                 ]);
             }

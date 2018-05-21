@@ -30,4 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endfor; ?>
     </div>
 
+    <div class="row site-product">
+      <div class="col-md-12 text-center">
+        <h4><?= Html::a('Volver a Galería', ['gallery/index'], ['class' => 'btn btn-submit mt30'] ) ?></h4>
+      </div>
+    </div>
+
 </div>

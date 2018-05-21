@@ -35,4 +35,9 @@ $this->title = 'Nuestros Productos';
         <?php endforeach; ?>
 
     </div>
+    <div class="row site-product">
+      <div class="col-md-12 text-center">
+        <h4><?= Html::a('Volver a Nuestros Productos', ['products/index'], ['class' => 'btn btn-submit mt30'] ) ?></h4>
+      </div>
+    </div>
 </div>

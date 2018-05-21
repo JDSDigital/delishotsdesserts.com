@@ -100,4 +100,16 @@ class ProductsController extends Controller
             'product' => $product,
         ]);
     }
+
+    /**
+     * Sets flash and redirects to contact
+     *
+     * @return string
+     */
+    public function actionContact()
+    {
+        Yii::$app->session->set('pastry', true);
+
+        return $this->redirect(['site/contact']);
+    }
 }
