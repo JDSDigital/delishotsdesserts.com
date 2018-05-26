@@ -11,16 +11,20 @@ class Products extends ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 0;
 
-    const PRODUCT_FULL = 1;
-    const PRODUCT_SHOT = 2;
-    const PRODUCT_5OZ = 3;
-    const PRODUCT_8OZ = 4;
+    const PRODUCT_SLICE = 1;
+    const PRODUCT_GLASS = 2;
+    const PRODUCT_FULL = 3;
+    const PRODUCT_SHOT = 4;
+    const PRODUCT_5OZ = 5;
+    const PRODUCT_8OZ = 6;
 
     const PRODUCT_BAKERY = 1;
     const PRODUCT_PASTRY = 2;
     const PRODUCT_DELI = 3;
 
     const PRODUCT_FORMS = [
+        self::PRODUCT_SLICE => 'priceSlice',
+        self::PRODUCT_GLASS => 'priceGlass',
         self::PRODUCT_FULL => 'priceFull',
         self::PRODUCT_SHOT => 'priceShot',
         self::PRODUCT_5OZ => 'price5oz',
@@ -28,6 +32,8 @@ class Products extends ActiveRecord
     ];
 
     const PRODUCT_FORMS_LABEL = [
+        self::PRODUCT_SLICE => 'Porción Individual',
+        self::PRODUCT_GLASS => 'Envase de Vidrio',
         self::PRODUCT_FULL => 'Postre Completo Kg',
         self::PRODUCT_SHOT => 'Shots',
         self::PRODUCT_5OZ => 'Vasito de 5oz',
@@ -35,6 +41,8 @@ class Products extends ActiveRecord
     ];
 
     const PRODUCT_QUANTITIES = [
+        self::PRODUCT_SLICE => [1,2,3,4],
+        self::PRODUCT_GLASS => [1,2,3,4],
         self::PRODUCT_FULL => [1,2,3,4],
         self::PRODUCT_SHOT => [20,30,40,50,60,70,80,90,100],
         self::PRODUCT_5OZ => [6,12,18,24,30,36,42,48,54,60],
@@ -72,7 +80,7 @@ class Products extends ActiveRecord
     {
         return [
             [['product', 'name', 'description'], 'string'],
-            [['status', 'priceFull', 'priceShot', 'price5oz', 'price8oz', 'priceDeli'], 'integer'],
+            [['status', 'priceSlice', 'priceGlass', 'priceFull', 'priceShot', 'price5oz', 'price8oz', 'priceDeli'], 'integer'],
         ];
     }
 
@@ -85,6 +93,8 @@ class Products extends ActiveRecord
             'product'     => 'Producto',
             'name'        => 'Nombre',
             'description' => 'Descripción',
+            'priceSlice'   => 'Porción Individual',
+            'priceGlass'   => 'Envase de Vidrio',
             'priceFull'   => 'Precio Completo',
             'priceShot'   => 'Precio Shot',
             'price5oz'    => 'Precio 5oz',

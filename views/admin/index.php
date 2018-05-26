@@ -48,6 +48,8 @@ $this->title = 'Productos';
 					],
                      'name',
                      'description',
+										 'priceSlice',
+                     'priceGlass',
                      'priceFull',
                      'priceShot',
                      'price5oz',

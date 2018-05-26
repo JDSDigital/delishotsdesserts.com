@@ -23,6 +23,10 @@ use yii\helpers\Html;
 
 				<?php if ($model->type == Products::PRODUCT_BAKERY) : ?>
 
+					<?= $form->field($model, 'priceSlice')->textInput() ?>
+
+					<?= $form->field($model, 'priceGlass')->textInput() ?>
+
 					<?= $form->field($model, 'priceFull')->textInput() ?>
 
 					<?= $form->field($model, 'priceShot')->textInput() ?>

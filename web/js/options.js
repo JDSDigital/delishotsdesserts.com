@@ -163,7 +163,7 @@ function createFormsSelect (id, value) {
 				dropdown.removeAttr('disabled');
 
 				// Appends results
-				for (var i = 1; i <= 4; i++) {
+				for (var i = 1; i <= 6; i++) {
 					if (arr[i])
 						dropdown.append('<option value="'+i+'">'+arr[i]+'</option>');
 				}

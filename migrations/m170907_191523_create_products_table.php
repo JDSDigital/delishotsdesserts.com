@@ -38,6 +38,8 @@ class m170907_191523_create_products_table extends Migration
             'product'     => $this->string()->null(),
             'name'        => $this->string()->null(),
             'description' => $this->string(1028)->null(),
+            'priceSlice'  => $this->double()->null(),
+            'priceGlass'  => $this->double()->null(),
             'priceFull'   => $this->double()->null(),
             'priceShot'   => $this->double()->null(),
             'price5oz'    => $this->double()->null(),

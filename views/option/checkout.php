@@ -64,6 +64,6 @@ $this->title = 'Checkout';
         <h2><strong>Total: </strong> <?= Yii::$app->formatter->asCurrency($cart['total'], 'VEF') ?></h2>
     </div>
     <div class="row text-center">
-        <?= Html::button('Enviar Pedido', ['id' => 'button-form', 'url' => Url::to(['/option/form']),'class' => 'btn btn-success btn-check']) ?>
+        <?= Html::a('Enviar Pedido', ['/option/form'], ['id' => 'button-form', 'url' => Url::to(['/option/form']),'class' => 'btn btn-success btn-check']) ?>
     </div>
 </div>

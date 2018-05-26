@@ -25,6 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'name',
                     'description',
+                    'priceSlice',
+                    'priceGlass',
                     'priceFull',
                     'priceShot',
                     'price5oz',

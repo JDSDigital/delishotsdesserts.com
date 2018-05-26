@@ -19,7 +19,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         // 'css/master.css',
-        'css/mdb.css',
+        'css/mdb.min.css',
         'css/animate.css',
         'css/vegas.min.css',
         'css/font-awesome.min.css',
@@ -27,7 +27,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'js/mdb.js',
+        'js/mdb.min.js',
         'js/vegas.min.js',
         'js/parallax.min.js',
         'js/jquery.fancybox.min.js',

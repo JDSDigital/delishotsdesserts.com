@@ -118,14 +118,24 @@ class OptionController extends Controller
 
                 $response[0] =  Products::PRODUCT_BAKERY;
 
+                if ($product['priceSlice'] != null && $product['priceSlice'] != '')
+                    $response[Products::PRODUCT_SLICE] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_SLICE];
+
+                if ($product['priceGlass'] != null && $product['priceGlass'] != '')
+                    $response[Products::PRODUCT_GLASS] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_GLASS];
+
                 if ($product['priceFull'] != null && $product['priceFull'] != '')
-                    $response[Products::PRODUCT_FULL] = 'Postre Completo Kg';
+                    $response[Products::PRODUCT_FULL] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_FULL];
+
                 if ($product['priceShot'] != null && $product['priceShot'] != '')
-                    $response[Products::PRODUCT_SHOT] = 'Shots';
+                    $response[Products::PRODUCT_SHOT] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_SHOT];
+
                 if ($product['price5oz'] != null && $product['price5oz'] != '')
-                    $response[Products::PRODUCT_5OZ] = 'Vasito de 5oz';
+                    $response[Products::PRODUCT_5OZ] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_5OZ];
+
                 if ($product['price8oz'] != null && $product['price8oz'] != '')
-                    $response[Products::PRODUCT_8OZ] = 'Vasito de 8oz';
+                    $response[Products::PRODUCT_8OZ] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_8OZ];
+
             } elseif ($product['type'] == Products::PRODUCT_DELI)
                 $response[0] =  Products::PRODUCT_DELI;
 
