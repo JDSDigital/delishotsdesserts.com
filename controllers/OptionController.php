@@ -75,7 +75,12 @@ class OptionController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             $products = Yii::$app->session->get('products');
-            return json_encode($products);
+            $boxes = Yii::$app->session->get('boxes');
+            $response = [
+              'products' => $products,
+              'boxes' => $boxes,
+            ];
+            return json_encode($response);
         } else
             return null;
     }
@@ -255,6 +260,7 @@ class OptionController extends Controller
                   'price' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] : $product['priceDeli'],
                   'priceTotal' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2],
                   'quantity' => $item[2],
+                  'box' => Products::PRODUCT_BOXES[$item[3]],
                 ]);
             }
 

@@ -34,6 +34,9 @@ $this->title = 'Checkout';
             <th>
                 Precio Total
             </th>
+            <th>
+                Empaque
+            </th>
         </thead>
         <tbody id="options-table-body">
             <?php foreach ($cart['items'] as $item) : ?>
@@ -55,6 +58,9 @@ $this->title = 'Checkout';
                 </td>
                 <td>
                   <?= Yii::$app->formatter->asCurrency($item['priceTotal'], 'VEF') ?>
+                </td>
+                <td>
+                  <?= $item['box'] ?>
                 </td>
               </tr>
             <?php endforeach; ?>

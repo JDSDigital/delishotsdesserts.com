@@ -45,6 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     Precio Total
                 </th>
                 <th>
+                    Empaque
+                </th>
+                <th>
                     Eliminar
                 </th>
             </thead>

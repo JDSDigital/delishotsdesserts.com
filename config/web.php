@@ -34,9 +34,9 @@ $config = [
 
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => '',
-                'username' => '',
-                'password' => '',
+                'host' => 'mail.delishotsdesserts.com',
+                'username' => 'info@delishotsdesserts.com',
+                'password' => '!I0d7h8Q-r2u',
                 'port' => '587',
                 'encryption' => 'tls',
                 'streamOptions' => [

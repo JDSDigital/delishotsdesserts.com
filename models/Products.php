@@ -55,6 +55,16 @@ class Products extends ActiveRecord
         self::PRODUCT_DELI => [12,24,36,48,60,72,84],
     ];
 
+    const PRODUCT_BOXES = [
+        '0' => '',
+        self::PRODUCT_SLICE => 'Empaque Individual',
+        self::PRODUCT_GLASS => 'Recipiente de Vidrio',
+        self::PRODUCT_FULL => 'Caja Grande',
+        self::PRODUCT_SHOT => 'Caja de 12',
+        self::PRODUCT_5OZ => 'Caja de 12',
+        self::PRODUCT_8OZ => 'Caja de 12',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -116,6 +126,9 @@ class Products extends ActiveRecord
         if (Yii::$app->session->has('products'))
             Yii::$app->session->remove('products');
 
+        if (Yii::$app->session->has('boxes'))
+            Yii::$app->session->remove('boxes');
+
         $products = Products::find()
           ->where(['status' => Products::STATUS_ACTIVE])
           ->asArray()
@@ -124,6 +137,7 @@ class Products extends ActiveRecord
         array_unshift($products, [0]);
 
         Yii::$app->session->set('products', $products);
+        Yii::$app->session->set('boxes', self::PRODUCT_BOXES);
 
         return true;
 

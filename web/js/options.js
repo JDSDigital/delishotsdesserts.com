@@ -21,7 +21,9 @@ $(document).ready(function(){
 			_csrf : yii.getCsrfToken()
 		},
 		success: function(data) {
-			PRODUCTS = JSON.parse(data);
+			let response = JSON.parse(data);
+			PRODUCTS = response.products;
+			BOXES = response.boxes;
 		}
 	});
 
@@ -41,6 +43,7 @@ function addEmptyRow () {
 		'<td><select id="quantity-' + row + '" class="form-control"></select></td>' +
 		'<td id="price-' + row + '"></td>' +
 		'<td id="priceTotal-' + row + '"></td>' +
+		'<td><select id="box-' + row + '" class="form-control"></select></td>' +
 		'<td><button id="delete-' + row + '" class="btn btn-danger">X</button></td>' +
 	'</tr>';
 
@@ -138,13 +141,14 @@ function addProductThumb(id, value) {
 	});*/
 	for (let i = 1; i < PRODUCTS.length; i++) {
 		if (PRODUCTS[i].id == value) {
-			$('#thumb-'+id).html('<img class="img-responsive" src="../images/products/thumbs/'+PRODUCTS[i].product+'" />');
+			$('#thumb-'+id).html('<img class="img-responsive" src="../images/products/thumbs/'+PRODUCTS[i].product+'.jpg" />');
 		}
 	}
 }
 
 function createFormsSelect (id, value) {
 	let dropdown = $('#form-'+id);
+	let dropdownBox = $('#box-'+id);
 
 	// Gets products from the database
 	$.ajax({
@@ -157,6 +161,7 @@ function createFormsSelect (id, value) {
 		success: function(data) {
 			let arr = JSON.parse(data);
 			dropdown.html('');
+			dropdownBox.html('');
 
 			if (arr[0] == 1) {
 
@@ -170,17 +175,25 @@ function createFormsSelect (id, value) {
 
 				let value = dropdown.val();
 				createQuantitySelect(id, value);
+				createBoxSelect(id, value);
 
 				// Creates the selects on change event
 				dropdown.on('change', function () {
 					let id = this.id.replace(/form-/, '');
 					let value = dropdown.val();
 					createQuantitySelect(id, value);
+					createBoxSelect(id, value);
 				});
 
 			} else if (arr[0] == 3) {
+
+				dropdown.append('<option value="0">Unidad</option>');
+
 				dropdown.attr('disabled', 'disabled');
+				dropdownBox.attr('disabled', 'disabled');
+
 				createQuantitySelect(id, 0);
+				createBoxSelect(id, 0);
 			}
 
 		}
@@ -219,6 +232,15 @@ function createQuantitySelect (id, value) {
 	});
 }
 
+function createBoxSelect(id, value) {
+	let dropdown = $('#box-'+id);
+	dropdown.html('');
+	dropdown.removeAttr('disabled');
+
+	// Appends results
+	dropdown.append('<option value="'+value+'">'+BOXES[value]+'</option>');
+}
+
 function showPrice(id) {
 	let product = $('#product-'+id).val();
 	let form = $('#form-'+id).val();
@@ -228,7 +250,7 @@ function showPrice(id) {
 	let cellPriceTotal = $('#priceTotal-'+id);
 
 	// Gets price from the database
-	if (form != null) {
+	if (form != 0) {
 		$.ajax({
 			url: 'productprice',
 			type: 'post',
@@ -311,11 +333,12 @@ function checkOut (url) {
 				let product = $('#product-'+i).val();
 				let form = $('#form-'+i).val();
 				let quantity = $('#quantity-'+i).val();
+				let box = $('#box-'+i).val();
 
 				if (!product || !quantity)
 					continue;
 
-				list.push([product, form, quantity]);
+				list.push([product, form, quantity, box]);
 			}
 
 			// Gets price from the database
