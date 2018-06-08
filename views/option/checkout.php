@@ -13,6 +13,8 @@ $this->title = 'Checkout';
 ?>
 <div class="site-option">
     <h1><?= Html::encode($this->title) ?></h1>
+</div>
+</div>
 
     <table class="table-responsive table table-striped table-hover">
         <thead>
@@ -29,13 +31,13 @@ $this->title = 'Checkout';
                 Cantidad
             </th>
             <th>
+              Empaque
+            </th>
+            <th>
                 Precio Unitario
             </th>
             <th>
                 Precio Total
-            </th>
-            <th>
-                Empaque
             </th>
         </thead>
         <tbody id="options-table-body">
@@ -54,18 +56,20 @@ $this->title = 'Checkout';
                   <?= $item['quantity']?>
                 </td>
                 <td>
+                  <?= $item['box'] ?>
+                </td>
+                <td>
                   <?= Yii::$app->formatter->asCurrency($item['price'], 'VEF') . 'c/u' ?>
                 </td>
                 <td>
                   <?= Yii::$app->formatter->asCurrency($item['priceTotal'], 'VEF') ?>
                 </td>
-                <td>
-                  <?= $item['box'] ?>
-                </td>
               </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+<div class="container">
+  <div class="site-option">
     <div class="row text-center">
         <h2><strong>Total: </strong> <?= Yii::$app->formatter->asCurrency($cart['total'], 'VEF') ?></h2>
     </div>

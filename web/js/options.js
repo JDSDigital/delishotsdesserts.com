@@ -41,9 +41,9 @@ function addEmptyRow () {
 		'<td><select id="product-' + row + '" class="form-control"></select></td>' +
 		'<td><select id="form-' + row + '" class="form-control"></select></td>' +
 		'<td><select id="quantity-' + row + '" class="form-control"></select></td>' +
+		'<td><select id="box-' + row + '" class="form-control"></select></td>' +
 		'<td id="price-' + row + '"></td>' +
 		'<td id="priceTotal-' + row + '"></td>' +
-		'<td><select id="box-' + row + '" class="form-control"></select></td>' +
 		'<td><button id="delete-' + row + '" class="btn btn-danger">X</button></td>' +
 	'</tr>';
 

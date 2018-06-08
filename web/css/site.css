@@ -27,7 +27,7 @@ p {
 }
 
 .wrap > .container {
-    padding: 70px 15px 30px;
+    padding: 30px 15px 30px;
 }
 
 .footer {
@@ -387,7 +387,7 @@ a.desc:after {
 	z-index: 3;
 }
 .gallery-products, .gallery-events, .gallery-bakery, .gallery-pastry {
-    height: 237px;
+    height: 300px;
     width: 500px;
 	display: inline-block;
 	/*height: 160px;*/

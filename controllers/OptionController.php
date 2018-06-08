@@ -257,10 +257,10 @@ class OptionController extends Controller
                   'product' => $product['product'],
                   'name' => $product['name'],
                   'form' => ($item[1]) ? Products::PRODUCT_FORMS_LABEL[$item[1]] : null,
+                  'box' => Products::PRODUCT_BOXES[$item[3]],
                   'price' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] : $product['priceDeli'],
                   'priceTotal' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2],
                   'quantity' => $item[2],
-                  'box' => Products::PRODUCT_BOXES[$item[3]],
                 ]);
             }
 

@@ -22,6 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin([
       'id' => 'option-form',
     ]); ?>
+</div>
+</div>
 
     <div id="options-list">
         <table id="options-table" class="table-responsive table table-striped table-hover">
@@ -39,13 +41,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     Cantidad
                 </th>
                 <th>
+                  Empaque
+                </th>
+                <th>
                     Precio Unitario
                 </th>
                 <th>
                     Precio Total
-                </th>
-                <th>
-                    Empaque
                 </th>
                 <th>
                     Eliminar
@@ -56,6 +58,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </tbody>
         </table>
     </div>
+
+<div class="container">
+  <div class="site-option">
     <div class="row">
         <div class="col-sm-12 text-right">
             <h4 id="price-total"></h4>
