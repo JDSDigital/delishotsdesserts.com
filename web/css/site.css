@@ -421,7 +421,7 @@ a.desc:after {
 #options-table-body img {
     max-height: 75px !important;
 }
-#options-table-body .form-control {
+#options-table-body .form-control, #products-type {
     padding: 0;
     background-color: #FFF;
 }
@@ -487,6 +487,9 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 .admin-panel .glyphicon {
     font-size: large;
     margin-right: 5px;
+}
+.display-none {
+  display: none;
 }
 /* END ADMIN */
 

@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class AdminController extends \yii\web\Controller
 {
@@ -22,7 +23,7 @@ class AdminController extends \yii\web\Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['logout', 'index', 'view', 'update'],
+                        'actions' => ['logout', 'index', 'view', 'update', 'create', 'delete', 'productstatus'],
                         'allow'   => true,
                         'roles'   => ['@'],
                     ],
@@ -85,13 +86,74 @@ class AdminController extends \yii\web\Controller
     {
         $model = Products::find()->where(['id' => $id])->one();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->productImage = UploadedFile::getInstance($model, 'productImage');
+            $model->productThumb = UploadedFile::getInstance($model, 'productThumb');
+
+            if ($model->productImage && $model->uploadImage()) {
+                $model->productImage = null;
+            }
+
+            if ($model->productThumb && $model->uploadThumb()) {
+                $model->productThumb = null;
+            }
+
+            if ($model->save()) {
+
+              return $this->redirect(['index']);
+
+            } else {
+
+              foreach ($model->errors as $error) {
+                Yii::$app->session->setFlash('error', $error);
+              }
+              return $this->render('update', [
+                  'model' => $model,
+              ]);
+
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionCreate()
+    {
+        $model = new Products;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+          $model->productImage = UploadedFile::getInstance($model, 'productImage');
+          $model->productThumb = UploadedFile::getInstance($model, 'productThumb');
+
+          if ($model->productImage && $model->uploadImage()) {
+              $model->productImage = null;
+          }
+
+          if ($model->productThumb && $model->uploadThumb()) {
+              $model->productThumb = null;
+          }
+
+          if ($model->save()) {
+
+            Yii::$app->session->setFlash('success', 'Producto creado exitosamente.');
+            return $this->redirect(['index']);
+
+          } else {
+
+            foreach ($model->errors as $error) {
+              Yii::$app->session->setFlash('error', $error);
+            }
+
+          }
+
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -115,6 +177,27 @@ class AdminController extends \yii\web\Controller
         }
 
         return null;
+    }
+
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+
+        if (!unlink('images/products/full/' . $model->product . '.jpg'))
+          Yii::$app->session->setFlash('error', 'Error al eliminar las fotos del producto');
+
+        if (!unlink('images/products/thumbs/' . $model->product . '.jpg'))
+          Yii::$app->session->setFlash('error', 'Error al eliminar las fotos del producto');
+
+        if ($model->delete()) {
+          Yii::$app->session->setFlash('success', 'Producto eliminado exitosamente.');
+        } else {
+          foreach ($model->errors as $error) {
+            Yii::$app->session->setFlash('error', $error);
+          }
+        }
+
+        return $this->redirect(['index']);
     }
 
     /**

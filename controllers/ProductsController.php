@@ -69,7 +69,9 @@ class ProductsController extends Controller
      */
     public function actionBakery()
     {
-        $products = Products::find()->all();
+        $products = Products::find()
+          ->where(['status' => Products::STATUS_ACTIVE])
+          ->all();
 
         return $this->render('bakery', [
             'products' => $products,

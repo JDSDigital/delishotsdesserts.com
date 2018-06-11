@@ -65,6 +65,9 @@ class Products extends ActiveRecord
         self::PRODUCT_8OZ => 'Caja de 12',
     ];
 
+    public $productImage;
+    public $productThumb;
+
     /**
      * @inheritdoc
      */
@@ -83,14 +86,32 @@ class Products extends ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        if ($this->isNewRecord) {
+          $product = strtolower($this->name);
+          $product = str_replace(' ', '-', $product);
+          $this->product = $product;
+        }
+
+        return true;
+    }
+
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
+            [['name', 'description'], 'required'],
             [['product', 'name', 'description'], 'string'],
             [['status', 'priceSlice', 'priceGlass', 'priceFull', 'priceShot', 'price5oz', 'price8oz', 'priceDeli'], 'integer'],
+
+            [['productImage', 'productThumb'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg'],
         ];
     }
 
@@ -103,8 +124,9 @@ class Products extends ActiveRecord
             'product'     => 'Producto',
             'name'        => 'Nombre',
             'description' => 'Descripción',
-            'priceSlice'   => 'Porción Individual',
-            'priceGlass'   => 'Envase de Vidrio',
+            'type'        => 'Tipo',
+            'priceSlice'  => 'Porción Individual',
+            'priceGlass'  => 'Envase de Vidrio',
             'priceFull'   => 'Precio Completo',
             'priceShot'   => 'Precio Shot',
             'price5oz'    => 'Precio 5oz',
@@ -141,6 +163,39 @@ class Products extends ActiveRecord
 
         return true;
 
+    }
+
+    public function uploadImage()
+    {
+        if ($this->validate()) {
+            if ($this->isNewRecord) {
+              $product = strtolower($this->name);
+              $product = str_replace(' ', '-', $product);
+            } else
+              $product = $this->product;
+
+            $this->productImage->saveAs('images/products/full/' . $product . '.' . $this->productImage->extension);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function uploadThumb()
+    {
+        if ($this->validate()) {
+            if ($this->isNewRecord) {
+              $product = strtolower($this->name);
+              $product = str_replace(' ', '-', $product);
+            } else
+              $product = $this->product;
+
+            $this->productThumb->saveAs('images/products/thumbs/' . $product . '.' . $this->productThumb->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

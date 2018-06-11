@@ -15,42 +15,53 @@ use yii\helpers\Html;
 		<div class="row panel panel-flat">
 			<div class="col-md-5 ml20">
 
-				<?php $form = ActiveForm::begin(); ?>
+				<?php $form = ActiveForm::begin([
+					'id' => 'form-products',
+					'options' => ['enctype' => 'multipart/form-data'],
+				]); ?>
 
-                <?= $form->field($model, 'name')->textInput() ?>
+          <?= $form->field($model, 'productImage')->fileInput() ?>
 
-                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+          <?= $form->field($model, 'productThumb')->fileInput() ?>
 
-				<?php if ($model->type == Products::PRODUCT_BAKERY) : ?>
+          <?= $form->field($model, 'name')->textInput() ?>
 
-					<?= $form->field($model, 'priceSlice')->textInput() ?>
+          <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-					<?= $form->field($model, 'priceGlass')->textInput() ?>
+					<?= $form->field($model, 'type')->dropDownList([Products::PRODUCT_BAKERY => 'Postres', Products::PRODUCT_DELI => 'Delicateses']) ?>
 
-					<?= $form->field($model, 'priceFull')->textInput() ?>
+					<div id="products-bakery">
 
-					<?= $form->field($model, 'priceShot')->textInput() ?>
+							<?= $form->field($model, 'priceSlice')->textInput() ?>
 
-					<?= $form->field($model, 'price5oz')->textInput() ?>
+							<?= $form->field($model, 'priceGlass')->textInput() ?>
 
-					<?= $form->field($model, 'price8oz')->textInput() ?>
+							<?= $form->field($model, 'priceFull')->textInput() ?>
 
-				<?php elseif ($model->type == Products::PRODUCT_DELI) : ?>
+							<?= $form->field($model, 'priceShot')->textInput() ?>
+
+							<?= $form->field($model, 'price5oz')->textInput() ?>
+
+							<?= $form->field($model, 'price8oz')->textInput() ?>
+
+					</div>
+
+					<div id="products-deli">
 
 					<?= $form->field($model, 'priceDeli')->textInput() ?>
 
-				<?php endif; ?>
+					</div>
 
-                <div class="form-group">
-					<?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Actualizar', [
-                        'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-                    ]) ?>
-                    <?= Html::a(Yii::t('app', 'volver'), ['index'], [
-                        'class' => 'btn btn-danger',
-                    ]) ?>
-				</div>
+          <div class="form-group">
+						<?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Actualizar', [
+                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+            ]) ?>
+            <?= Html::a(Yii::t('app', 'volver'), ['index'], [
+                'class' => 'btn btn-danger',
+            ]) ?>
+					</div>
 
-                <?php ActiveForm::end(); ?>
+      	<?php ActiveForm::end(); ?>
 			</div>
 		</div>
 	</div>

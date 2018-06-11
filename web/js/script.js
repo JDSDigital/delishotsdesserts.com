@@ -1,24 +1,18 @@
-// $(".index-slider").vegas({
-// 	delay: 7000,
-// 	shuffle: true,
-// 	loop: true,
-// 	animation: 'random',
-// 	slides: [
-// 		{ src: "../images/front/01.jpg" },
-// 		{ src: "../images/front/02.jpg" },
-// 		{ src: "../images/front/03.jpg" },
-// 		{ src: "../images/front/04.jpg" },
-// 		{ src: "../images/front/05.jpg" },
-// 		{ src: "../images/front/06.jpg" },
-// 		{ src: "../images/front/07.jpg" },
-// 		{ src: "../images/front/08.jpg" },
-// 		{ src: "../images/front/09.jpg" },
-// 		{ src: "../images/front/10.jpg" },
-// 		{ src: "../images/front/11.jpg" },
-// 		{ src: "../images/front/12.jpg" },
-// 		{ src: "../images/front/13.jpg" }
-// 	]
-// });
+yii.confirm = function (message, okCallback, cancelCallback) {
+	swal({
+		title             : 'Eliminar',
+		text              : message,
+		type              : 'warning',
+		showCancelButton  : true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor : '#d33',
+		//confirmButtonText : 'Yes, delete it!',
+		//cancelButtonText  : 'No, cancel!',
+		confirmButtonClass: 'btn btn-success',
+		cancelButtonClass : 'btn btn-danger',
+		buttonsStyling    : false
+	}).then(okCallback, cancelCallback);
+};
 
 $(".gallery-products").vegas({
 	delay: 7000,
@@ -101,6 +95,16 @@ function listenerChangeStatus(url){
 	});
 }
 
+function productTypeNav(type) {
+	if (type == 1) {
+		$('#products-bakery').removeClass('display-none');
+		$('#products-deli').addClass('display-none');
+	} else if (type == 3) {
+		$('#products-deli').removeClass('display-none');
+		$('#products-bakery').addClass('display-none');
+	}
+}
+
 $(window).on('load', function() {
 	$('#preloader').fadeOut('slow', function(){
 		$(this).remove();
@@ -125,5 +129,13 @@ $(window).on('load', function() {
 			autoStart : true,
 			speed     : 4000
 		}
+	});
+
+	let type = $('#products-type').val();
+	productTypeNav(type);
+
+	$('#products-type').on('change', function () {
+		let type = $('#products-type').val();
+		productTypeNav(type);
 	});
 });
