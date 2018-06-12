@@ -121,6 +121,8 @@ class Products extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'productImage'     => 'Imagen Completa',
+            'productThumb'     => 'Imagen en Miniatura',
             'product'     => 'Producto',
             'name'        => 'Nombre',
             'description' => 'Descripción',

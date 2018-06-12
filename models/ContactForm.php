@@ -52,7 +52,11 @@ class ContactForm extends Model
      */
     public function contact()
     {
-        $email = Yii::$app->mailer->compose()
+        $email = Yii::$app->mailer->compose('contact', [
+                'name' => $this->name,
+                'email' => $this->email,
+                'body' => $this->body,
+            ])
             ->setTo(Yii::$app->params['adminEmail'])
             ->setFrom([Yii::$app->params['supportEmail'] => 'Delishots Web'])
             ->setSubject($this->subject)
