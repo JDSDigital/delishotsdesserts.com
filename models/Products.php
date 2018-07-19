@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\Packages;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -21,6 +22,7 @@ class Products extends ActiveRecord
     const PRODUCT_BAKERY = 1;
     const PRODUCT_PASTRY = 2;
     const PRODUCT_DELI = 3;
+    const PRODUCT_MIX = 4;
 
     const PRODUCT_FORMS = [
         self::PRODUCT_SLICE => 'priceSlice',
@@ -64,6 +66,8 @@ class Products extends ActiveRecord
         self::PRODUCT_5OZ => 'Caja de 12',
         self::PRODUCT_8OZ => 'Caja de 12',
     ];
+
+    public $forms = [];
 
     public $productImage;
     public $productThumb;
@@ -109,7 +113,7 @@ class Products extends ActiveRecord
         return [
             [['name', 'description'], 'required'],
             [['product', 'name', 'description'], 'string'],
-            [['status', 'priceSlice', 'priceGlass', 'priceFull', 'priceShot', 'price5oz', 'price8oz', 'priceDeli'], 'integer'],
+            [['type', 'status', 'priceSlice', 'priceGlass', 'priceFull', 'priceShot', 'price5oz', 'price8oz', 'priceDeli'], 'integer'],
 
             [['productImage', 'productThumb'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg'],
         ];
@@ -158,10 +162,16 @@ class Products extends ActiveRecord
           ->asArray()
           ->all();
 
+        $boxes = Packages::find()
+          ->select(['id', 'type_id', 'name', 'price', 'status'])
+          ->where(['status' => Packages::STATUS_ACTIVE])
+          ->asArray()
+          ->all();
+
         array_unshift($products, [0]);
 
         Yii::$app->session->set('products', $products);
-        Yii::$app->session->set('boxes', self::PRODUCT_BOXES);
+        Yii::$app->session->set('boxes', $boxes);
 
         return true;
 
@@ -198,6 +208,55 @@ class Products extends ActiveRecord
         } else {
             return false;
         }
+    }
+
+    public function getProductTypes()
+    {
+      return [
+        self::PRODUCT_BAKERY => 'Pastelería',
+        // self::PRODUCT_PASTRY => 'Repostería',
+        self::PRODUCT_DELI => 'Delicateses',
+        // self::PRODUCT_MIX => 'Mixto',
+      ];
+    }
+
+    public function getForms() {
+
+        if ($this->type == self::PRODUCT_BAKERY) {
+
+            $this->forms[0] =  self::PRODUCT_BAKERY;
+
+            if ($this->priceSlice != null && $this->priceSlice != '')
+                $this->forms[self::PRODUCT_SLICE] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_SLICE];
+
+            if ($this->priceGlass != null && $this->priceGlass != '')
+                $this->forms[self::PRODUCT_GLASS] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_GLASS];
+
+            if ($this->priceFull != null && $this->priceFull != '')
+                $this->forms[self::PRODUCT_FULL] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_FULL];
+
+            if ($this->priceShot != null && $this->priceShot != '')
+                $this->forms[self::PRODUCT_SHOT] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_SHOT];
+
+            if ($this->price5oz != null && $this->price5oz != '')
+                $this->forms[self::PRODUCT_5OZ] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_5OZ];
+
+            if ($this->price8oz != null && $this->price8oz != '')
+                $this->forms[self::PRODUCT_8OZ] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_8OZ];
+
+        } elseif ($this->type == self::PRODUCT_DELI) {
+
+            if ($this->priceDeli != null && $this->priceDeli != '')
+                $this->forms[0] =  self::PRODUCT_DELI;
+        }
+
+        return $this->forms;
+
+    }
+
+    public function getProductType($id)
+    {
+      return self::getProductTypes($id);
     }
 
 }

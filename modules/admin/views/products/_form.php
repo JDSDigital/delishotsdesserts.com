@@ -28,7 +28,7 @@ use yii\helpers\Html;
 
           <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-					<?= $form->field($model, 'type')->dropDownList([Products::PRODUCT_BAKERY => 'Postres', Products::PRODUCT_DELI => 'Delicateses']) ?>
+					<?= $form->field($model, 'type')->dropDownList($model->getProductTypes()) ?>
 
 					<div id="products-bakery">
 

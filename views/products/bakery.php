@@ -26,7 +26,7 @@ $this->title = 'Nuestros Productos';
                   </h2>
                     <?=
                         Html::a(
-                            Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $product->product . '.jpg', ['class' => '']) . '<span></span>',
+                            Html::img(Yii::getAlias('@web') . '/images/products/thumbs/' . $product->product . '.jpg', ['class' => 'crop']) . '<span></span>',
                             ['products/view', 'id' => $product->id]
                         );
                     ?>

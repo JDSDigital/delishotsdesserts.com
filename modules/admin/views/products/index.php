@@ -19,7 +19,7 @@ $this->title = 'Productos';
 					<h1>Postres</h1>
 				</div>
 				<div class="col-md-6 text-right">
-					<?= Html::a('Nuevo Producto', ['//admin/create'], ['class' => 'btn btn-success']) ?>
+					<?= Html::a('Nuevo Producto', ['products/create'], ['class' => 'btn btn-success']) ?>
 				</div>
 			</div>
 

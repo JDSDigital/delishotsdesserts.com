@@ -1,5 +1,8 @@
 <?php
 
+use \yii\web\Request;
+$baseUrl = str_replace('/web', '', (new Request)->getBaseUrl());
+
 $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
 
@@ -8,10 +11,16 @@ $config = [
     'language' => 'es',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'fDI_TiS2hqAn7Q1wARnQOlMFUQWP0XpN',
+            'baseUrl' => $baseUrl,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

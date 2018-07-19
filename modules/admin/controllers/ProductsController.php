@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\admin\controllers;
 
 use app\models\Products;
 use Yii;
@@ -10,7 +10,7 @@ use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
-class AdminController extends \yii\web\Controller
+class ProductsController extends \yii\web\Controller
 {
 
     /**
@@ -49,11 +49,11 @@ class AdminController extends \yii\web\Controller
         }
 
         $dataProviderBakery = new ActiveDataProvider([
-            'query' => Products::find()->where(['type' => 1]),
+            'query' => Products::find()->where(['type' => Products::PRODUCT_BAKERY]),
         ]);
 
         $dataProviderDeli = new ActiveDataProvider([
-            'query' => Products::find()->where(['type' => 3]),
+            'query' => Products::find()->where(['type' => Products::PRODUCT_DELI]),
         ]);
 
         return $this->render('index', [

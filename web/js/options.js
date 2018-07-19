@@ -238,7 +238,11 @@ function createBoxSelect(id, value) {
 	dropdown.removeAttr('disabled');
 
 	// Appends results
-	dropdown.append('<option value="'+value+'">'+BOXES[value]+'</option>');
+	for (var i = 0; i < Object.keys(BOXES).length; i++) {
+		if (BOXES[i].type_id == value){
+			dropdown.append('<option value="'+BOXES[i].id+'">'+BOXES[i].name+'</option>');
+		}
+	}
 }
 
 function showPrice(id) {
