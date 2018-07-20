@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Packages */
 
-$this->title = 'Create Packages';
+$this->title = 'Crear Envase';
 $this->params['breadcrumbs'][] = ['label' => 'Packages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

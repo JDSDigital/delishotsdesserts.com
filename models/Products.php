@@ -23,6 +23,7 @@ class Products extends ActiveRecord
     const PRODUCT_PASTRY = 2;
     const PRODUCT_DELI = 3;
     const PRODUCT_MIX = 4;
+    const PRODUCT_BOMBON = 5;
 
     const PRODUCT_FORMS = [
         self::PRODUCT_SLICE => 'priceSlice',
@@ -163,12 +164,13 @@ class Products extends ActiveRecord
           ->all();
 
         $boxes = Packages::find()
-          ->select(['id', 'type_id', 'name', 'price', 'status'])
+          ->select(['id', 'type_id', 'name', 'price', 'quantity', 'status'])
           ->where(['status' => Packages::STATUS_ACTIVE])
           ->asArray()
           ->all();
 
         array_unshift($products, [0]);
+        array_unshift($boxes, [0]);
 
         Yii::$app->session->set('products', $products);
         Yii::$app->session->set('boxes', $boxes);
@@ -217,6 +219,7 @@ class Products extends ActiveRecord
         // self::PRODUCT_PASTRY => 'Repostería',
         self::PRODUCT_DELI => 'Delicateses',
         // self::PRODUCT_MIX => 'Mixto',
+        self::PRODUCT_BOMBON => 'Bombonería',
       ];
     }
 

@@ -83,6 +83,13 @@ $this->title = 'Productos';
                 }
               ],
               [
+                'attribute' => 'quantity',
+                'value' => function ($model) {
+                  return $model->quantity;
+                },
+								'contentOptions' => ['style' => 'width: 100px;min-width: 100px'],
+              ],
+              [
                   'class'          => 'yii\grid\ActionColumn',
                   'template'       => '{ul}{view}{update}{delete}',
                   'contentOptions' => ['style' => 'width: 100px;min-width: 100px'],

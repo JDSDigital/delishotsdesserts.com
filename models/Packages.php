@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
  * @property int $type_id
  * @property string $name
  * @property double $price
+ * @property double $quantity
  * @property string $image
  * @property int $status
  * @property int $created_at
@@ -66,8 +67,8 @@ class Packages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'name', 'price'], 'required'],
-            [['type_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['type_id', 'name', 'price', 'quantity'], 'required'],
+            [['type_id', 'status', 'quantity', 'created_at', 'updated_at'], 'integer'],
             [['price'], 'number'],
             [['name', 'image'], 'string', 'max' => 255],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => PackagesTypes::className(), 'targetAttribute' => ['type_id' => 'id']],
@@ -86,6 +87,7 @@ class Packages extends \yii\db\ActiveRecord
             'type_id' => 'Tipo',
             'name' => 'Nombre',
             'price' => 'Precio',
+            'quantity' => 'Cantidad de productos en el envase',
             'image' => 'Imágen',
             'packageImage' => 'Imágen',
             'status' => 'Estado',

@@ -44,6 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
                   Empaque
                 </th>
                 <th>
+                    Precio Empaque Individual
+                </th>
+                <th>
+                    Precio Empaque Total
+                </th>
+                <th>
                     Precio Unitario
                 </th>
                 <th>

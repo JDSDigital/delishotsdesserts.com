@@ -32,6 +32,7 @@ class m180719_091628_create_packages_tables extends Migration
             'type_id' => $this->integer()->notNull(),
             'name' => $this->string()->notNull(),
             'price' => $this->double()->notNull(),
+            'quantity' => $this->integer()->notNull()->defaultValue(1),
             'image' => $this->string()->null(),
 
             'status'     => $this->smallInteger()->notNull()->defaultValue(1),
@@ -49,16 +50,16 @@ class m180719_091628_create_packages_tables extends Migration
             ['Bombones'],
         ]);
 
-        $this->batchInsert('{{%ds_packages}}', ['type_id', 'name', 'price'], [
-            [1, 'Envase Individual', 1],
-            [2, 'Envase', 1],
-            [3, 'Caja Grande', 1],
-            [4, 'Cajita de 3', 1],
-            [4, 'Cajita de 12', 1],
-            [5, 'Envase de 5oz', 1],
-            [6, 'Envase de 8oz', 1],
-            [7, 'Cajita de 3', 1],
-            [7, 'Cajita de 12', 1],
+        $this->batchInsert('{{%ds_packages}}', ['type_id', 'name', 'price', 'quantity'], [
+            [1, 'Envase Individual', 1, 1],
+            [2, 'Envase', 1, 1],
+            [3, 'Caja Grande', 1, 1],
+            [4, 'Cajita de 3', 1, 3],
+            [4, 'Cajita de 12', 1, 12],
+            [5, 'Envase de 5oz', 1, 1],
+            [6, 'Envase de 8oz', 1, 1],
+            [7, 'Cajita de 3', 1, 3],
+            [7, 'Cajita de 12', 1, 12],
         ]);
 
         $this->createIndex('idx-ds_packages-type_id', 'ds_packages', 'type_id');

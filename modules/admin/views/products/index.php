@@ -153,5 +153,52 @@ $this->title = 'Productos';
 			]); ?>
 		</div>
 	</section>
+
+	<section class="panel">
+		<header class="panel-heading">
+			<h1>Bombonería</h1>
+		</header>
+		<div class="panel-body pl0 pr0">
+			<?= GridView::widget([
+				'dataProvider'   => $dataProviderBombon,
+				'options'        => [
+					'class' => 'table-responsive',
+				],
+				'tableOptions'   => [
+					'class' => 'table table-striped table-hover',
+				],
+				'pager'          => [
+					'options' => [
+						'class' => 'pagination ml20 mt10',
+					],
+				],
+				'summaryOptions' => [
+					'class' => 'summary ml20 mt25',
+				],
+				'layout'         => '{items}{pager}{summary}',
+				'columns'        => [
+					[
+						'attribute' => 'status',
+						'format' => 'raw',
+						'value'     => function ($model) {
+							$check = ($model->status == Products::STATUS_ACTIVE) ? "checked='checked'" : null;
+
+							return "<div class='switchery-xs m0'>
+                                    <input id='status-$model->id' type='checkbox' class='switchery switchStatus' $check>
+                                </div>";
+						},
+					],
+					'name',
+					'description',
+					'priceDeli',
+					[
+						'class'          => 'yii\grid\ActionColumn',
+						'template'       => '{ul}{view}{update}{delete}',
+						'contentOptions' => ['style' => 'width: 100px;min-width: 100px'],
+					],
+				],
+			]); ?>
+		</div>
+	</section>
 </div>
 <?php $this->registerJs('listenerChangeStatus("'.Url::to(["/admin/productstatus"]).'");'); ?>

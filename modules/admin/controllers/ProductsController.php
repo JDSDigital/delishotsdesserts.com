@@ -56,9 +56,14 @@ class ProductsController extends \yii\web\Controller
             'query' => Products::find()->where(['type' => Products::PRODUCT_DELI]),
         ]);
 
+        $dataProviderBombon = new ActiveDataProvider([
+            'query' => Products::find()->where(['type' => Products::PRODUCT_BOMBON]),
+        ]);
+
         return $this->render('index', [
             'dataProviderBakery' => $dataProviderBakery,
             'dataProviderDeli' => $dataProviderDeli,
+            'dataProviderBombon' => $dataProviderBombon,
         ]);
     }
 

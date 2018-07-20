@@ -141,8 +141,11 @@ class OptionController extends Controller
                 if ($product['price8oz'] != null && $product['price8oz'] != '')
                     $response[Products::PRODUCT_8OZ] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_8OZ];
 
-            } elseif ($product['type'] == Products::PRODUCT_DELI)
+            } elseif ($product['type'] == Products::PRODUCT_DELI) {
                 $response[0] =  Products::PRODUCT_DELI;
+
+            } elseif ($product['type'] == Products::PRODUCT_BOMBON)
+                $response[0] =  Products::PRODUCT_BOMBON;
 
             return json_encode($response);
         } else
@@ -172,14 +175,19 @@ class OptionController extends Controller
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $product = Yii::$app->session->get('products')[$data['product']];
+            $box = ($data['box'] != 0) ? Yii::$app->session->get('boxes')[$data['box']] : 0;
 
             // Price by unity
             $price = $product[Products::PRODUCT_FORMS[$data['form']]];
+            $boxPrice = ($box != 0) ? $box['price'] : 0;
 
             // Price by quantity
             $priceTotal = $product[Products::PRODUCT_FORMS[$data['form']]] * $data['quantity'];
+            $boxTotal = ($box != 0) ? ceil($data['quantity'] / $box['quantity']) * $box['price'] : 0;
 
             $response = [
+              'boxPrice' => Yii::$app->formatter->asCurrency($boxPrice, 'VEF') . ' c/u',
+              'boxTotal' => Yii::$app->formatter->asCurrency($boxTotal, 'VEF'),
               'price' => Yii::$app->formatter->asCurrency($price, 'VEF') . ' c/u',
               'priceTotal' => Yii::$app->formatter->asCurrency($priceTotal, 'VEF')
             ];
@@ -197,11 +205,17 @@ class OptionController extends Controller
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $product = Yii::$app->session->get('products')[$data['product']];
+            $box = ($data['box'] != 0) ? Yii::$app->session->get('boxes')[$data['box']] : 0;
 
             $price = $product['priceDeli'];
             $priceTotal = $product['priceDeli'] * $data['quantity'];
 
+            $boxPrice = ($box != 0) ? $box['price'] : 0;
+            $boxTotal = ($box != 0) ? ceil($data['quantity'] / $box['quantity']) * $box['price'] : 0;
+
             $response = [
+              'boxPrice' => Yii::$app->formatter->asCurrency($boxPrice, 'VEF') . ' c/u',
+              'boxTotal' => Yii::$app->formatter->asCurrency($boxTotal, 'VEF'),
               'price' => Yii::$app->formatter->asCurrency($price, 'VEF') . ' c/u',
               'priceTotal' => Yii::$app->formatter->asCurrency($priceTotal, 'VEF')
             ];
@@ -217,8 +231,13 @@ class OptionController extends Controller
 
         foreach ($data['list'] as $item) {
             $product = Yii::$app->session->get('products')[$item[0]];
+            $box = ($item[3] != 0) ? Yii::$app->session->get('boxes')[$item[3]] : 0;
 
-            $price = ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2];
+            $boxTotal = ($box != 0) ? ceil($item[2] / $box['quantity']) * $box['price'] : 0;
+
+            $price = ($item[1]) ?
+                ($product[Products::PRODUCT_FORMS[$item[1]]] * $item[2]) + $boxTotal :
+                $product['priceDeli'] * $item[2];
             $total = $total + $price;
         }
         return $total;
