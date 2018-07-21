@@ -34,6 +34,12 @@ $this->title = 'Checkout';
               Empaque
             </th>
             <th>
+                Precio Empaque Individual
+            </th>
+            <th>
+                Precio Empaque Total
+            </th>
+            <th>
                 Precio Unitario
             </th>
             <th>
@@ -56,7 +62,13 @@ $this->title = 'Checkout';
                   <?= $item['quantity']?>
                 </td>
                 <td>
-                  <?= $item['box'] ?>
+                  <?= ($item['box']) ? $item['box'] : 'Sin Empaque' ?>
+                </td>
+                <td>
+                  <?= Yii::$app->formatter->asCurrency($item['boxPrice'], 'VEF') . 'c/u' ?>
+                </td>
+                <td>
+                  <?= Yii::$app->formatter->asCurrency($item['boxTotal'], 'VEF') ?>
                 </td>
                 <td>
                   <?= Yii::$app->formatter->asCurrency($item['price'], 'VEF') . 'c/u' ?>

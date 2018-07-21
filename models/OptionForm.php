@@ -46,9 +46,13 @@ class OptionForm extends Model
             $order = '<table style="text-align: left">';
             $order .= '<tr>';
             $order .= '<td>Producto</td>';
-            $order .= '<td>Forma</td>';
+            $order .= '<td>Presentación</td>';
             $order .= '<td>Cantidad</td>';
-            $order .= '<td>Precio</td>';
+            $order .= '<td>Empaque</td>';
+            $order .= '<td>Precio Empaque Individual</td>';
+            $order .= '<td>Precio Empaque Total</td>';
+            $order .= '<td>Precio Unitario</td>';
+            $order .= '<td>Precio Total</td>';
             $order .= '</tr>';
 
             foreach (Yii::$app->session->get('cart')['items'] as $key => $value) {
@@ -56,12 +60,16 @@ class OptionForm extends Model
               $order .= '<td>' . $value['name'] . '</td>';
               $order .= '<td>' . $value['form'] . '</td>';
               $order .= '<td>' . $value['quantity'] . '</td>';
+              $order .= '<td>' . ($value['box']) ? $value['box'] : 'Sin Empaque' . '</td>';
+              $order .= '<td>' . Yii::$app->formatter->asCurrency($value['boxPrice'], 'VEF') . '</td>';
+              $order .= '<td>' . Yii::$app->formatter->asCurrency($value['boxTotal'], 'VEF') . '</td>';
               $order .= '<td>' . Yii::$app->formatter->asCurrency($value['price'], 'VEF') . '</td>';
+              $order .= '<td>' . Yii::$app->formatter->asCurrency($value['priceTotal'], 'VEF') . '</td>';
               $order .= '</tr>';
             }
 
             $order .= '<tr>';
-            $order .= '<td colspan="3"><strong>Total:</strong></td>';
+            $order .= '<td colspan="7"><strong>Total:</strong></td>';
             $order .= '<td><strong>' . Yii::$app->formatter->asCurrency(Yii::$app->session->get('cart')['total'], 'VEF') . '</strong></td>';
             $order .= '</tr>';
             $order .= '</table>';

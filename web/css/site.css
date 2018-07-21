@@ -435,7 +435,7 @@ a.desc:after {
 #options-table-body img {
     max-height: 75px !important;
 }
-#options-table-body .form-control, #products-type {
+#options-table-body .form-control, #products-type, .packages-form .form-control {
     padding: 0;
     background-color: #FFF;
 }

@@ -163,7 +163,7 @@ function createFormsSelect (id, value) {
 				dropdownBox.attr('disabled', 'disabled');
 
 				createQuantitySelect(id, 0);
-				createBoxSelect(id, 0);
+				createBoxSelect(id, 7);
 			}
 
 		}

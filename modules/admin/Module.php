@@ -23,8 +23,8 @@ class Module extends \yii\base\Module
         parent::init();
 
         // custom initialization code goes here
-        $path = Yii::getAlias('@web') . '/images/packages';
+        //$path = Yii::getAlias('@web') . '/images/packages';
 
-        FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
+        //FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
     }
 }
