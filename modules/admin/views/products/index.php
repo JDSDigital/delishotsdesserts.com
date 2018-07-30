@@ -20,6 +20,7 @@ $this->title = 'Productos';
 				</div>
 				<div class="col-md-6 text-right">
 					<?= Html::a('Nuevo Producto', ['products/create'], ['class' => 'btn btn-success']) ?>
+					<?= Html::a('Volver', ['default/index'], ['class' => 'btn btn-admin-2']) ?>
 				</div>
 			</div>
 

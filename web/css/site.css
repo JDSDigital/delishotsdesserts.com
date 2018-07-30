@@ -426,6 +426,9 @@ a.desc:after {
     background: linear-gradient(#513527, #2f1e15);
     width: 300px;
 }
+.btn-admin-2, .btn-admin-2:active {
+    background: linear-gradient(#513527, #2f1e15);
+}
 .btn-check {
     width: 300px;
 }
