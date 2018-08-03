@@ -80,7 +80,7 @@ $this->title = 'Productos';
               [
                 'attribute' => 'price',
                 'value' => function ($model) {
-                  return $model->price;
+                  return Yii::$app->formatter->asCurrency($model->price);
                 }
               ],
               [

@@ -133,7 +133,7 @@ class Products extends ActiveRecord
             'description' => 'Descripción',
             'type'        => 'Tipo',
             'priceSlice'  => 'Porción Individual',
-            'priceGlass'  => 'Envase de Vidrio',
+            'priceGlass'  => 'Envase',
             'priceFull'   => 'Precio Completo',
             'priceShot'   => 'Precio Shot',
             'price5oz'    => 'Precio 5oz',

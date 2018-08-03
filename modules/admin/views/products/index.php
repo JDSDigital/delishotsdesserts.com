@@ -65,37 +65,37 @@ $this->title = 'Productos';
 							 [
 								 'attribute' => 'priceSlice',
 								 'value' => function ($model) {
-									 return ($model->priceSlice) ? $model->priceSlice : 'Inexistente';
+									 return ($model->priceSlice) ? Yii::$app->formatter->asCurrency($model->priceSlice) : 'Inexistente';
 								 }
 							 ],
                [
 								 'attribute' => 'priceGlass',
 								 'value' => function ($model) {
-									 return ($model->priceGlass) ? $model->priceGlass : 'Inexistente';
+									 return ($model->priceGlass) ? Yii::$app->formatter->asCurrency($model->priceGlass) : 'Inexistente';
 								 }
 							 ],
                [
 								 'attribute' => 'priceFull',
 								 'value' => function ($model) {
-									 return ($model->priceFull) ? $model->priceFull : 'Inexistente';
+									 return ($model->priceFull) ? Yii::$app->formatter->asCurrency($model->priceFull) : 'Inexistente';
 								 }
 							 ],
                [
 								 'attribute' => 'priceShot',
 								 'value' => function ($model) {
-									 return ($model->priceShot) ? $model->priceShot : 'Inexistente';
+									 return ($model->priceShot) ? Yii::$app->formatter->asCurrency($model->priceShot) : 'Inexistente';
 								 }
 							 ],
                [
 								 'attribute' => 'price5oz',
 								 'value' => function ($model) {
-									 return ($model->price5oz) ? $model->price5oz : 'Inexistente';
+									 return ($model->price5oz) ? Yii::$app->formatter->asCurrency($model->price5oz) : 'Inexistente';
 								 }
 							 ],
                [
 								 'attribute' => 'price8oz',
 								 'value' => function ($model) {
-									 return ($model->price8oz) ? $model->price8oz : 'Inexistente';
+									 return ($model->price8oz) ? Yii::$app->formatter->asCurrency($model->price8oz) : 'Inexistente';
 								 }
 							 ],
               [
@@ -144,7 +144,12 @@ $this->title = 'Productos';
 					],
 					'name',
 					'description',
-					'priceDeli',
+					[
+						'attribute' => 'priceDeli',
+						'value' => function ($model) {
+							return ($model->priceDeli) ? Yii::$app->formatter->asCurrency($model->priceDeli) : 'Inexistente';
+						}
+					],
 					[
 						'class'          => 'yii\grid\ActionColumn',
 						'template'       => '{ul}{view}{update}{delete}',
@@ -191,7 +196,12 @@ $this->title = 'Productos';
 					],
 					'name',
 					'description',
-					'priceDeli',
+					[
+						'attribute' => 'priceDeli',
+						'value' => function ($model) {
+							return ($model->priceDeli) ? Yii::$app->formatter->asCurrency($model->priceDeli) : 'Inexistente';
+						}
+					],
 					[
 						'class'          => 'yii\grid\ActionColumn',
 						'template'       => '{ul}{view}{update}{delete}',
