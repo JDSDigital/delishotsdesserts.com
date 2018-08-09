@@ -55,6 +55,7 @@ class ContactForm extends Model
         $email = Yii::$app->mailer->compose('contact', [
                 'name' => $this->name,
                 'email' => $this->email,
+                'subject' => $this->subject,
                 'body' => $this->body,
             ])
             ->setTo(Yii::$app->params['adminEmail'])
