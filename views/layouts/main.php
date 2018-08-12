@@ -107,8 +107,8 @@ AppAsset::register($this);
                     <div class="col-md-6 footer-right text-center">
                         <h5>¡Síguenos en nuestras redes sociales!</h5>
                         <a class="btn btn-instagram" href="https://www.instagram.com/delishotsdesserts/" target="_blank"><i class="fa fa-lg fa-instagram"></i></a>
-                        <a class="btn btn-twitter" href="https://twitter.com/delishots/" target="_blank"><i class="fa fa-lg fa-twitter"></i></a>
-                        <a class="btn btn-facebook" href="https://es-la.facebook.com/delishots/" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
+                        <!-- <a class="btn btn-twitter" href="https://twitter.com/delishots/" target="_blank"><i class="fa fa-lg fa-twitter"></i></a> -->
+                        <a class="btn btn-facebook" href="https://www.facebook.com/DeliShots-Desserts-2101429316845708/" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
                     </div>
                 </div>
             </div>
