@@ -13,6 +13,51 @@ use app\widgets\Alert;
 $this->registerMetaTag(['name' => 'author', 'content' => 'JDSDigital']);
 $this->registerMetaTag(['rel' => 'canonical', 'href' => 'http://www.delishotsdessers.com']);
 
+$this->registerMetaTag([
+    'property' => 'og:url',
+    'content' => Url::to(['/site/index'], true)
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:type',
+    'content' => 'website'
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:title',
+    'content' => 'Delishots Desserts'
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:description',
+    'content' => 'Delishots Desserts'
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:image',
+    'content' => Url::to(['/images/logo.png'], true)
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:image:alt',
+    'content' => 'Delishots Desserts'
+]);
+
+$this->registerMetaTag([
+    'property' => 'twitter:card',
+    'content' => 'summary'
+]);
+
+$this->registerMetaTag([
+    'property' => 'twitter:description',
+    'content' => 'Delishots Desserts'
+]);
+
+$this->registerMetaTag([
+    'property' => 'twitter:title',
+    'content' => 'Delishots Desserts'
+]);
+
 $class = (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') ? 'wrap index-slider' : 'wrap';
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => Yii::getAlias('@web') . '/images/favicon.png']);
 AppAsset::register($this);
