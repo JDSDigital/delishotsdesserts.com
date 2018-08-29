@@ -13,6 +13,8 @@ use app\widgets\Alert;
 
 $this->registerMetaTag(['name' => 'author', 'content' => 'JDSDigital']);
 $this->registerMetaTag(['rel' => 'canonical', 'href' => 'http://www.delishotsdessers.com']);
+$this->registerMetaTag(['name' => 'description', 'content' => 'Empresa dedicada a la elaboración casera de postres para eventos, fiestas, mayor y detal en la zona de Caracas.']);
+$this->registerMetaTag(['name' => 'keywords', 'content' => 'postres, eventos, fiestas, shots']);
 
 $this->registerMetaTag([
     'property' => 'og:url',
