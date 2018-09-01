@@ -85,7 +85,6 @@ $this->registerMetaTag(['name' => 'msapplication-square150x150logo', 'content' =
 $this->registerMetaTag(['name' => 'msapplication-wide310x150logo', 'content' => './images/favicon/mstile-310x150.png']);
 $this->registerMetaTag(['name' => 'msapplication-square310x310logo', 'content' => './images/favicon/mstile-310x310.png']);
 
-
 $class = (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') ? 'wrap index-slider' : 'wrap';
 AppAsset::register($this);
 ?>
@@ -145,7 +144,7 @@ AppAsset::register($this);
     ?>
     <div class="header text-center">
         <?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') { ?>
-
+            <?php /* TODO: Fix this */ ?>
         <?php } else { ?>
             <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
                 'class' => 'img-fluid logo-banner m0a animated fadeIn',
@@ -160,7 +159,7 @@ AppAsset::register($this);
 </div>
 
 <?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') { ?>
-
+    <?php /* TODO: Fix this */ ?>
 <?php } else { ?>
     <footer>
         <div class="footer-main">
@@ -188,7 +187,6 @@ AppAsset::register($this);
                 </div>
             </div>
         </div>
-
         <div class="footer-rights">
             <div class="container">
                 <hr/>
