@@ -119,11 +119,13 @@ class Packages extends \yii\db\ActiveRecord
     public function uploadImage()
     {
         if ($this->validate()) {
-            if ($this->isNewRecord) {
+            if ($this->image) {
+              $package = $this->image;
+            } else {
               $package = strtolower($this->name);
               $package = str_replace(' ', '-', $package);
-            } else
-              $package = $this->package;
+              $this->image = $package;
+            }
 
             $this->packageImage->saveAs('images/packages/' . $package . '.' . $this->packageImage->extension);
 

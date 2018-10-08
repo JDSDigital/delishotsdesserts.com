@@ -13,6 +13,17 @@ $(document).ready(function(){
 		orderForm($(this).attr('url'));
 	})
 
+	$('#options-table').on('click', 'a.boxbutton', function () {
+		let id = $(this).attr("id").replace(/boxbutton-/g, '');
+		fillBoxModal(id);
+	})
+
+	$('.modal-body').on('click', 'a.box-link', function (e) {
+		e.preventDefault();
+		let id = $(this).attr("id");
+		selectBoxModal(id);
+	})
+
 	// Gets products from the database
 	$.ajax({
 		url: 'productsfull',
@@ -24,6 +35,8 @@ $(document).ready(function(){
 			let response = JSON.parse(data);
 			PRODUCTS = response.products;
 			BOXES = response.boxes;
+			// console.log(PRODUCTS);
+			// console.log(BOXES);
 		}
 	});
 
@@ -41,7 +54,8 @@ function addEmptyRow () {
 		'<td><select id="product-' + row + '" class="form-control"></select></td>' +
 		'<td><select id="form-' + row + '" class="form-control"></select></td>' +
 		'<td><select id="quantity-' + row + '" class="form-control"></select></td>' +
-		'<td><select id="box-' + row + '" class="form-control"></select></td>' +
+		// '<td><select id="box-' + row + '" class="form-control"></select></td>' +
+		'<td id="box-' + row + '"></td>' +
 		'<td id="boxPrice-' + row + '"></td>' +
 		'<td id="boxTotal-' + row + '"></td>' +
 		'<td id="price-' + row + '"></td>' +
@@ -205,27 +219,53 @@ function createQuantitySelect (id, value) {
 function createBoxSelect(id, value) {
 	let dropdown = $('#box-'+id);
 
-	dropdown.html('');
-	dropdown.removeAttr('disabled');
+	dropdown.html('<a class="boxbutton" id="boxbutton-'+id+'" data-toggle="modal" data-target="#basicExampleModal">Seleccionar</a>');
+
+	// dropdown.html('');
+	// dropdown.removeAttr('disabled');
 
 	// Appends results
-	dropdown.append('<option value="'+ 0 +'">Sin Empaque</option>');
-
-	for (var i = 0; i < Object.keys(BOXES).length; i++) {
-		if (BOXES[i].type_id == value){
-			dropdown.append('<option value="'+BOXES[i].id+'">'+BOXES[i].name+'</option>');
-		}
-	}
+	// dropdown.append('<option value="'+ 0 +'">Sin Empaque</option>');
+	//
+	// for (var i = 0; i < Object.keys(BOXES).length; i++) {
+	// 	if (BOXES[i].type_id == value){
+	// 		dropdown.append('<option value="'+BOXES[i].id+'">'+BOXES[i].name+'</option>');
+	// 	}
+	// }
 	dropdown.on('change', function () {
 		showPrice(id);
 	});
+}
+
+function fillBoxModal(id) {
+	let value = $('#form-'+id).val();
+	let boxesList = '<div class="row">';
+
+	for (var i = 0; i < Object.keys(BOXES).length; i++) {
+		if (BOXES[i].type_id == value){
+			boxesList += '<div class="col-xs-6">'+
+			'<a id="'+id+'-'+BOXES[i].id+'" class="box-link"><img class="img-responsive" src="../images/packages/'+BOXES[i].image+'.jpg" /></a>'+
+			'</div>';
+		}
+	}
+
+	boxesList += '</div>';
+
+	$('.modal-body').html(boxesList);
+}
+
+function selectBoxModal(id) {
+	let arr = id.split('-');
+	$('#box-'+arr[0]).html('<a class="boxbutton" data-toggle="modal" data-target="#basicExampleModal"><img id="'+arr[1]+'" class="img-responsive" src="../images/packages/'+BOXES[arr[1]].image+'.jpg" /></a>');
+	$('#basicExampleModal').modal('hide');
+	showPrice(arr[0]);
 }
 
 function showPrice(id) {
 	let product = $('#product-'+id).val();
 	let form = $('#form-'+id).val();
 	let quantity = $('#quantity-'+id).val();
-	let box = $('#box-'+id).val();
+	let box = $('#box-'+id+' img').attr('id');
 
 	let boxPrice = $('#boxPrice-'+id);
 	let boxTotal = $('#boxTotal-'+id);
@@ -242,7 +282,7 @@ function showPrice(id) {
 				product: product,
 				form: form,
 				quantity: quantity,
-				box: box,
+				box: box ? box : 0,
 				_csrf : yii.getCsrfToken()
 			},
 			success: function(data) {
@@ -338,12 +378,12 @@ function checkOut (url) {
 				let product = $('#product-'+i).val();
 				let form = $('#form-'+i).val();
 				let quantity = $('#quantity-'+i).val();
-				let box = $('#box-'+i).val();
+				let box = $('#box-'+i+' img').attr('id');
 
 				if (!product || !quantity)
 					continue;
 
-				list.push([product, form, quantity, box]);
+				list.push([product, form, quantity, box ? box : 0]);
 			}
 
 			// Gets price from the database

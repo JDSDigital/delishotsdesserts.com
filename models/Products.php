@@ -164,7 +164,7 @@ class Products extends ActiveRecord
           ->all();
 
         $boxes = Packages::find()
-          ->select(['id', 'type_id', 'name', 'price', 'quantity', 'status'])
+          ->select(['id', 'type_id', 'name', 'price', 'quantity', 'status', 'image'])
           ->where(['status' => Packages::STATUS_ACTIVE])
           ->asArray()
           ->all();

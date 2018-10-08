@@ -62,7 +62,7 @@ $this->title = 'Checkout';
                   <?= $item['quantity']?>
                 </td>
                 <td>
-                  <?= ($item['box']) ? $item['box'] : 'Sin Empaque' ?>
+                  <?= ($item['box']) ? Html::img(Yii::getAlias('@web') . '/images/packages/' . $item['box'] . '.jpg') : 'Sin Empaque' ?>
                 </td>
                 <td>
                   <?= Yii::$app->formatter->asCurrency($item['boxPrice'], 'VEF') . 'c/u' ?>
