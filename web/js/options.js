@@ -13,10 +13,36 @@ $(document).ready(function(){
 		orderForm($(this).attr('url'));
 	})
 
+	$('#options-table').on('change', 'select.product', function () {
+		let id = $(this).attr("id").replace(/product-/g, '');
+		let value = $(this).val();
+		addProductThumb(id, value);
+		createFormsSelect(id, value);
+	})
+
+	$('#options-table').on('change', 'select.form', function () {
+		let id = $(this).attr("id").replace(/form-/g, '');
+		let value = $(this).val();
+		createQuantitySelect(id, value);
+		createBoxSelect(id, value);
+	})
+
+	$('#options-table').on('change', 'select.quantity', function () {
+		let id = $(this).attr("id").replace(/quantity-/g, '');
+		showPrice(id);
+	})
+
 	$('#options-table').on('click', 'a.boxbutton', function () {
 		let id = $(this).attr("id").replace(/boxbutton-/g, '');
 		fillBoxModal(id);
 	})
+
+	// Creates event on the delete row button
+	$('#options-table').on('click', 'button.btn-danger', function () {
+		let id = this.id.replace(/delete-/, '');
+		$('#row-'+id).remove();
+		showTotal();
+	});
 
 	$('.modal-body').on('click', 'a.box-link', function (e) {
 		e.preventDefault();
@@ -35,8 +61,9 @@ $(document).ready(function(){
 			let response = JSON.parse(data);
 			PRODUCTS = response.products;
 			BOXES = response.boxes;
-			// console.log(PRODUCTS);
-			// console.log(BOXES);
+			FORMS = response.forms;
+			QUANTITIES = response.quantities;
+			TYPEQUANTITIES = response.typequantities;
 		}
 	});
 
@@ -51,10 +78,9 @@ function addEmptyRow () {
 
 	let productRow =  '<tr id="row-'   + row + '">' +
 		'<td id="thumb-' + row + '"></td>' +
-		'<td><select id="product-' + row + '" class="form-control"></select></td>' +
-		'<td><select id="form-' + row + '" class="form-control"></select></td>' +
-		'<td><select id="quantity-' + row + '" class="form-control"></select></td>' +
-		// '<td><select id="box-' + row + '" class="form-control"></select></td>' +
+		'<td><select id="product-' + row + '" class="product form-control"></select></td>' +
+		'<td><select id="form-' + row + '" class="form form-control"></select></td>' +
+		'<td><select id="quantity-' + row + '" class="quantity form-control"></select></td>' +
 		'<td id="box-' + row + '"></td>' +
 		'<td id="boxPrice-' + row + '"></td>' +
 		'<td id="boxTotal-' + row + '"></td>' +
@@ -72,18 +98,6 @@ function addEmptyRow () {
 	if (checkBtn)
 		$('#button-check').removeClass('dn');
 
-	// Creates event on the delete row button
-	$('#delete-'+row).on('click', function () {
-		deleteRow(this);
-	});
-
-}
-
-// Deletes a row
-function deleteRow (object) {
-	let id = object.id.replace(/delete-/, '');
-	$('#row-'+id).remove();
-	showTotal();
 }
 
 // Fills the product select
@@ -102,13 +116,6 @@ function createProductSelect (id) {
 	addProductThumb(id, value);
 	createFormsSelect(id, value);
 
-	// Creates the selects on change event
-	dropdown.on('change', function () {
-		let id = this.id.replace(/product-/, '');
-		let value = dropdown.val();
-		addProductThumb(id, value);
-		createFormsSelect(id, value);
-	});
 }
 
 function addProductThumb(id, value) {
@@ -124,96 +131,61 @@ function createFormsSelect (id, value) {
 	let dropdown = $('#form-'+id);
 	let dropdownBox = $('#box-'+id);
 
-	// Gets products from the database
-	$.ajax({
-		url: 'productforms',
-		type: 'post',
-		data: {
-			id: value,
-			_csrf : yii.getCsrfToken()
-		},
-		success: function(data) {
-			let arr = JSON.parse(data);
-			dropdown.html('');
-			dropdownBox.html('');
+	dropdown.html('');
+	dropdownBox.html('');
 
-			if (arr[0] == 1) {
+	let arr = FORMS[value];
 
-				dropdown.removeAttr('disabled');
+	if (arr[0] == 1) {
 
-				// Appends results
-				for (var i = 1; i <= 6; i++) {
-					if (arr[i])
-						dropdown.append('<option value="'+i+'">'+arr[i]+'</option>');
-				}
+		dropdown.removeAttr('disabled');
 
-				let value = dropdown.val();
-				createQuantitySelect(id, value);
-				createBoxSelect(id, value);
-
-				// Creates the selects on change event
-				dropdown.on('change', function () {
-					let id = this.id.replace(/form-/, '');
-					let value = dropdown.val();
-					createQuantitySelect(id, value);
-					createBoxSelect(id, value);
-				});
-
-			} else if (arr[0] == 3) {
-
-				dropdown.append('<option value="0">Unidad</option>');
-
-				dropdown.attr('disabled', 'disabled');
-				dropdownBox.attr('disabled', 'disabled');
-
-				createQuantitySelect(id, 0);
-				createBoxSelect(id, 0);
-
-			} else if (arr[0] == 5) {
-
-				dropdown.append('<option value="0">Unidad</option>');
-
-				dropdown.attr('disabled', 'disabled');
-				dropdownBox.attr('disabled', 'disabled');
-
-				createQuantitySelect(id, 0);
-				createBoxSelect(id, 7);
-			}
-
+		// Appends results
+		for (var i = 1; i <= 6; i++) {
+			if (arr[i])
+				dropdown.append('<option value="'+i+'">'+arr[i]+'</option>');
 		}
-	});
+
+		let value = dropdown.val();
+		createQuantitySelect(id, value);
+		createBoxSelect(id, value);
+
+	} else if (arr[0] == 3) {
+
+		dropdown.append('<option value="0">Unidad</option>');
+
+		dropdown.attr('disabled', 'disabled');
+		dropdownBox.attr('disabled', 'disabled');
+
+		createQuantitySelect(id, 0);
+		createBoxSelect(id, 0);
+
+	} else if (arr[0] == 5) {
+
+		dropdown.append('<option value="0">Unidad</option>');
+
+		dropdown.attr('disabled', 'disabled');
+		dropdownBox.attr('disabled', 'disabled');
+
+		createQuantitySelect(id, 0);
+		createBoxSelect(id, 7);
+	}
+
 }
 
 function createQuantitySelect (id, value) {
 	let dropdown = $('#quantity-'+id);
+	let arr = value != 0 ? QUANTITIES[value] : TYPEQUANTITIES[3];
 
-	// Gets quantities from the database
-	$.ajax({
-		url: 'productquantities',
-		type: 'post',
-		data: {
-			id: value,
-			_csrf : yii.getCsrfToken()
-		},
-		success: function(data) {
-			let arr = JSON.parse(data);
-			dropdown.html('');
+	dropdown.html('');
 
-			// Appends results
-			for (var i = 0; i < Object.keys(arr).length; i++) {
-				dropdown.append('<option value="'+arr[i]+'">'+arr[i]+'</option>');
-			}
+	// Appends results
+	for (var i = 0; i < Object.keys(arr).length; i++) {
+		dropdown.append('<option value="'+arr[i]+'">'+arr[i]+'</option>');
+	}
 
-			showPrice(id);
+	showPrice(id);
 
-			// Creates the selects on change event
-			dropdown.on('change', function () {
-				let id = this.id.replace(/quantity-/, '');
-				let value = dropdown.val();
-				showPrice(id);
-			});
-		}
-	});
 }
 
 function createBoxSelect(id, value) {
@@ -221,20 +193,6 @@ function createBoxSelect(id, value) {
 
 	dropdown.html('<a class="boxbutton" id="boxbutton-'+id+'" data-toggle="modal" data-target="#basicExampleModal">Seleccionar</a>');
 
-	// dropdown.html('');
-	// dropdown.removeAttr('disabled');
-
-	// Appends results
-	// dropdown.append('<option value="'+ 0 +'">Sin Empaque</option>');
-	//
-	// for (var i = 0; i < Object.keys(BOXES).length; i++) {
-	// 	if (BOXES[i].type_id == value){
-	// 		dropdown.append('<option value="'+BOXES[i].id+'">'+BOXES[i].name+'</option>');
-	// 	}
-	// }
-	dropdown.on('change', function () {
-		showPrice(id);
-	});
 }
 
 function fillBoxModal(id) {
@@ -308,7 +266,7 @@ function showPrice(id) {
 			data: {
 				product: product,
 				quantity: quantity,
-				box: box,
+				box: box ? box : 0,
 				_csrf : yii.getCsrfToken()
 			},
 			success: function(data) {

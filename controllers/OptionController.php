@@ -76,9 +76,16 @@ class OptionController extends Controller
         if (Yii::$app->request->isAjax) {
             $products = Yii::$app->session->get('products');
             $boxes = Yii::$app->session->get('boxes');
+            $forms = Yii::$app->session->get('forms');
+            $quantities = Yii::$app->session->get('quantities');
+            $typequantities = Yii::$app->session->get('typequantities');
+
             $response = [
               'products' => $products,
               'boxes' => $boxes,
+              'forms' => $forms,
+              'quantities' => $quantities,
+              'typequantities' => $typequantities,
             ];
             return json_encode($response);
         } else
