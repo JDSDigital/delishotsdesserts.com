@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Galería';
+$this->title = 'Galería de Eventos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-gallery">

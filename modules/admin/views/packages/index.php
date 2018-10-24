@@ -61,7 +61,7 @@ $this->title = 'Productos';
 								'format' => 'raw',
                 'attribute' => 'image',
                 'value' => function ($model) {
-                  return ($model->image) ? Html::img(Yii::getAlias('@web') . '/images/packages/' . $model->image, ['class' => 'img-responsive crop-thumb']) : $model->image;
+                  return ($model->image) ? Html::img(Yii::getAlias('@web') . '/images/packages/' . $model->image . '.jpg', ['class' => 'img-responsive crop-thumb']) : $model->image;
                 },
 								'contentOptions' => ['style' => 'width: 200px;min-width: 100px'],
               ],

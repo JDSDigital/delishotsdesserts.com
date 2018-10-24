@@ -20,7 +20,7 @@ $this->title = 'Contáctanos';
     <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
     <div class="row text-center social-icons" style="margin: 30px 0">
       <h3>¡Siguenos en nuestras redes sociales!</h3>
-      <a class="btn btn-instagram" href="https://www.instagram.com/delishots/" target="_blank"><i class="fa fa-lg fa-instagram"></i></a>
+      <a class="btn btn-instagram" href="https://www.instagram.com/delishotsdesserts/" target="_blank"><i class="fa fa-lg fa-instagram"></i></a>
       <!-- <a class="btn btn-twitter" href="https://twitter.com/delishots" target="_blank"><i class="fa fa-lg fa-twitter"></i></a> -->
       <a class="btn btn-facebook" href="https://www.facebook.com/DeliShots-Desserts-2101429316845708/" target="_blank"><i class="fa fa-lg fa-facebook"></i></a>
     </div>
