@@ -7,6 +7,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\Products;
+use app\models\search\ProductsSearch;
 
 class ProductsController extends Controller
 {
@@ -69,12 +70,11 @@ class ProductsController extends Controller
      */
     public function actionBakery()
     {
-        $products = Products::find()
-          ->where(['status' => Products::STATUS_ACTIVE])
-          ->all();
+        $productsSearch = new ProductsSearch;
+        $dataProvider = $productsSearch->getProducts(Yii::$app->request->post());
 
         return $this->render('bakery', [
-            'products' => $products,
+            'products' => $dataProvider->getModels(),
         ]);
     }
 
@@ -85,7 +85,6 @@ class ProductsController extends Controller
      */
     public function actionPastry()
     {
-
         return $this->render('pastry');
     }
 
