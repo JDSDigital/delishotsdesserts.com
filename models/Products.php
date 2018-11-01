@@ -98,9 +98,9 @@ class Products extends ActiveRecord
         }
 
         if ($this->isNewRecord) {
-          $product = strtolower($this->name);
-          $product = str_replace(' ', '-', $product);
-          $this->product = $product;
+            $product = strtolower($this->name);
+            $product = str_replace(' ', '-', $product);
+            $this->product = $product;
         }
 
         return true;
@@ -126,20 +126,20 @@ class Products extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'productImage'     => 'Imagen Completa',
-            'productThumb'     => 'Imagen en Miniatura',
-            'product'     => 'Producto',
-            'name'        => 'Nombre',
+            'productImage' => 'Imagen Completa',
+            'productThumb' => 'Imagen en Miniatura',
+            'product' => 'Producto',
+            'name' => 'Nombre',
             'description' => 'Descripción',
-            'type'        => 'Tipo',
-            'priceSlice'  => 'Porción Individual',
-            'priceGlass'  => 'Envase',
-            'priceFull'   => 'Precio Completo',
-            'priceShot'   => 'Precio Shot',
-            'price5oz'    => 'Precio 5oz',
-            'price8oz'    => 'Precio 8oz',
-            'priceDeli'   => 'Precio Individual',
-            'status'      => 'Estado',
+            'type' => 'Tipo',
+            'priceSlice' => 'Porción Individual',
+            'priceGlass' => 'Envase',
+            'priceFull' => 'Precio Completo',
+            'priceShot' => 'Precio Shot',
+            'price5oz' => 'Precio 5oz',
+            'price8oz' => 'Precio 8oz',
+            'priceDeli' => 'Precio Individual',
+            'status' => 'Estado',
         ];
     }
 
@@ -172,37 +172,33 @@ class Products extends ActiveRecord
         $forms = [0 => 0];
 
         foreach ($products as $key => $product) {
-          $response = [];
+            $response = [];
 
-          if ($product['type'] == Products::PRODUCT_BAKERY) {
+            switch ($product['type']) {
+                case Products::PRODUCT_BAKERY:
+                    $response[0] = Products::PRODUCT_BAKERY;
 
-              $response[0] =  Products::PRODUCT_BAKERY;
+                    foreach (self::PRODUCT_FORMS as $key => $value) {
+                        if ($product[$value] != null && $product[$value] != '') {
+                            $response[$key] = Products::PRODUCT_FORMS_LABEL[$key];
+                        }
+                    }
+                    break;
 
-              if ($product['priceSlice'] != null && $product['priceSlice'] != '')
-                  $response[Products::PRODUCT_SLICE] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_SLICE];
+                case Products::PRODUCT_DELI:
+                    $response[0] = Products::PRODUCT_DELI;
+                    break;
 
-              if ($product['priceGlass'] != null && $product['priceGlass'] != '')
-                  $response[Products::PRODUCT_GLASS] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_GLASS];
+                case Products::PRODUCT_BOMBON:
+                    $response[0] = Products::PRODUCT_BOMBON;
+                    break;
 
-              if ($product['priceFull'] != null && $product['priceFull'] != '')
-                  $response[Products::PRODUCT_FULL] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_FULL];
+                default:
+                    $response[0] = null;
+                    break;
+            }
 
-              if ($product['priceShot'] != null && $product['priceShot'] != '')
-                  $response[Products::PRODUCT_SHOT] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_SHOT];
-
-              if ($product['price5oz'] != null && $product['price5oz'] != '')
-                  $response[Products::PRODUCT_5OZ] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_5OZ];
-
-              if ($product['price8oz'] != null && $product['price8oz'] != '')
-                  $response[Products::PRODUCT_8OZ] = Products::PRODUCT_FORMS_LABEL[Products::PRODUCT_8OZ];
-
-          } elseif ($product['type'] == Products::PRODUCT_DELI) {
-              $response[0] =  Products::PRODUCT_DELI;
-
-          } elseif ($product['type'] == Products::PRODUCT_BOMBON)
-              $response[0] =  Products::PRODUCT_BOMBON;
-
-          array_push($forms, $response);
+            array_push($forms, $response);
         }
 
         array_unshift($products, [0]);
@@ -222,10 +218,11 @@ class Products extends ActiveRecord
     {
         if ($this->validate()) {
             if ($this->isNewRecord) {
-              $product = strtolower($this->name);
-              $product = str_replace(' ', '-', $product);
-            } else
-              $product = $this->product;
+                $product = strtolower($this->name);
+                $product = str_replace(' ', '-', $product);
+            } else {
+                $product = $this->product;
+            }
 
             $this->productImage->saveAs('images/products/full/' . $product . '.' . $this->productImage->extension);
 
@@ -238,13 +235,16 @@ class Products extends ActiveRecord
     public function uploadThumb()
     {
         if ($this->validate()) {
+
             if ($this->isNewRecord) {
-              $product = strtolower($this->name);
-              $product = str_replace(' ', '-', $product);
-            } else
-              $product = $this->product;
+                $product = strtolower($this->name);
+                $product = str_replace(' ', '-', $product);
+            } else {
+                $product = $this->product;
+            }
 
             $this->productThumb->saveAs('images/products/thumbs/' . $product . '.' . $this->productThumb->extension);
+
             return true;
         } else {
             return false;
@@ -268,28 +268,17 @@ class Products extends ActiveRecord
 
             $this->forms[0] =  self::PRODUCT_BAKERY;
 
-            if ($this->priceSlice != null && $this->priceSlice != '')
-                $this->forms[self::PRODUCT_SLICE] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_SLICE];
-
-            if ($this->priceGlass != null && $this->priceGlass != '')
-                $this->forms[self::PRODUCT_GLASS] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_GLASS];
-
-            if ($this->priceFull != null && $this->priceFull != '')
-                $this->forms[self::PRODUCT_FULL] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_FULL];
-
-            if ($this->priceShot != null && $this->priceShot != '')
-                $this->forms[self::PRODUCT_SHOT] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_SHOT];
-
-            if ($this->price5oz != null && $this->price5oz != '')
-                $this->forms[self::PRODUCT_5OZ] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_5OZ];
-
-            if ($this->price8oz != null && $this->price8oz != '')
-                $this->forms[self::PRODUCT_8OZ] = self::PRODUCT_FORMS_LABEL[self::PRODUCT_8OZ];
+            foreach (self::PRODUCT_FORMS as $key => $value) {
+                if ($this->$value != null && $this->$value != '') {
+                    $this->forms[$key] = self::PRODUCT_FORMS_LABEL[$key];
+                }
+            }
 
         } elseif ($this->type == self::PRODUCT_DELI) {
 
-            if ($this->priceDeli != null && $this->priceDeli != '')
+            if ($this->priceDeli != null && $this->priceDeli != '') {
                 $this->forms[0] =  self::PRODUCT_DELI;
+            }
         }
 
         return $this->forms;
@@ -298,7 +287,7 @@ class Products extends ActiveRecord
 
     public function getProductType($id)
     {
-      return self::getProductTypes($id);
+        return self::getProductTypes($id);
     }
 
 }
