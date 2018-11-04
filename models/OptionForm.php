@@ -14,7 +14,6 @@ class OptionForm extends Model
     public $email;
     public $body;
 
-
     /**
      * @return array the validation rules.
      */
