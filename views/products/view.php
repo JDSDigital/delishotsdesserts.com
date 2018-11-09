@@ -38,8 +38,7 @@ $i = 1;
                         <i class="fa fa-lg fa-facebook"></i>
                     </a>
                     <a class="btn btn-twitter"
-                       onclick="window.open('http://twitter.com/share?text=He%20visto%20este%20artículo%20en%20delishotsdesserts.com%20->', 'newwindow', 'width=600,height=300'); return false;"
-                       href="http://twitter.com/share?text=He%20visto%20este%20producto%20en%20delishotsdesserts.com?url=<?= Url::to(['//products/view', 'id' => $product->id], true) ?>">
+                       onclick="window.open('http://twitter.com/share?text=He%20visto%20este%20artículo%20en%20delishotsdesserts.com%20->&url=<?= Url::to(['//products/view', 'id' => $product->id], true) ?>', 'newwindow', 'width=600,height=300'); return false;">
                         <i class="fa fa-lg fa-twitter"></i>
                     </a>
                     <!-- <a class="btn btn-twitter" href="#" target="_blank"><i class="fa fa-lg fa-twitter"></i></a> -->

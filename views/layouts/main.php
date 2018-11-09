@@ -11,6 +11,8 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\widgets\Alert;
 
+AppAsset::register($this);
+
 $this->registerMetaTag(['name' => 'author', 'content' => 'JDSDigital']);
 $this->registerMetaTag(['rel' => 'canonical', 'href' => 'http://www.delishotsdessers.com']);
 $this->registerMetaTag(['name' => 'description', 'content' => 'Empresa dedicada a la elaboración casera de postres para eventos, fiestas, mayor y detal en la zona de Caracas.']);
@@ -86,7 +88,7 @@ $this->registerMetaTag(['name' => 'msapplication-wide310x150logo', 'content' => 
 $this->registerMetaTag(['name' => 'msapplication-square310x310logo', 'content' => './images/favicon/mstile-310x310.png']);
 
 $class = (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') ? 'wrap index-slider' : 'wrap';
-AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -98,19 +100,30 @@ AppAsset::register($this);
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
     <?= Html::csrfMetaTags() ?>
     <!-- Facebook SDK -->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-    		var js, fjs = d.getElementsByTagName(s)[0];
-    		if (d.getElementById(id)) return;
-    		js = d.createElement(s); js.id = id;
-    		js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-    		fjs.parentNode.insertBefore(js, fjs);
-    	}(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : 'delishots',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v3.2'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
     <!-- / Facebook SDK -->
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body class="preloader">
+    <?php $this->beginBody() ?>
 
     <div id="preloader" class="text-center">
         <?= Html::img(Yii::getAlias('@web') . '/images/logo.png', [
@@ -120,7 +133,6 @@ AppAsset::register($this);
         ]) ?>
     </div>
 
-<?php $this->beginBody() ?>
 
 <div class="<?= $class ?>">
     <?php
