@@ -65,16 +65,16 @@ $this->title = 'Checkout';
                   <?= ($item['box']) ? Html::img(Yii::getAlias('@web') . '/images/packages/' . $item['box'] . '.jpg') : 'Sin Empaque' ?>
                 </td>
                 <td>
-                  <?= Yii::$app->formatter->asCurrency($item['boxPrice'], 'VEF') . 'c/u' ?>
+                  <?= (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($item['boxPrice'], 'VEF') . 'c/u' : '' ?>
                 </td>
                 <td>
-                  <?= Yii::$app->formatter->asCurrency($item['boxTotal'], 'VEF') ?>
+                  <?= (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($item['boxTotal'], 'VEF') : '' ?>
                 </td>
                 <td>
-                  <?= Yii::$app->formatter->asCurrency($item['price'], 'VEF') . 'c/u' ?>
+                  <?= (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($item['price'], 'VEF') . 'c/u' : '' ?>
                 </td>
                 <td>
-                  <?= Yii::$app->formatter->asCurrency($item['priceTotal'], 'VEF') ?>
+                  <?= (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($item['priceTotal'], 'VEF') : '' ?>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -83,7 +83,7 @@ $this->title = 'Checkout';
 <div class="container">
   <div class="site-option">
     <div class="row text-center">
-        <h2><strong>Total: </strong> <?= Yii::$app->formatter->asCurrency($cart['total'], 'VEF') ?></h2>
+        <h2><strong>Total: </strong> <?= (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($cart['total'], 'VEF') : 'Consultar precio.'?></h2>
     </div>
     <div class="row text-center">
         <?= Html::a('Enviar Pedido', ['/option/form'], ['id' => 'button-form', 'url' => Url::to(['/option/form']),'class' => 'btn btn-success btn-check']) ?>

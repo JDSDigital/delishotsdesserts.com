@@ -149,69 +149,145 @@ class Products extends ActiveRecord
      */
     public function getProductsArray()
     {
-        if (Yii::$app->session->has('cart'))
+        $this->unsetSessionVariables();
+
+        $this->setSessionVariableProducts();
+        $this->setSessionVariableBoxes();
+        $this->setSessionVariableForms();
+        $this->setSessionVariableQuantities();
+        $this->setSessionVariableTypeQuantities();
+        $this->setSessionVariableShowPrices();
+
+        return true;
+    }
+
+    public function unsetSessionVariables()
+    {
+        if (Yii::$app->session->has('cart')) {
             Yii::$app->session->remove('cart');
+        }
 
-        if (Yii::$app->session->has('products'))
+        if (Yii::$app->session->has('products')) {
             Yii::$app->session->remove('products');
+        }
 
-        if (Yii::$app->session->has('boxes'))
+        if (Yii::$app->session->has('boxes')) {
             Yii::$app->session->remove('boxes');
+        }
 
+        if (Yii::$app->session->has('quantities')) {
+            Yii::$app->session->remove('quantities');
+        }
+
+        if (Yii::$app->session->has('typequantities')) {
+            Yii::$app->session->remove('typequantities');
+        }
+
+        if (Yii::$app->session->has('showprices')) {
+            Yii::$app->session->remove('showprices');
+        }
+
+        return true;
+    }
+
+    public function setSessionVariableProducts()
+    {
         $products = Products::find()
           ->where(['status' => Products::STATUS_ACTIVE])
           ->asArray()
           ->all();
 
+        array_unshift($products, [0]);
+
+        Yii::$app->session->set('products', $products);
+
+        return true;
+    }
+
+    public function setSessionVariableBoxes()
+    {
         $boxes = Packages::find()
           ->select(['id', 'type_id', 'name', 'price', 'quantity', 'status', 'image'])
           ->where(['status' => Packages::STATUS_ACTIVE])
           ->asArray()
           ->all();
 
+        array_unshift($boxes, [0]);
+
+        Yii::$app->session->set('boxes', $boxes);
+
+        return true;
+    }
+
+    public function setSessionVariableForms()
+    {
         $forms = [0 => 0];
+        $products = Yii::$app->session->get('products');
 
         foreach ($products as $key => $product) {
-            $response = [];
+
+            if ($key == 0) {
+                continue;
+            }
 
             switch ($product['type']) {
                 case Products::PRODUCT_BAKERY:
-                    $response[0] = Products::PRODUCT_BAKERY;
-
-                    foreach (self::PRODUCT_FORMS as $key => $value) {
-                        if ($product[$value] != null && $product[$value] != '') {
-                            $response[$key] = Products::PRODUCT_FORMS_LABEL[$key];
-                        }
-                    }
+                    array_push($forms, $this->setProductFormsTypeBakery($product));
                     break;
 
                 case Products::PRODUCT_DELI:
-                    $response[0] = Products::PRODUCT_DELI;
+                    array_push($forms, [0 => self::PRODUCT_DELI]);
                     break;
 
                 case Products::PRODUCT_BOMBON:
-                    $response[0] = Products::PRODUCT_BOMBON;
+                    array_push($forms, [0 => self::PRODUCT_BOMBON]);
                     break;
 
                 default:
-                    $response[0] = null;
+                    array_push($forms, [0 => null]);
                     break;
             }
-
-            array_push($forms, $response);
         }
 
-        array_unshift($products, [0]);
-        array_unshift($boxes, [0]);
-
-        Yii::$app->session->set('products', $products);
-        Yii::$app->session->set('boxes', $boxes);
         Yii::$app->session->set('forms', $forms);
+
+        return true;
+    }
+
+    public function setSessionVariableQuantities()
+    {
         Yii::$app->session->set('quantities', self::PRODUCT_QUANTITIES);
+
+        return true;
+    }
+
+    public function setSessionVariableTypeQuantities()
+    {
         Yii::$app->session->set('typequantities', self::PRODUCT_TYPE_QUANTITIES);
 
         return true;
+    }
 
+    public function setProductFormsTypeBakery($product)
+    {
+        $response = [];
+        $response[0] = Products::PRODUCT_BAKERY;
+
+        foreach (self::PRODUCT_FORMS as $key => $value) {
+            if ($product[$value] != null && $product[$value] != '') {
+                $response[$key] = self::PRODUCT_FORMS_LABEL[$key];
+            }
+        }
+
+        return $response;
+    }
+
+    public function setSessionVariableShowPrices()
+    {
+        $prices = System::findOne(1);
+        Yii::$app->session->set('showprices', $prices->show_prices);
+
+        return true;
     }
 
     public function uploadImage()

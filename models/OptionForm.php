@@ -60,16 +60,16 @@ class OptionForm extends Model
               $order .= '<td>' . $value['form'] . '</td>';
               $order .= '<td>' . $value['quantity'] . '</td>';
               $order .= '<td>' . ($value['box']) ? $value['box'] : 'Sin Empaque' . '</td>';
-              $order .= '<td>' . Yii::$app->formatter->asCurrency($value['boxPrice'], 'VEF') . '</td>';
-              $order .= '<td>' . Yii::$app->formatter->asCurrency($value['boxTotal'], 'VEF') . '</td>';
-              $order .= '<td>' . Yii::$app->formatter->asCurrency($value['price'], 'VEF') . '</td>';
-              $order .= '<td>' . Yii::$app->formatter->asCurrency($value['priceTotal'], 'VEF') . '</td>';
+              $order .= '<td>' . (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($value['boxPrice'], 'VEF') : '' . '</td>';
+              $order .= '<td>' . (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($value['boxTotal'], 'VEF') : '' . '</td>';
+              $order .= '<td>' . (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($value['price'], 'VEF') : '' . '</td>';
+              $order .= '<td>' . (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency($value['priceTotal'], 'VEF') : '' . '</td>';
               $order .= '</tr>';
             }
 
             $order .= '<tr>';
             $order .= '<td colspan="7"><strong>Total:</strong></td>';
-            $order .= '<td><strong>' . Yii::$app->formatter->asCurrency(Yii::$app->session->get('cart')['total'], 'VEF') . '</strong></td>';
+            $order .= '<td><strong>' . (Yii::$app->session->get('showprices')) ? Yii::$app->formatter->asCurrency(Yii::$app->session->get('cart')['total'], 'VEF') : '' . '</strong></td>';
             $order .= '</tr>';
             $order .= '</table>';
 

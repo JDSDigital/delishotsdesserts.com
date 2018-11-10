@@ -64,6 +64,7 @@ $(document).ready(function(){
 			FORMS = response.forms;
 			QUANTITIES = response.quantities;
 			TYPEQUANTITIES = response.typequantities;
+			SHOW_PRICES = response.showprices;
 		}
 	});
 
@@ -95,8 +96,9 @@ function addEmptyRow () {
 
 	let checkBtn = $('#button-check').hasClass('dn');
 
-	if (checkBtn)
+	if (checkBtn) {
 		$('#button-check').removeClass('dn');
+	}
 
 }
 
@@ -185,14 +187,12 @@ function createQuantitySelect (id, value) {
 	}
 
 	showPrice(id);
-
 }
 
 function createBoxSelect(id, value) {
 	let dropdown = $('#box-'+id);
 
 	dropdown.html('<a class="boxbutton" id="boxbutton-'+id+'" data-toggle="modal" data-target="#basicExampleModal">Seleccionar</a>');
-
 }
 
 function fillBoxModal(id) {
@@ -220,6 +220,11 @@ function selectBoxModal(id) {
 }
 
 function showPrice(id) {
+	if (!SHOW_PRICES) {
+		showCheckPrice();
+		return null;
+	}
+
 	let product = $('#product-'+id).val();
 	let form = $('#form-'+id).val();
 	let quantity = $('#quantity-'+id).val();
@@ -319,6 +324,11 @@ function showTotal () {
 	});
 }
 
+function showCheckPrice() {
+	let cell = $('#price-total');
+	cell.html('<b>Total</b>: No disponible.');
+}
+
 function checkOut (url) {
 	swal({
 		title: '¿Desea continuar a la revisión del pedido?',
@@ -370,8 +380,8 @@ function orderForm (url) {
 		confirmButtonText: 'Continuar',
 		cancelButtonText: 'Cancelar',
 	}).then((result) => {
-			if (result.value) {
-					window.location.href = url;
-			}
+		if (result.value) {
+			window.location.href = url;
+		}
 	})
 }

@@ -79,6 +79,7 @@ class OptionController extends Controller
             $forms = Yii::$app->session->get('forms');
             $quantities = Yii::$app->session->get('quantities');
             $typequantities = Yii::$app->session->get('typequantities');
+            $showprices = Yii::$app->session->get('showprices');
 
             $response = [
               'products' => $products,
@@ -86,7 +87,9 @@ class OptionController extends Controller
               'forms' => $forms,
               'quantities' => $quantities,
               'typequantities' => $typequantities,
+              'showprices' => $showprices,
             ];
+
             return json_encode($response);
         } else
             return null;
@@ -268,43 +271,17 @@ class OptionController extends Controller
         if (Yii::$app->request->isAjax) {
 
             // If there is already a cart, proceeds to checkout
-            if (Yii::$app->session->has('cart'))
+            if (Yii::$app->session->has('cart')) {
                 return $this->redirect('actionCheckout');
-
-            $cart = [];
-            $list = [];
-            $data = Yii::$app->request->post();
-
-            // Creates an array with the clients products
-            foreach ($data['list'] as $item) {
-                $product = Yii::$app->session->get('products')[$item[0]];
-                $box = ($item[3] != 0) ? Yii::$app->session->get('boxes')[$item[3]] : 0;
-
-                $boxTotal = ($box != 0) ? ceil($item[2] / $box['quantity']) * $box['price'] : 0;
-
-                array_push($list, [
-                  'product' => $product['product'],
-                  'name' => $product['name'],
-                  'form' => ($item[1]) ? Products::PRODUCT_FORMS_LABEL[$item[1]] : null,
-                  'box' => ($box != 0) ? $box['image'] : 0,
-                  'boxPrice' => ($box != 0) ? $box['price'] : 0,
-                  'boxTotal' => $boxTotal,
-                  'price' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] : $product['priceDeli'],
-                  'priceTotal' => ($item[1]) ? $product[Products::PRODUCT_FORMS[$item[1]]] * $item[2] : $product['priceDeli'] * $item[2],
-                  'quantity' => $item[2],
-                ]);
             }
 
-            // Adds products and total to response array
-            $cart['items'] = $list;
-            $cart['total'] = $this->actionCalculateTotal($data);
-
-            // Sets the response array as a session variable
-            Yii::$app->session->set('cart', $cart);
+            $option = new Option;
+            $option->setCart(Yii::$app->request->post());
 
             // If session variable has been created, proceds to checkout
-            if (Yii::$app->session->get('cart'))
+            if (Yii::$app->session->get('cart')) {
                 return true;
+            }
 
         } else
             return null;
