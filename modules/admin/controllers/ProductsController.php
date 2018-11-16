@@ -105,7 +105,8 @@ class ProductsController extends \yii\web\Controller
 
             if ($model->save()) {
 
-              return $this->redirect(['index']);
+                Yii::$app->session->setFlash('success', 'Producto actualizado exitosamente.');
+                return $this->redirect(['index']);
 
             } else {
 
@@ -173,12 +174,15 @@ class ProductsController extends \yii\web\Controller
 
             $model = Products::findOne($data['id']);
 
-            if ($model->status)
+            if ($model->status) {
                 $model->status = Products::STATUS_DELETED;
-            else
+            } else {
                 $model->status = Products::STATUS_ACTIVE;
+            }
 
             $model->save();
+
+            return true;
         }
 
         return null;
@@ -187,20 +191,7 @@ class ProductsController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-
-        if (!unlink('images/products/full/' . $model->product . '.jpg'))
-          Yii::$app->session->setFlash('error', 'Error al eliminar las fotos del producto');
-
-        if (!unlink('images/products/thumbs/' . $model->product . '.jpg'))
-          Yii::$app->session->setFlash('error', 'Error al eliminar las fotos del producto');
-
-        if ($model->delete()) {
-          Yii::$app->session->setFlash('success', 'Producto eliminado exitosamente.');
-        } else {
-          foreach ($model->errors as $error) {
-            Yii::$app->session->setFlash('error', $error);
-          }
-        }
+        $model->deleteProductWithImages();
 
         return $this->redirect(['index']);
     }

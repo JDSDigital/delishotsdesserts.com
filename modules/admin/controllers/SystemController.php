@@ -38,6 +38,8 @@ class SystemController extends Controller
         $model = $this->findModel(1);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Configuración actualizada exitosamente.');
+            
             return $this->redirect(['//admin/default']);
         }
 

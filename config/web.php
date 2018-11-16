@@ -8,7 +8,7 @@ $db = require(__DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic',
-    'language' => 'es',
+    'language' => 'es_ES',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
@@ -31,6 +31,13 @@ $config = [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'formatter' => [
+            'dateFormat' => 'dd MMM Y',
+            'datetimeFormat' => 'dd MMM Y - H:mm:ss',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => '.',
+            'currencyCode' => 'VEF',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

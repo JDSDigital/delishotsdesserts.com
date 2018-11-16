@@ -223,6 +223,12 @@ $class = (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->
         </div>
     </footer>
 <?php } ?>
+
+<?php
+$folder = json_encode(Yii::getAlias('@web') . '/images/front/');
+$this->registerJs("headerImages($folder)");
+?>
+
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -72,9 +72,6 @@ $(".gallery-pastry").vegas({
 	]
 });
 
-var frontImages = ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg'];
-var num = Math.floor(Math.random() * frontImages.length);
-
 function listenerChangeStatus(url){
 
 	$(".switchStatus").change(function(){
@@ -105,12 +102,17 @@ function productTypeNav(type) {
 	}
 }
 
+function headerImages(route)
+{
+	var frontImages = ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg'];
+	var num = Math.floor(Math.random() * frontImages.length);
+	$('.header').parallax({imageSrc: route + frontImages[num] });
+}
+
 $(window).on('load', function() {
 	$('#preloader').fadeOut('slow', function(){
 		$(this).remove();
 	});
-
-	$('.header').parallax({imageSrc: '../images/front/' + frontImages[num] });
 
 	$("[data-fancybox]").fancybox({
 		image : {

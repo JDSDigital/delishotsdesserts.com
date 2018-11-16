@@ -203,6 +203,7 @@ function fillBoxModal(id) {
 		if (BOXES[i].type_id == value){
 			boxesList += '<div class="col-xs-6">'+
 			'<a id="'+id+'-'+BOXES[i].id+'" class="box-link"><img class="img-responsive" src="../images/packages/'+BOXES[i].image+'.jpg" /></a>'+
+			'<p>'+BOXES[i].name+'</p>'+
 			'</div>';
 		}
 	}

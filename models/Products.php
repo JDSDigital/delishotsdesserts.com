@@ -366,4 +366,30 @@ class Products extends ActiveRecord
         return self::getProductTypes($id);
     }
 
+    public function deleteProductWithImages()
+    {
+        if (!unlink('images/products/full/' . $this->product . '.jpg')) {
+            Yii::$app->session->setFlash('error', 'Error al eliminar las fotos del producto');
+            return null;
+        }
+
+        if (!unlink('images/products/thumbs/' . $this->product . '.jpg')) {
+            Yii::$app->session->setFlash('error', 'Error al eliminar las fotos del producto');
+            return null;
+        }
+
+        if ($this->delete()) {
+
+            Yii::$app->session->setFlash('success', 'Producto eliminado exitosamente.');
+
+        } else {
+
+            foreach ($this->errors as $error) {
+                Yii::$app->session->setFlash('error', $error);
+            }
+            
+            return null;
+        }
+    }
+
 }
