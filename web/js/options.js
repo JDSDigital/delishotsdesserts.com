@@ -72,6 +72,11 @@ $(document).ready(function(){
 
 // Initializes variables
 var row = 0;
+const PRODUCT_BAKERY = 1;
+const PRODUCT_PASTRY = 2;
+const PRODUCT_DELI = 3;
+const PRODUCT_MIX = 4;
+const PRODUCT_BOMBON = 5;
 
 // Adds an empty row
 function addEmptyRow () {
@@ -136,23 +141,23 @@ function createFormsSelect (id, value) {
 	dropdown.html('');
 	dropdownBox.html('');
 
-	let arr = FORMS[value];
+	let form = FORMS[value];
 
-	if (arr[0] == 1) {
+	if (form[0] == PRODUCT_BAKERY) {
 
 		dropdown.removeAttr('disabled');
 
 		// Appends results
 		for (var i = 1; i <= 6; i++) {
-			if (arr[i])
-				dropdown.append('<option value="'+i+'">'+arr[i]+'</option>');
+			if (form[i])
+				dropdown.append('<option value="'+i+'">'+form[i]+'</option>');
 		}
 
 		let value = dropdown.val();
 		createQuantitySelect(id, value);
-		createBoxSelect(id, value);
+		createBoxSelect(id, 1);
 
-	} else if (arr[0] == 3) {
+} else if (form[0] == PRODUCT_DELI) {
 
 		dropdown.append('<option value="0">Unidad</option>');
 
@@ -162,7 +167,7 @@ function createFormsSelect (id, value) {
 		createQuantitySelect(id, 0);
 		createBoxSelect(id, 0);
 
-	} else if (arr[0] == 5) {
+} else if (form[0] == PRODUCT_BOMBON) {
 
 		dropdown.append('<option value="0">Unidad</option>');
 
@@ -170,7 +175,7 @@ function createFormsSelect (id, value) {
 		dropdownBox.attr('disabled', 'disabled');
 
 		createQuantitySelect(id, 0);
-		createBoxSelect(id, 7);
+		createBoxSelect(id, 1);
 	}
 
 }
@@ -192,7 +197,11 @@ function createQuantitySelect (id, value) {
 function createBoxSelect(id, value) {
 	let dropdown = $('#box-'+id);
 
-	dropdown.html('<a class="boxbutton" id="boxbutton-'+id+'" data-toggle="modal" data-target="#basicExampleModal">Seleccionar</a>');
+	if (value == 0) {
+		dropdown.html('');
+	} else {
+		dropdown.html('<a class="boxbutton" id="boxbutton-'+id+'" data-toggle="modal" data-target="#basicExampleModal">Seleccionar</a>');
+	}
 }
 
 function fillBoxModal(id) {
