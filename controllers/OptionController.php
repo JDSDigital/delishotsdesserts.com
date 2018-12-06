@@ -13,6 +13,9 @@ use yii\filters\VerbFilter;
 
 class OptionController extends Controller
 {
+
+    public $defaultAction = 'redirect';
+
     /**
      * @inheritdoc
      */
@@ -53,6 +56,11 @@ class OptionController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionRedirect()
+    {
+        return $this->redirect('option/index');
     }
 
     /**
