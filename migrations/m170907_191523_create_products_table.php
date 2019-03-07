@@ -54,8 +54,8 @@ class m170907_191523_create_products_table extends Migration
         $this->insert('{{%ds_users}}', [
             'username'      => 'Admin',
             'role'          => 'admin',
-            'auth_key'      => '8yodFzc4J0-0efBA6uJaymkejpVS6qlg',
-            'password_hash' => '$2y$13$anHn/UT2OXHjJp9Yt99ct.RjfMCPsHLvPPK.DjaTEc0dcp0yRPu4K',
+            'auth_key'      => '6-Oj7UlbBzGErKAjXidC-QNhtATWbctw',
+            'password_hash' => '$2y$13$GbyLKMHbbu/dWxnafz9znudqQUKdcwpqhlePxhD1xoJloE2./EqBC',
             'email'         => 'jdsosa@gmail.com',
         ]);
 
@@ -169,7 +169,7 @@ class m170907_191523_create_products_table extends Migration
                 'La palabra alfajor se utiliza para designar a una especie de bocado dulce, realizado como un tipo de galleta esponjosa y suave a base de maicena, rellenos con dulce de leche y decorados con coco rallado.',
             ],
             [
-                3,
+                5,
                 'bomboneria',
                 'Bombonería Surtida',
                 'Bombones de chocolate elaborados con el mejor cacao proveniente de las diferentes regiones del país, con una gran variedad de rellenos, texturas y colores, que sólo probarlos quedarán enamorados de la combinación entre aromas y sabores que se funden dentro de su boca.',
