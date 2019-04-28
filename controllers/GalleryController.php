@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use app\models\Gallery;
 
 class GalleryController extends Controller
 {
@@ -68,8 +69,11 @@ class GalleryController extends Controller
      */
     public function actionProducts()
     {
+        $models = Gallery::getGalleryProducts();
 
-        return $this->render('products');
+        return $this->render('products', [
+            'models' => $models,
+        ]);
     }
 
     /**
@@ -79,7 +83,10 @@ class GalleryController extends Controller
      */
     public function actionEvents()
     {
-
-        return $this->render('events');
+        $models = Gallery::getGalleryEvents();
+        
+        return $this->render('events', [
+            'models' => $models,
+        ]);
     }
 }

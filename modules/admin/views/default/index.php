@@ -8,5 +8,6 @@ $this->title = 'Administrador de Delishots Desserts'
     <h3>Elija una opción:</h3>
     <?= Html::a('Productos', ['//admin/products'], ['class' => 'btn btn-admin']) ?>
     <?= Html::a('Empaques', ['//admin/packages'], ['class' => 'btn btn-admin']) ?>
+    <?= Html::a('Galería', ['//admin/gallery'], ['class' => 'btn btn-admin']) ?>
     <?= Html::a('Configuración', ['//admin/system'], ['class' => 'btn btn-admin']) ?>
 </div>

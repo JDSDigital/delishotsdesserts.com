@@ -11,15 +11,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="row">
-        <?php for ($i = 1; $i < 23; $i++) : ?>
+        <?php foreach($models as $image) : ?>
             <div class="col-md-3">
                 <div class="view hm-zoom">
                     <?= Html::a(
-                            Html::img(Yii::getAlias('@web') . '/images/gallery/products/thumb-' . $i . '.jpg', [
+                            Html::img(Yii::getAlias('@web') . '/images/gallery/products/thumb-' . $image->file, [
                                 'class' => 'img-responsive',
                                 'alt'   => Html::encode('Delishots Desserts'),
                             ]),
-                        Yii::getAlias('@web') . '/images/gallery/products/full-' . $i . '.jpg',
+                        Yii::getAlias('@web') . '/images/gallery/products/full-' . $image->file,
                         [
                             'data-fancybox' => "gallery",
                             'data-caption'  => "Delishots Desserts",
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     )?>
                 </div>
             </div>
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </div>
     <div class="row site-product">
       <div class="col-md-12 text-center">
