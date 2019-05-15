@@ -12,11 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <?php foreach($models as $image) : ?>
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 <div class="view hm-zoom">
                     <?= Html::a(
                             Html::img(Yii::getAlias('@web') . '/images/gallery/products/thumb-' . $image->file, [
-                                'class' => 'img-responsive',
+                                'class' => 'crop-gallery',
                                 'alt'   => Html::encode('Delishots Desserts'),
                             ]),
                         Yii::getAlias('@web') . '/images/gallery/products/full-' . $image->file,

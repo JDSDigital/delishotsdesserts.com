@@ -1,13 +1,18 @@
 <?php
 
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\widgets\FileInput;
 
 $this->title = 'Actualizar galería';
 ?>
 
-<?= FileInput::widget([
-    'name' => 'attachment_1[]',
+<?php $form = ActiveForm::begin([
+    'options' => ['enctype' => 'multipart/form-data']
+]); ?>
+
+<?= $form->field($model, 'images[]')->widget(FileInput::classname(), [
+    'name' => 'images',
     'language' => 'es',
     'options' => [
         'multiple' => true,
@@ -29,3 +34,11 @@ $this->title = 'Actualizar galería';
         // 'otherActionButtons' => $btn,
     ]
 ]); ?>
+
+<div class="form-group">
+    <?= Html::submitButton('Guardar', [
+        'class' => 'btn btn-success',
+    ]) ?>
+</div>
+
+<?php ActiveForm::end(); ?>

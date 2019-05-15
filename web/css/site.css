@@ -24,6 +24,21 @@ p {
     position: relative;
 }
 
+.crop-gallery {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    position: relative;
+}
+
+.btn.btn-primary.btn-file {
+    white-space: nowrap !important;
+}
+.file-caption.form-control.kv-fileinput-caption.icon-visible {
+    height: auto !important;
+    margin-top: 6px !important;
+}
+
 .mt30 {
   margin-top: 30px;
 }
