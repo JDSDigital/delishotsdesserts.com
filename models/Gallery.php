@@ -115,8 +115,10 @@ class Gallery extends \yii\db\ActiveRecord
 
                 $image->file = $name;
 
-                if ($image->save()) {
-                    $image->saveImage($uploadedImage, $name);
+                if ($image->save() && $image->saveImage($uploadedImage, $name)) {
+                    continue;
+                } else {
+                    Yii::warning($this->returnError($uploadedImage->error));
                 }
                 
             }
@@ -129,17 +131,57 @@ class Gallery extends \yii\db\ActiveRecord
 
     public function saveImage(UploadedFile $uploadedImage, string $name): bool
     {
-        $uploadedImage->saveAs(self::getFolder() . 'tmp-' . $name);
+        if ($uploadedImage->saveAs(self::getFolder() . 'tmp-' . $name)) {
 
-        Image::resize(self::getFolder() . 'tmp-' . $name, 1024, null)
-        ->save(self::getFolder() . 'full-' . $name, ['jpeg_quality' => 80]);
+            Image::resize(self::getFolder() . 'tmp-' . $name, 1024, null)
+            ->save(self::getFolder() . 'full-' . $name, ['jpeg_quality' => 80]);
+    
+            Image::resize(self::getFolder() . 'tmp-' . $name, 300, null)
+            ->save(self::getFolder() . 'thumb-' . $name, ['jpeg_quality' => 80]);
+    
+            unlink(self::getFolder() . 'tmp-' . $name);
+    
+            return true;
+        }
 
-        Image::resize(self::getFolder() . 'tmp-' . $name, 300, null)
-        ->save(self::getFolder() . 'thumb-' . $name, ['jpeg_quality' => 80]);
+        return false;
+    }
 
-        unlink(self::getFolder() . 'tmp-' . $name);
-
-        return true;
+    public function returnError(int $code): string
+    {
+        switch ($code) {
+            case 0:
+                return 'There is no error, the file uploaded with success.';
+                break;
+    
+            case 1:
+                return 'The uploaded file exceeds the upload_max_filesize directive in php.ini.';
+                break;
+    
+            case 2:
+                return 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.';
+                break;
+    
+            case 3:
+                return 'The uploaded file was only partially uploaded.';
+                break;
+    
+            case 4:
+                return 'No file was uploaded.';
+                break;
+    
+            case 6:
+                return 'Missing a temporary folder. Introduced in PHP 5.0.3.';
+                break;
+    
+            case 7:
+                return 'Failed to write file to disk. Introduced in PHP 5.1.0.';
+                break;
+    
+            case 8:
+                return 'A PHP extension stopped the file upload.';
+                break;
+        }
     }
 
 }

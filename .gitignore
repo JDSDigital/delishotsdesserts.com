@@ -32,3 +32,4 @@ tests/_support/_generated
 config/web.php
 web/images/packages
 web/images/products
+web/images/gallery
